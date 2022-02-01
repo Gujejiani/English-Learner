@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import styles from './guessWords.module.css'
+import {engAlphabetToGeo} from '../utils/engAlphToGeo'
 const GuessWords: React.FC<{word: {question: string, answer: string},  onChangeWord: (direction: string)=>void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
 
@@ -9,6 +10,7 @@ const GuessWords: React.FC<{word: {question: string, answer: string},  onChangeW
         })
     }
     const nextHandler =()=>{
+        engAlphabetToGeo('maRaziidan')
         setShow(false)
         props.onChangeWord('Next')
        
@@ -22,7 +24,7 @@ const GuessWords: React.FC<{word: {question: string, answer: string},  onChangeW
          
         <div className={styles.card__question} >
             <label  className={styles.card__title} >Guess Word</label>
-            <label  className={styles.card__word} >{props.word.question}</label>
+            <label  className={styles.card__word} >{ engAlphabetToGeo(props.word.question)}</label>
         </div>
         <div className={styles.card__answer} >
         <label  className={`${styles.card__translate} ${show?  styles.card__show: ''}`} >{props.word.answer}</label>

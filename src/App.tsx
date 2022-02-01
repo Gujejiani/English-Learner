@@ -31,7 +31,14 @@ function App() {
     }else{
       currentIndex--
     }
-    const currentWord = data[currentIndex].split('–')
+  let currentWord;
+    if(data[currentIndex].includes('–')){
+      currentWord = data[currentIndex].split('–')
+    }else{
+     currentWord = data[currentIndex].split('-')
+    }
+  
+   console.log( data[currentIndex].includes('-'))
     setWord({
       question: currentWord[1],
       answer: currentWord[0]
@@ -41,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-     <h2> Welcome Georgian/English To vocabulary learner </h2>
+     <h2> Welcome Georgian/English vocabulary learner </h2>
       {
         data.length ?  <GuessWords onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
       }
