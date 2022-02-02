@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 200px;
+    position: relative;
 }
 .card__question{
 flex: 1;
@@ -16,9 +17,12 @@ background-color: rgb(247, 244, 244);
 padding: 5px;
 display: flex;
 flex-direction: column;
+border-radius: 10px;
 }
 .card__title{
 font-size: 20px;
+color: rgb(16, 123, 150);
+font-weight: bold;
 }
 .card__word{
 font-size: 18px;
@@ -35,16 +39,19 @@ align-items: center;
 flex-direction: column;
 padding: 10px;
 
+
 }
 .card__translate{
-flex: 1;
+
 font-size: 18px;
 opacity: 1;
 color: green;
 font-weight: bold;
 filter: blur(7px);
 cursor: pointer;
+display: flex;
 
+margin-top: 20px;
 
 }
 .card__nav{
@@ -52,7 +59,8 @@ cursor: pointer;
     width: 100%;
     justify-content: space-around;
     max-width: 300px;
-
+    align-items: flex-end;
+    height: 100%;
 }
 .card__button{
     padding: 5px;
@@ -69,4 +77,19 @@ cursor: pointer;
 }
 .card__show{
     filter: blur(0);
+   
+}
+.disable{
+    opacity: 0.4;
+    cursor: no-drop;
+    background-color: gray;
+    transition: all 0.4s ease-in-out;
+}
+
+.count{
+    position: absolute;
+    left: 5px;
+    top:7px;
+    font-weight: bold;
+    color: rgb(16, 123, 150);
 }
