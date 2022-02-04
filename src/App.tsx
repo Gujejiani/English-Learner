@@ -81,11 +81,18 @@ function App() {
     setIndex(currentIndex)
   }
 
+  const changeWordsHandler =()=>{
+    setVocabulary({
+      words: [],
+      language: 'Geo'
+    })
+  }
+
   return (
     <div className="App">
      <h2> Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
       {
-        vocabulary.words.length ?  <GuessWords language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
+        vocabulary.words.length ?  <GuessWords onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
       }
       
      

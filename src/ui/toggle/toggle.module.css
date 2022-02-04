@@ -7,7 +7,7 @@
     width: 80px;
     height: 35px;
     border-radius: 10px;
-    background-color: rgb(5, 10, 14);
+    background-color: rgb(185, 200, 211);
     align-items: center;
     justify-content: space-around;
     cursor: pointer;
@@ -17,7 +17,7 @@
     display: flex;
     width: 46%;
     height: 80%;
-    background-color: rgb(23, 121, 143);
+    background-color: rgb(29, 135, 23);
     border-radius: 5px;
     color: #fff;
     justify-content: center;

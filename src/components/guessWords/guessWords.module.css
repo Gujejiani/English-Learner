@@ -105,3 +105,11 @@ margin-top: 20px;
     right: 10px;
     top: -4px;
 }
+
+.card__insert{
+   
+    width: 120px;
+    height: 50px;
+    background-color: rgb(121, 53, 22);
+    margin-top: 10px;
+}

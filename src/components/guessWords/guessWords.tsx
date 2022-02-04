@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styles from './guessWords.module.css'
 import {engAlphabetToGeo} from '../../utils/engAlphToGeo'
 
-const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}}>  = (props)  => {
+const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
 
     const showHandler = ()=>{
@@ -37,8 +37,9 @@ const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettin
                 <button disabled={props.buttSettings.prevDisable} onClick={prevHandler} className={`${styles.card__button} ${props.buttSettings.prevDisable? styles.disable: ''}` } >{ '<Prev'}</button>
                 <button onClick={showHandler} className={ `${styles.card__button} ${styles.button__show}`} >Show</button>
                 <button disabled={props.buttSettings.nextDisable} onClick={nextHandler} className={`${styles.card__button} ${props.buttSettings.nextDisable? styles.disable: ''}`} >{ 'Next>'}</button>
-            
+               
              </div>
+             <button onClick={props.onChangeWords} className={ `${styles.card__button} ${styles.button__show} ${styles.card__insert}`} >Change Words</button>
         </div>
 
     
