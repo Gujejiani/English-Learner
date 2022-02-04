@@ -1,15 +1,17 @@
 
 .card{
     background-color: #f5eeee;
-    max-width: 400px;
+    max-width: 800px;
     margin: auto;
-    max-height: 300px;
-    height: 300px;
+    width: 100%;
+    max-height: 350px;
+    height: 350px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    margin-top: 200px;
+    margin-top: 160px;
     position: relative;
+   
 }
 .card__question{
 flex: 1;
@@ -18,17 +20,19 @@ padding: 5px;
 display: flex;
 flex-direction: column;
 border-radius: 10px;
+
 }
 .card__title{
 font-size: 20px;
 color: rgb(16, 123, 150);
 font-weight: bold;
+margin-top: 10px;
 }
 .card__word{
 font-size: 18px;
 color: rgb(37, 43, 37);
 font-weight: bold;
-margin-top: 10px;
+margin-top: 30px;
 }
 .card__answer{
 flex: 1;
@@ -38,7 +42,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 padding: 10px;
-
+font-size: 18px;
 
 }
 .card__translate{
@@ -89,7 +93,15 @@ margin-top: 20px;
 .count{
     position: absolute;
     left: 5px;
-    top:7px;
+    top:5px;
     font-weight: bold;
     color: rgb(16, 123, 150);
+
+}
+
+.toggle{
+   
+    position: absolute;
+    right: 10px;
+    top: -4px;
 }
