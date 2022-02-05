@@ -11,10 +11,6 @@ if(!word) return;
 
 let georgian: string = ''
 let letters= mappedLetters()
-
-
-console.log(word.split(')'))
-console.log(word.indexOf(')'))
 let curlyIndex = word.indexOf(')')
 
 let lettersArray: Array<string> =word.split('')

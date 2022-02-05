@@ -8,18 +8,19 @@ import DataModifier from './utils/DataModifier'
 
 function App() {
   const [vocabulary, setVocabulary] = useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
-  const [word, setWord] = useState<{question: string, answer: string}>({question: '', answer: ''})
+  const [word, setWord] = useState<{question: string, answer: string, title: string}>({question: '', answer: '', title: ''})
   const [index,  setIndex] = useState<number>(0)
   const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
   
   const processData = (words: string, language: string)=>{
     console.log(language)
       if(words){
-        const done =  (data:{updatedWords: string[], firstWord: Array<string>})=>{
+        const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
           setVocabulary({words: data.updatedWords, language})
           setWord({
             question: data.firstWord[ language==='Geo'? 1: 0],
-            answer: data.firstWord[ language==='Geo'? 0: 1]
+            answer: data.firstWord[ language==='Geo'? 0: 1],
+            title: data.title
           })
           console.log('done is called')
         }
@@ -32,24 +33,19 @@ function App() {
  
 
   const changeWord  = (direction: string)=>{
-
+    console.log('hei')
     let currentIndex: number;
     if(direction  ==="Next"){
      currentIndex = buttonController({index, next: true, words: vocabulary.words}, buttons, setButtons)
     }else{
       currentIndex = buttonController({index, next: false, words: vocabulary.words}, buttons, setButtons)
     }
-  let currentWord;
-
-    if(vocabulary.words[currentIndex].includes('–')){
-      currentWord = vocabulary.words[currentIndex].split('–')
-    }else{
-     currentWord = vocabulary.words[currentIndex].split('-')
-    }
-  
+    let currentWord =DataModifier.getWord(vocabulary.words, currentIndex)
+    let title= ''
     setWord({
       question: currentWord[vocabulary.language==='Geo'? 1: 0],
-      answer: currentWord[vocabulary.language==='Geo'?0: 1]
+      answer: currentWord[vocabulary.language==='Geo'?0: 1],
+      title: title
     })
     setIndex(currentIndex)
   }
@@ -60,6 +56,7 @@ function App() {
       language: 'Geo',
     })
     setIndex(0)
+    setButtons({nextDisable: false, prevDisable: true})
   }
 
   return (

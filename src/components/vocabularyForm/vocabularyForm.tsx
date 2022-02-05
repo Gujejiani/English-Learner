@@ -1,5 +1,5 @@
 import  styles from './vocabularyForm.module.css'
-import  React, {useRef, useState} from 'react'
+import  React, {useRef, useState, useEffect} from 'react'
 import Toggle from '../../ui/toggle/toggle'
  const VocabularyForm: React.FC<{processData: (data: string, language: string)=> void}> = (props)=>{
     const textAreaInput = useRef<HTMLTextAreaElement>(null)
@@ -8,10 +8,20 @@ import Toggle from '../../ui/toggle/toggle'
         disable: true
     })
     const [language, setLanguage]   = useState<string>('Geo')
+    const [words, setWords] = useState<string>('')
+        useEffect(()=>{
+            const inputData = localStorage.getItem('data')
+            if(inputData && inputData !== "undefined"){
+
+                const data: string = JSON.parse(inputData);
+                  setWords(data);
+                  console.log('hehehe')
+            }
+        }, [])
 
     const submitHandler =(e: React.FormEvent)=>{
         e.preventDefault()
-      
+        localStorage.setItem('data', JSON.stringify(`${textAreaInput.current?.value}`))
             setButtonInfo({
                 text: "Processing...",
                 disable: false
@@ -19,15 +29,17 @@ import Toggle from '../../ui/toggle/toggle'
             setTimeout(()=>{
                 if(textAreaInput.current?.value){
                 props.processData(textAreaInput.current?.value, language)
+                console.log(textAreaInput.current.value)
+              
             }
             }, 2000)
            
-     
-        console.log(textAreaInput.current?.value)
         
     }
     const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>{
+     
         if(e.target.value){
+            setWords(e.target.value)
             setButtonInfo({
                 ...buttonInfo,
                 disable: false
@@ -50,7 +62,7 @@ import Toggle from '../../ui/toggle/toggle'
 
    return ( <form  onSubmit={submitHandler} className={styles.form} >
      <h5 className={styles.form__heading} >Please put vocabulary</h5>    
-    <textarea  onChange={changeHandler}  ref={textAreaInput} className={styles.form__input}  />
+    <textarea value={words}  onChange={changeHandler}  ref={textAreaInput} className={styles.form__input}  />
     <div className={styles.language} > 
     <h3>Choose Questions Language  </h3>
     <Toggle onToggled={toggleHandler} />
