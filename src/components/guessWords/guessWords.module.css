@@ -113,3 +113,15 @@ margin-top: 20px;
     background-color: rgb(121, 53, 22);
     margin-top: 10px;
 }
+
+.sound{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.s{
+    color: rgb(16, 123, 150);
+ 
+}

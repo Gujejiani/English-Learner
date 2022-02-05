@@ -1,6 +1,7 @@
 import  styles from './vocabularyForm.module.css'
 import  React, {useRef, useState, useEffect} from 'react'
 import Toggle from '../../ui/toggle/toggle'
+
  const VocabularyForm: React.FC<{processData: (data: string, language: string)=> void}> = (props)=>{
     const textAreaInput = useRef<HTMLTextAreaElement>(null)
     const [buttonInfo, setButtonInfo]  = useState<{text: string, disable: boolean}>({
@@ -11,25 +12,39 @@ import Toggle from '../../ui/toggle/toggle'
     const [words, setWords] = useState<string>('')
         useEffect(()=>{
             const inputData = localStorage.getItem('data')
+            const lang = localStorage.getItem('lang')
             if(inputData && inputData !== "undefined"){
 
                 const data: string = JSON.parse(inputData);
                   setWords(data);
-                  console.log('hehehe')
+                  setButtonInfo({...buttonInfo,disable: false }  )
+                
+            }
+            console.log(lang ==="Eng")
+            if(lang){
+                let parsedLang = JSON.parse(lang)
+                console.log(parsedLang === 'Eng')
+                if(parsedLang === 'Eng'){
+                    setLanguage('Eng')
+                   
+                    console.log('changed')
+                }
             }
         }, [])
 
     const submitHandler =(e: React.FormEvent)=>{
         e.preventDefault()
         localStorage.setItem('data', JSON.stringify(`${textAreaInput.current?.value}`))
+        localStorage.setItem('lang', JSON.stringify(`${language}`))
             setButtonInfo({
                 text: "Processing...",
                 disable: false
             })
             setTimeout(()=>{
                 if(textAreaInput.current?.value){
+                    console.log(language)
                 props.processData(textAreaInput.current?.value, language)
-                console.log(textAreaInput.current.value)
+               
               
             }
             }, 2000)
@@ -50,10 +65,10 @@ import Toggle from '../../ui/toggle/toggle'
                 disable: true
             })
         }
-        console.log(e.target.value)
+
      }
-     const toggleHandler =(toggled: boolean)=>{
-        if(!toggled){
+     const toggleHandler =(_toggled: boolean)=>{
+        if(language !=='Eng'){
             setLanguage('Eng')
         }else{
             setLanguage('Geo')
@@ -65,7 +80,7 @@ import Toggle from '../../ui/toggle/toggle'
     <textarea value={words}  onChange={changeHandler}  ref={textAreaInput} className={styles.form__input}  />
     <div className={styles.language} > 
     <h3>Choose Questions Language  </h3>
-    <Toggle onToggled={toggleHandler} />
+    <Toggle toggle={language ==='Geo'? true: false } onToggled={toggleHandler} />
     </div>
     <button className={`${styles.form__button} ${buttonInfo.disable  ? styles.disable: '' }`}  disabled={buttonInfo.disable }  type="submit" > {buttonInfo.text}</button>
     </form>)

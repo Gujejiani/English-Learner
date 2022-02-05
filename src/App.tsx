@@ -13,16 +13,18 @@ function App() {
   const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
   
   const processData = (words: string, language: string)=>{
-    console.log(language)
+
       if(words){
         const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
           setVocabulary({words: data.updatedWords, language})
+          let questIndex = language==='Geo'? 1: 0
+          let answerIndex =  language==='Geo'? 0: 1
           setWord({
-            question: data.firstWord[ language==='Geo'? 1: 0],
-            answer: data.firstWord[ language==='Geo'? 0: 1],
+            question: data.firstWord[questIndex],
+            answer: data.firstWord[answerIndex],
             title: data.title
           })
-          console.log('done is called')
+      
         }
       
         DataModifier.modifyWords(words, done)
@@ -33,7 +35,7 @@ function App() {
  
 
   const changeWord  = (direction: string)=>{
-    console.log('hei')
+  
     let currentIndex: number;
     if(direction  ==="Next"){
      currentIndex = buttonController({index, next: true, words: vocabulary.words}, buttons, setButtons)
@@ -42,9 +44,12 @@ function App() {
     }
     let currentWord =DataModifier.getWord(vocabulary.words, currentIndex)
     let title= ''
+
+    let questIndex = vocabulary.language==='Geo'? 1: 0
+    let answerIndex =  vocabulary.language==='Geo'? 0: 1
     setWord({
-      question: currentWord[vocabulary.language==='Geo'? 1: 0],
-      answer: currentWord[vocabulary.language==='Geo'?0: 1],
+      question: currentWord[questIndex],
+      answer: currentWord[answerIndex],
       title: title
     })
     setIndex(currentIndex)

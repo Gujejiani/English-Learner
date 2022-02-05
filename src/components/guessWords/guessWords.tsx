@@ -2,15 +2,18 @@ import React, {useState, useEffect} from 'react'
 import styles from './guessWords.module.css'
 import {engAlphabetToGeo} from '../../utils/engAlphToGeo'
 import {speak} from '../../utils/voice'
+import { FaVolumeMute } from "@react-icons/all-files/fa/FaVolumeMute";
+import { ImVolumeMedium } from "@react-icons/all-files/im/ImVolumeMedium";
 const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
-    
+    const [sound, setSound] = useState<boolean>(true)
 
     useEffect(()=>{
-        if(props.language !=='Geo'){
+        if(props.language !=='Geo' && sound){
+        
             speak(props.word.question)
         }
-    }, [props.language,props.word.question])
+    }, [props.language,props.word.question, sound])
 
 
 
@@ -20,7 +23,7 @@ const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettin
             return !current
         })
        
-        if(props.language ==='Geo' && !show){
+        if(props.language ==='Geo' && !show && sound){
             speak(props.word.answer)
         }
        
@@ -37,9 +40,17 @@ const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettin
       
     }
 
-  
+    const soundHandler = ()=>{
+        setSound(!sound)
+    }
 
     return <div className={styles.card} >
+
+    <div onClick={soundHandler} className={styles.sound}>
+      {sound? <ImVolumeMedium className={styles.s}  width={'50px'} />: <FaVolumeMute className={styles.s}  />}
+    </div>
+   
+
          <span className={styles.count} >({props.page.start}/{props.page.last})</span>
         <div className={styles.card__question} >
             <label  className={styles.card__title} >Guess Word</label>

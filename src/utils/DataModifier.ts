@@ -22,12 +22,9 @@
 
   private  addMissingWordsBack(vocabulary: Array<string>): Array<string>  {
         const vocabularyCopy = [...vocabulary]
-        console.log(vocabulary)
         vocabularyCopy.forEach((sentence: string, index)=>{
-          
           if(!sentence.includes('-') && !sentence.includes('–') && !sentence.includes('LESSON')){
             vocabularyCopy.splice(index, 1)
-            console.log(vocabularyCopy)
             vocabularyCopy[index-1] =   `${vocabularyCopy[index-1]} ` + sentence
           }
          
