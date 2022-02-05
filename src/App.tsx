@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import VocabularyForm from './components/vocabularyForm/vocabularyForm';
 import GuessWords from './components/guessWords/guessWords';
-import {addMissingWordsBack} from './utils/missingWords'
 
-
+import {buttonController} from './utils/buttons'
+import DataModifier from './utils/DataModifier'
 
 function App() {
   const [vocabulary, setVocabulary] = useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
@@ -15,55 +15,29 @@ function App() {
   const processData = (words: string, language: string)=>{
     console.log(language)
       if(words){
-        console.log(words)
-        const splitted = words.split('\n').filter(text=> text)
-        const updatedWords = addMissingWordsBack(splitted)
-        setVocabulary({words: updatedWords, language})
-        console.log(words.split('–'))
-        console.log(splitted[index].split('–'))
-        const firstWord: Array<string> = updatedWords[0].split('–').length ? updatedWords[0].split('–'): updatedWords[0].split('-')
-
-
-
-        setWord({
-          question: firstWord[ language==='Geo'? 1: 0],
-          answer: firstWord[ language==='Geo'? 0: 1]
-        })
+        const done =  (data:{updatedWords: string[], firstWord: Array<string>})=>{
+          setVocabulary({words: data.updatedWords, language})
+          setWord({
+            question: data.firstWord[ language==='Geo'? 1: 0],
+            answer: data.firstWord[ language==='Geo'? 0: 1]
+          })
+          console.log('done is called')
+        }
+      
+        DataModifier.modifyWords(words, done)
       }
       
   }
 
+ 
+
   const changeWord  = (direction: string)=>{
 
-    let currentIndex = index
+    let currentIndex: number;
     if(direction  ==="Next"){
-      currentIndex++;
-      if(buttons.prevDisable){
-        setButtons({
-          ...buttons,
-          prevDisable: false
-        })
-      }
-      if(!vocabulary.words[currentIndex +1]){
-        setButtons({
-          prevDisable: false,
-          nextDisable: true
-        })
-      }
+     currentIndex = buttonController({index, next: true, words: vocabulary.words}, buttons, setButtons)
     }else{
-      currentIndex--
-      if(buttons.nextDisable){
-        setButtons({
-          ...buttons,
-          nextDisable: false
-        })
-      }
-      if(!vocabulary.words[currentIndex -1]){
-        setButtons({
-          prevDisable: true,
-          nextDisable: false
-        })
-      }
+      currentIndex = buttonController({index, next: false, words: vocabulary.words}, buttons, setButtons)
     }
   let currentWord;
 
@@ -73,7 +47,6 @@ function App() {
      currentWord = vocabulary.words[currentIndex].split('-')
     }
   
-
     setWord({
       question: currentWord[vocabulary.language==='Geo'? 1: 0],
       answer: currentWord[vocabulary.language==='Geo'?0: 1]
@@ -84,8 +57,9 @@ function App() {
   const changeWordsHandler =()=>{
     setVocabulary({
       words: [],
-      language: 'Geo'
+      language: 'Geo',
     })
+    setIndex(0)
   }
 
   return (
