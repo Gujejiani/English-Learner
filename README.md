@@ -5,8 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Open [https://gujejiani.github.io/English-Learner/](https://gujejiani.github.io/English-Learner/) to view it in the browser.
 
-# It's sometimes not so convenient to learn words from vocabulary, during learning process you have to hide
-# half side, to check your knowledge 
+# It's sometimes not so convenient to learn words from vocabulary, during learning process you have to hide half side, to check your knowledge 
 
 # Aplication  makes this process easier, you can past vocabulary from Pdf just simply coping it
 
@@ -24,6 +23,6 @@ Open [https://gujejiani.github.io/English-Learner/](https://gujejiani.github.io/
 
 
 
-# here we go, you can check your vocabulary nollige withoung having to trouble to hide half sides of pdf or leptop :D 
+# here we go, you can check your vocabulary knowledge withoung having trouble to hide half sides of pdf or leptop :D 
 
 
