@@ -20,14 +20,12 @@ import Toggle from '../../ui/toggle/toggle'
                   setButtonInfo({...buttonInfo,disable: false }  )
                 
             }
-            console.log(lang ==="Eng")
+        
             if(lang){
                 let parsedLang = JSON.parse(lang)
-                console.log(parsedLang === 'Eng')
+              
                 if(parsedLang === 'Eng'){
                     setLanguage('Eng')
-                   
-                    console.log('changed')
                 }
             }
         }, [])
@@ -42,7 +40,6 @@ import Toggle from '../../ui/toggle/toggle'
             })
             setTimeout(()=>{
                 if(textAreaInput.current?.value){
-                    console.log(language)
                 props.processData(textAreaInput.current?.value, language)
                
               
@@ -74,14 +71,24 @@ import Toggle from '../../ui/toggle/toggle'
             setLanguage('Geo')
         }
      }
-
+const clearHandler = () =>{
+    setWords('')
+    localStorage.removeItem('data')
+    setButtonInfo({...buttonInfo, disable: true})
+}
    return ( <form  onSubmit={submitHandler} className={styles.form} >
-     <h5 className={styles.form__heading} >Please put vocabulary</h5>    
-    <textarea value={words}  onChange={changeHandler}  ref={textAreaInput} className={styles.form__input}  />
+     <h5 className={styles.form__heading} >Please put vocabulary</h5>
+     <div className={styles.wrapper} >
+     <textarea value={words}  onChange={changeHandler}  ref={textAreaInput} className={styles.form__input}  />
+     <button disabled={!words ? true: false } onClick={clearHandler} type='button' className={`${styles.button} ${words? '': styles.disable }`} >Clear</button>
+         </div>    
+   
+
     <div className={styles.language} > 
     <h3>Choose Questions Language  </h3>
     <Toggle toggle={language ==='Geo'? true: false } onToggled={toggleHandler} />
     </div>
+   
     <button className={`${styles.form__button} ${buttonInfo.disable  ? styles.disable: '' }`}  disabled={buttonInfo.disable }  type="submit" > {buttonInfo.text}</button>
     </form>)
 }
