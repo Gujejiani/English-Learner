@@ -7,13 +7,20 @@ import { ImVolumeMedium } from "@react-icons/all-files/im/ImVolumeMedium";
 const GuessWords: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
-
+    const [spoken, setSpoken] = useState<string>('');
     useEffect(()=>{
+        let timeOut: any
         if(props.language !=='Geo' && sound){
-        
-            speak(props.word.question)
+           timeOut = setTimeout(()=>{
+                setSpoken(props.word.question)
+                if(spoken !==props.word.question){
+                    speak(props.word.question)
+                }
+              
+            }, 1000)
         }
-    }, [props.language,props.word.question, sound])
+      return ()=> clearTimeout(timeOut)
+    }, [props.language,props.word.question, sound, spoken])
 
 
 
