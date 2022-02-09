@@ -60,6 +60,7 @@ function App() {
       words: [],
       language: 'Geo',
     })
+    setWord({question: '', answer: '', title:  ''})
     setIndex(0)
     setButtons({nextDisable: false, prevDisable: true})
   }
