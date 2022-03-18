@@ -1,7 +1,7 @@
 import  styles from './vocabularyForm.module.css'
 import  React, {useRef, useState, useEffect} from 'react'
 import Toggle from '../../ui/toggle/toggle'
-
+import FileUpload from '../fileUpload/fileUpload'
  const VocabularyForm: React.FC<{processData: (data: string, language: string)=> void}> = (props)=>{
     const textAreaInput = useRef<HTMLTextAreaElement>(null)
     const [buttonInfo, setButtonInfo]  = useState<{text: string, disable: boolean}>({
@@ -50,6 +50,7 @@ import Toggle from '../../ui/toggle/toggle'
     }
     const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) =>{
      
+        // Start processing button
         if(e.target.value){
             setWords(e.target.value)
             setButtonInfo({
@@ -88,7 +89,7 @@ const clearHandler = () =>{
     <h3>Choose Questions Language  </h3>
     <Toggle toggle={language ==='Geo'? true: false } onToggled={toggleHandler} />
     </div>
-   
+   <FileUpload/>
     <button className={`${styles.form__button} ${buttonInfo.disable  ? styles.disable: '' }`}  disabled={buttonInfo.disable }  type="submit" > {buttonInfo.text}</button>
     </form>)
 }

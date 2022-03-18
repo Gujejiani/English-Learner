@@ -5,8 +5,8 @@
 
 
 
-export const engAlphabetToGeo  = (word: string) =>{
-if(!word) return;
+export const engAlphabetToGeo  = (word: string): string =>{
+if(!word) return '';
 
 
 let georgian: string = ''

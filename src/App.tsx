@@ -16,6 +16,9 @@ function App() {
 
       if(words){
         const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
+
+      console.log(data)
+
           setVocabulary({words: data.updatedWords, language})
           let questIndex = language==='Geo'? 1: 0
           let answerIndex =  language==='Geo'? 0: 1
