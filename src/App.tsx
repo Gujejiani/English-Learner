@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
 import VocabularyForm from './components/vocabularyForm/vocabularyForm';
-import GuessWords from './components/guessWords/guessWords';
-
+import Dashboard from './container/dashboard/dashboard';
+import {LangMode} from './models/index'
 import {buttonController} from './utils/buttons'
 import DataModifier from './utils/DataModifier'
 
@@ -20,8 +20,8 @@ function App() {
       console.log(data)
 
           setVocabulary({words: data.updatedWords, language})
-          let questIndex = language==='Geo'? 1: 0
-          let answerIndex =  language==='Geo'? 0: 1
+          let questIndex = language===LangMode.GEO? 1: 0
+          let answerIndex =  language===LangMode.GEO? 0: 1
           setWord({
             question: data.firstWord[questIndex],
             answer: data.firstWord[answerIndex],
@@ -48,8 +48,8 @@ function App() {
     let currentWord =DataModifier.getWord(vocabulary.words, currentIndex)
     let title= ''
 
-    let questIndex = vocabulary.language==='Geo'? 1: 0
-    let answerIndex =  vocabulary.language==='Geo'? 0: 1
+    let questIndex = vocabulary.language===LangMode.GEO? 1: 0
+    let answerIndex =  vocabulary.language===LangMode.GEO? 0: 1
     setWord({
       question: currentWord[questIndex],
       answer: currentWord[answerIndex],
@@ -61,7 +61,7 @@ function App() {
   const changeWordsHandler =()=>{
     setVocabulary({
       words: [],
-      language: 'Geo',
+      language: LangMode.GEO,
     })
     setWord({question: '', answer: '', title:  ''})
     setIndex(0)
@@ -72,7 +72,7 @@ function App() {
     <div className="App">
      <h2> Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
       {
-        vocabulary.words.length ?  <GuessWords onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
+        vocabulary.words.length ?  <Dashboard onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
       }
       
      

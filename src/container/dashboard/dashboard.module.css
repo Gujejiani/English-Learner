@@ -58,31 +58,16 @@ display: flex;
 margin-top: 20px;
 
 }
-.card__nav{
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    max-width: 300px;
-    align-items: flex-end;
-    height: 100%;
-}
-.card__button{
-    padding: 5px;
-    border-radius: 10px;
-    outline: none;
-    width: 80px;
-    cursor: pointer;
-    background-color: olivedrab;
-    color: #fff;
-    
-}
-.button__show{
-    background-color: rgb(11, 87, 150);
-}
+
 .card__show{
     filter: blur(0);
    
 }
+
+
+
+
+
 .disable{
     opacity: 0.4;
     cursor: no-drop;
@@ -106,13 +91,7 @@ margin-top: 20px;
     top: -4px;
 }
 
-.card__insert{
-   
-    width: 120px;
-    height: 50px;
-    background-color: rgb(121, 53, 22);
-    margin-top: 10px;
-}
+
 
 .sound{
     position: absolute;
@@ -121,7 +100,7 @@ margin-top: 20px;
     cursor: pointer;
 }
 
-.s{
+.sound{
     color: rgb(16, 123, 150);
  
 }

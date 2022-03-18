@@ -13,7 +13,7 @@
     }
 
 
- public getWord(words: string[],index: number): string[]{
+    public getWord(words: string[],index: number): string[]{
     return words[index].split('–').length ? words[index].split('–'): words[index].split('-')
   }
 
