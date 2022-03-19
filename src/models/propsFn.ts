@@ -1,3 +1,3 @@
 
 
-export type  PropsFn =()=> void
+export type  PropsFn =()=> void | string

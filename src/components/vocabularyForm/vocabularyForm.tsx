@@ -2,13 +2,14 @@ import  styles from './vocabularyForm.module.css'
 import  React, {useRef, useState, useEffect} from 'react'
 import Toggle from '../../ui/toggle/toggle'
 import FileUpload from '../fileUpload/fileUpload'
+import {LangMode} from '../../models/index'
  const VocabularyForm: React.FC<{processData: (data: string, language: string)=> void}> = (props)=>{
     const textAreaInput = useRef<HTMLTextAreaElement>(null)
     const [buttonInfo, setButtonInfo]  = useState<{text: string, disable: boolean}>({
         text: "Start Processing",
         disable: true
     })
-    const [language, setLanguage]   = useState<string>('Geo')
+    const [language, setLanguage]   = useState<string>(LangMode.GEO)
     const [words, setWords] = useState<string>('')
         useEffect(()=>{
             const inputData = localStorage.getItem('data')
@@ -24,8 +25,8 @@ import FileUpload from '../fileUpload/fileUpload'
             if(lang){
                 let parsedLang = JSON.parse(lang)
               
-                if(parsedLang === 'Eng'){
-                    setLanguage('Eng')
+                if(parsedLang === LangMode.ENG){
+                    setLanguage(LangMode.ENG)
                 }
             }
         }, [])
@@ -65,11 +66,11 @@ import FileUpload from '../fileUpload/fileUpload'
         }
 
      }
-     const toggleHandler =(_toggled: boolean)=>{
-        if(language !=='Eng'){
-            setLanguage('Eng')
+     const toggleHandler =()=>{
+        if(language !==LangMode.ENG){
+            setLanguage(LangMode.ENG)
         }else{
-            setLanguage('Geo')
+            setLanguage(LangMode.GEO)
         }
      }
 const clearHandler = () =>{
@@ -87,7 +88,7 @@ const clearHandler = () =>{
 
     <div className={styles.language} > 
     <h3>Choose Questions Language  </h3>
-    <Toggle toggle={language ==='Geo'? true: false } onToggled={toggleHandler} />
+    <Toggle toggle={language ===LangMode.GEO? true: false } onToggled={toggleHandler} />
     </div>
    <FileUpload/>
     <button className={`${styles.form__button} ${buttonInfo.disable  ? styles.disable: '' }`}  disabled={buttonInfo.disable }  type="submit" > {buttonInfo.text}</button>

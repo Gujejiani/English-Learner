@@ -2,16 +2,20 @@ import React, {useState, useEffect} from 'react'
 import styles from './dashboard.module.css'
 import {engAlphabetToGeo} from '../../utils/engAlphToGeo'
 import {speak} from '../../utils/voice'
-import { FaVolumeMute } from "@react-icons/all-files/fa/FaVolumeMute";
-import { ImVolumeMedium } from "@react-icons/all-files/im/ImVolumeMedium";
 import Controller from '../../components/wordsNavController/controller';
+import Sound from '../../components/sound/sound.module';
+import { LangMode, Move } from '../../models';
+import Question from '../../components/question/question';
 const Dashboard: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
     const [spoken, setSpoken] = useState<string>('');
     useEffect(()=>{
-        let timeOut: any
-        if(props.language !=='Geo' && sound){
+        /**
+         * @description to  not speak every word when user changes word fast
+         */
+        let timeOut: NodeJS.Timeout 
+        if(props.language !== LangMode.GEO && sound){
            timeOut = setTimeout(()=>{
                 setSpoken(props.word.question)
                 if(spoken !==props.word.question){
@@ -31,43 +35,36 @@ const Dashboard: React.FC<{word: {question: string, answer: string}, buttSetting
             return !current
         })
        
-        if(props.language ==='Geo' && !show && sound){
+        if(props.language ===LangMode.GEO && !show && sound){
             speak(props.word.answer)
         }
        
     }
-    const nextHandler =()=>{
-        engAlphabetToGeo('maRaziidan')
+ 
+
+    const changeHandler =(direction: string): any=>{
         setShow(false)
-        props.onChangeWord('Next')
-       
-    }
-    const prevHandler = ()=>{
-        setShow(false)
-        props.onChangeWord('Prev')
-      
+        props.onChangeWord(direction)
     }
 
     const soundHandler = ()=>{
-        setSound(!sound)
+        setSound((prev)=>{
+            return !prev
+        })
     }
 
     return <div className={styles.card} >
 
-    <div onClick={soundHandler} className={styles.sound}>
-      {sound? <ImVolumeMedium className={styles.sound}  width={'50px'} />: <FaVolumeMute className={styles.s}  />}
-    </div>
+        <Sound sound={sound} soundClicked={soundHandler} />
    
 
          <span className={styles.count} >({props.page.start}/{props.page.last})</span>
-        <div className={styles.card__question} >
-            <label  className={styles.card__title} >Guess Word</label>
-            <label  className={styles.card__word} >{ props.language === 'Geo' ?  engAlphabetToGeo(props.word.question): props.word.question }</label>
-        </div>
+         <Question>{ props.language === LangMode.GEO ?  engAlphabetToGeo(props.word.question): props.word.question }</Question>
+        
         <div className={styles.card__answer} >
-        <label onClick={showHandler} className={`${styles.card__translate} ${show?  styles.card__show: ''}`} >  {  props.language === 'Geo' ?  props.word.answer:  engAlphabetToGeo(props.word.answer) }</label>
+        <label onClick={showHandler} className={`${styles.card__translate} ${show?  styles.card__show: ''}`} >  {  props.language === LangMode.GEO ?  props.word.answer:  engAlphabetToGeo(props.word.answer) }</label>
     
-        <Controller buttSettings={props.buttSettings} showClicked={showHandler} prev={prevHandler} next={nextHandler}changeWords={props.onChangeWords}  />
+        <Controller buttSettings={props.buttSettings} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={props.onChangeWords}  />
             
         </div>
 

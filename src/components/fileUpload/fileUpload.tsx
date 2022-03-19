@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios';
 
-
+import styles from './fileUpload.module.css'
 
 const FileUpload: React.FC = ()=>{
     const [selectedFile, setSelectedFile] = useState<any>();
@@ -33,12 +33,9 @@ const FileUpload: React.FC = ()=>{
 
 
     return(
-        <div>
-			<input type="file" id='inpFile' name="file" onChange={changeHandler} />
-		
-			<div>
-				<button type='button' onClick={handleSubmission}>Upload</button>
-			</div>
+        <div className={styles.upload} >
+			<input className={styles.upload__field} type="file" id='inpFile' name="file" onChange={changeHandler} />
+
 		</div>
     )
 }

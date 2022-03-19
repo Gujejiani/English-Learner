@@ -1,0 +1,31 @@
+
+.nav__button{
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+    width: 80px;
+    cursor: pointer;
+    background-color: olivedrab;
+    color: #fff;
+    
+}
+.button__show{
+    background-color: rgb(11, 87, 150);
+   
+}
+
+.nav__insert{
+   
+    width: 120px;
+    height: 50px;
+    background-color: rgb(121, 53, 22);
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.disable{
+    opacity: 0.4;
+    cursor: no-drop;
+    background-color: gray;
+    transition: all 0.4s ease-in-out;
+}

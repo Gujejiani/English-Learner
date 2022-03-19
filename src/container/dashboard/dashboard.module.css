@@ -13,27 +13,8 @@
     position: relative;
    
 }
-.card__question{
-flex: 1;
-background-color: rgb(247, 244, 244);
-padding: 5px;
-display: flex;
-flex-direction: column;
-border-radius: 10px;
 
-}
-.card__title{
-font-size: 20px;
-color: rgb(16, 123, 150);
-font-weight: bold;
-margin-top: 10px;
-}
-.card__word{
-font-size: 18px;
-color: rgb(37, 43, 37);
-font-weight: bold;
-margin-top: 30px;
-}
+
 .card__answer{
 flex: 1;
 background-color: rgb(197, 192, 192);
@@ -84,23 +65,9 @@ margin-top: 20px;
 
 }
 
-.toggle{
-   
-    position: absolute;
-    right: 10px;
-    top: -4px;
-}
 
 
 
-.sound{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-}
 
-.sound{
-    color: rgb(16, 123, 150);
- 
-}
+
+

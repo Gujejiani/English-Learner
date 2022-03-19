@@ -3,7 +3,7 @@ import './App.css';
 import VocabularyForm from './components/vocabularyForm/vocabularyForm';
 import Dashboard from './container/dashboard/dashboard';
 import {LangMode} from './models/index'
-import {buttonController} from './utils/buttons'
+import {buttonController} from './utils/buttonController'
 import DataModifier from './utils/DataModifier'
 
 function App() {
