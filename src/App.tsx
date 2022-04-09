@@ -5,15 +5,18 @@ import Dashboard from './container/dashboard/dashboard';
 import {LangMode} from './models/index'
 import {buttonController} from './utils/buttonController'
 import DataModifier from './utils/DataModifier'
+import {useSelector}  from 'react-redux'
+import { RootState } from './store/store';
 
 function App() {
+  const vocabularyReducer = useSelector((state: RootState)=> state.vocabulary.vocabulary)
   const [vocabulary, setVocabulary] = useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
   const [word, setWord] = useState<{question: string, answer: string, title: string}>({question: '', answer: '', title: ''})
   const [index,  setIndex] = useState<number>(0)
   const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
   
   const processData = (words: string, language: string)=>{
-
+ 
       if(words){
         const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
 
@@ -72,7 +75,7 @@ function App() {
     <div className="App">
      <h2> Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
       {
-        vocabulary.words.length ?  <Dashboard onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
+        vocabularyReducer ?  <Dashboard onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
       }
       
      
