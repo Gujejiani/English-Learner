@@ -3,52 +3,38 @@ import  React, { useState} from 'react'
 import Toggle from '../../ui/toggle/toggle'
 import FileUpload from '../fileUpload/fileUpload'
 import {LangMode} from '../../models/index'
-import axios from 'axios';
+import { sendPdfData } from '../../store/vocabulary-effects'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store/reducer';
+import { settingsActions } from '../../store/settings-slice'
+ const VocabularyForm: React.FC = ()=>{
 
-import {vocabularyActions} from '../../store/vocabulary-slice'
-import { useStateDispatch } from '../../store/store'
- const VocabularyForm: React.FC<{processData: (data: string, language: string)=> void}> = (props)=>{
-
-   const dispatch = useStateDispatch()
-
+    const dispatch = useDispatch()
     const [pdfFile, setPdfFile]= useState<File>()
-    const [buttonInfo, setButtonInfo]  = useState<{text: string, disable: boolean}>({
-        text: "Start Processing",
-        disable: true
-    })
-    const [language, setLanguage]   = useState<string>(LangMode.GEO)
+    const loading = useSelector((state: RootState)=> state.vocabulary.loading)
+    const language = useSelector((state: RootState)=> state.settings.language)
+    const  [processing, setProcessing ] = useState<boolean>(true) 
+  
 
   
 
     const submitHandler =(e: React.FormEvent)=>{
         e.preventDefault()
         console.log(pdfFile)
-        const formData = new FormData()
-		if(!pdfFile)return;
-
-		formData.append('pdfFile',pdfFile)
-		axios.post<{data: string}>('http://localhost:1111/extract-text', formData).then(res=>{
-			console.log(res.data)
-
-            dispatch(vocabularyActions.addVocabulary(res.data.data)) // {type: some_unique_action_name, payload: what you will pass}
-		})
-
-            setButtonInfo({
-                text: "Processing...",
-                disable: false
-            })
-
-           
-        
+      
+		if(!pdfFile){
+            return;
+        }
+        dispatch(sendPdfData(pdfFile, language))
     }
   
      const toggleHandler =()=>{
-            setLanguage(language !==LangMode.ENG ? LangMode.ENG: LangMode.GEO )
+            dispatch(settingsActions.changeLanguage())
      }
      
      const pdfHandler = (file: File)=>{
          setPdfFile(file)
-         setButtonInfo({...buttonInfo,disable: false }  )
+         setProcessing(false)
      }
 
    return ( <form  onSubmit={submitHandler} className={styles.form} >
@@ -62,7 +48,7 @@ import { useStateDispatch } from '../../store/store'
     <Toggle toggle={language ===LangMode.GEO? true: false } onToggled={toggleHandler} />
     </div>
    
-    <button className={`${styles.form__button} ${buttonInfo.disable  ? styles.disable: '' }`}  disabled={buttonInfo.disable }  type="submit" > {buttonInfo.text}</button>
+    <button className={`${styles.form__button} ${processing  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {loading? 'Processing...': 'Start Processing' }</button>
     </form>)
 }
 

@@ -25,9 +25,6 @@ const vocabularySlice =createSlice({
             state.loading =true
         },
         addVocabularySuccess(state, action:{payload: string[]}){
-
-            console.log('state updated')
-            console.log(action)
         state.loading =false
         console.log(action)
         state.vocabulary = action.payload

@@ -5,77 +5,49 @@ import Dashboard from './container/dashboard/dashboard';
 import {LangMode} from './models/index'
 import {buttonController} from './utils/buttonController'
 import DataModifier from './utils/DataModifier'
-import {useSelector}  from 'react-redux'
-import { RootState } from './store/store';
-
+import {useDispatch, useSelector}  from 'react-redux'
+import { RootState } from './store/reducer';
+import { vocabularyActions } from './store/vocabulary-slice';
+import {Move} from './models/move'
 function App() {
-  const vocabularyReducer = useSelector((state: RootState)=> state.vocabulary.vocabulary)
-  const [vocabulary, setVocabulary] = useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
-  const [word, setWord] = useState<{question: string, answer: string, title: string}>({question: '', answer: '', title: ''})
+  const vocabulary = useSelector((state: RootState)=> state.vocabulary.vocabulary)
+  const vocabularyQuestion=  useSelector((state: RootState)=> state.vocabulary.words) //useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
+  const language = useSelector((state: RootState)=> state.settings.language)
+  const dispatch = useDispatch()
+  
   const [index,  setIndex] = useState<number>(0)
   const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
-  
-  const processData = (words: string, language: string)=>{
- 
-      if(words){
-        const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
-
-      console.log(data)
-
-          setVocabulary({words: data.updatedWords, language})
-          let questIndex = language===LangMode.GEO? 1: 0
-          let answerIndex =  language===LangMode.GEO? 0: 1
-          setWord({
-            question: data.firstWord[questIndex],
-            answer: data.firstWord[answerIndex],
-            title: data.title
-          })
-      
-        }
-      
-        DataModifier.modifyWords(words, done)
-      }
-      
-  }
-
- 
-
   const changeWord  = (direction: string)=>{
-  
-    let currentIndex: number;
-    if(direction  ==="Next"){
-     currentIndex = buttonController({index, next: true, words: vocabulary.words}, buttons, setButtons)
-    }else{
-      currentIndex = buttonController({index, next: false, words: vocabulary.words}, buttons, setButtons)
-    }
-    let currentWord =DataModifier.getWord(vocabulary.words, currentIndex)
-    let title= ''
 
-    let questIndex = vocabulary.language===LangMode.GEO? 1: 0
-    let answerIndex =  vocabulary.language===LangMode.GEO? 0: 1
-    setWord({
+    let currentIndex: number;
+    if(direction  ===Move.NEXT){
+     currentIndex = buttonController({index, next: true, words: vocabulary}, buttons, setButtons)
+    }else{
+      currentIndex = buttonController({index, next: false, words: vocabulary}, buttons, setButtons)
+    }
+    let currentWord =DataModifier.getWord(vocabulary, currentIndex)
+    let questIndex = language===LangMode.GEO? 1: 0
+    let answerIndex =  language===LangMode.GEO? 0: 1
+
+    dispatch(vocabularyActions.changeWord({
       question: currentWord[questIndex],
       answer: currentWord[answerIndex],
-      title: title
-    })
+    }))
+
     setIndex(currentIndex)
   }
 
   const changeWordsHandler =()=>{
-    setVocabulary({
-      words: [],
-      language: LangMode.GEO,
-    })
-    setWord({question: '', answer: '', title:  ''})
     setIndex(0)
     setButtons({nextDisable: false, prevDisable: true})
+    localStorage.removeItem('data')
   }
 
   return (
     <div className="App">
      <h2> Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
       {
-        vocabularyReducer ?  <Dashboard onChangeWords={changeWordsHandler} language={vocabulary.language} page={{start: index+1, last: vocabulary.words.length}}  buttSettings={buttons} onChangeWord={changeWord} word={word} /> : <VocabularyForm processData={processData} />
+      vocabulary.length ?  <Dashboard onChangeWords={changeWordsHandler} language={language} page={{start: index+1, last: vocabulary.length}}  buttSettings={buttons} onChangeWord={changeWord} word={vocabularyQuestion} /> : <VocabularyForm  />
       }
       
      

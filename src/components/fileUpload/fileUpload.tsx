@@ -7,15 +7,15 @@ import styles from './fileUpload.module.css'
 
 const FileUpload: React.FC<{fileUploaded: (val: File)=> File | void}> = (props)=>{
     
-	const [idPdfType, setIsPdfType] = useState(true);
+	const [isPdfType, setIsPdfType] = useState(true);
     const changeHandler= (e: React.ChangeEvent<HTMLInputElement>)=>{
 		const form =e.target as HTMLInputElement
 
 
-	
+		// 1) check if file uploaded and it's in pdf format
 		if(form.files &&  form.files.length){
-
 			const file = form.files[0]
+		// 2) check if file is in pdf format
 			if(file && file.type=== "application/pdf"){
 				setIsPdfType(true)
 			}else{
@@ -24,8 +24,6 @@ const FileUpload: React.FC<{fileUploaded: (val: File)=> File | void}> = (props)=
 			}
 
 
-		
-			console.log(file)	
 			props.fileUploaded(file)
 		}
     }
@@ -36,7 +34,7 @@ const FileUpload: React.FC<{fileUploaded: (val: File)=> File | void}> = (props)=
     return(
         <div className={styles.upload} >
 			<input className={styles.upload__field} type="file" id='inpFile' name="file" onChange={changeHandler} />
-			{ !idPdfType? <span  className={styles.upload__error} >please upload pdf type document</span>: ''}
+			{ !isPdfType? <span  className={styles.upload__error} >please upload pdf type document</span>: ''}
 		</div>
     )
 }

@@ -1,10 +1,18 @@
  
 
- 
+ /**
+  * modifies pdf string into suitable format
+  * 
+  */
  class DataModifier {
    
+  /**
+   * 
+   * @param words pdf string
+   * @param done callback function
+   */
    modifyWords(words: string, done:  (data: {updatedWords: string[], firstWord: Array<string>, title: string})=> void ){
-        const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON'))
+        const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON') && !text.includes('Stage') && text.length >3)
         const updatedWords = this.addMissingWordsBack(splitted)
       
         let firstWord: Array<string> = this.getWord(updatedWords, 0)
@@ -14,12 +22,16 @@
 
 
     public getWord(words: string[],index: number): string[]{
-    return words[index].split('–').length ? words[index].split('–'): words[index].split('-')
+    return words[index].split('–').length >1 ? words[index].split('–'): words[index].split('-')
   }
 
 
 
-
+/**
+ * 
+ * @param vocabulary words 
+ * @returns ads missing word back, because we are splitting  words with /n new line, some long words are jumping down and this function adds them back
+ */
   private  addMissingWordsBack(vocabulary: Array<string>): Array<string>  {
         const vocabularyCopy = [...vocabulary]
         vocabularyCopy.forEach((sentence: string, index)=>{
