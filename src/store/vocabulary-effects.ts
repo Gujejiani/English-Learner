@@ -21,11 +21,11 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
      console.log('sending request')
      formData.append('pdfFile',pdfFile)
      axios.post<string>('http://localhost:1111/extract-text', formData).then(res=>{
-         console.log(res.data)
-        console.log(res)
+        //  console.log(res.data)
+        // console.log(res)
 
         
-            const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
+          const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
           dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords)) // {type: some_unique_action_name, payload: what you will pass}
 
           let questIndex = language ===LangMode.GEO? 1: 0
@@ -37,7 +37,8 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
         // modifying pdf string to array with 
         DataModifier.modifyWords(res.data, done)
 
-
+        DataModifier.splitByStages(res.data)
+         dispatch(vocabularyActions.addVocabularyByStages(res.data))
 
         
      }).catch(err=>{

@@ -1,10 +1,11 @@
- 
-
- /**
+/**
   * modifies pdf string into suitable format
-  * 
+  *
   */
- class DataModifier {
+import {Lesson} from "../store/vocabulary-slice";
+
+
+class DataModifier {
    
   /**
    * 
@@ -23,6 +24,40 @@
 
     public getWord(words: string[],index: number): string[]{
     return words[index].split('–').length >1 ? words[index].split('–'): words[index].split('-')
+  }
+
+
+    /**
+     * @description splitts vocabulary by lessons
+     * @param words all words data
+     *
+     */
+  splitByStages(words: string){
+       const stagesData: Lesson ={};
+
+    const vocabulary = words.split('LESSON').map((el)=>{
+        return  el.split('\n').filter(text=> text && text.length >3)
+    })
+
+      vocabulary.forEach((stage, i)=>{
+          const stages = [...stage]
+
+          if(stage.length ===1){
+              stagesData.stage = stage[0]
+          }else {
+              let key: number = Number(stages[0]);
+
+              stagesData[key]={
+                  lesson: 'LESSON ' + stages[0],
+                  vocabulary: stages.slice(1, stages.length)
+              }
+          }
+
+      })
+      console.log(stagesData)
+      console.log(vocabulary)
+      return stagesData
+
   }
 
 

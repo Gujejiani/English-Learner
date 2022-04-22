@@ -41,11 +41,12 @@ function App() {
     setIndex(0)
     setButtons({nextDisable: false, prevDisable: true})
     localStorage.removeItem('data')
+    dispatch(vocabularyActions.removeVocabulary())
   }
 
   return (
     <div className="App">
-     <h2> Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
+     <h2 className="title" > Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
       {
       vocabulary.length ?  <Dashboard onChangeWords={changeWordsHandler} language={language} page={{start: index+1, last: vocabulary.length}}  buttSettings={buttons} onChangeWord={changeWord} word={vocabularyQuestion} /> : <VocabularyForm  />
       }

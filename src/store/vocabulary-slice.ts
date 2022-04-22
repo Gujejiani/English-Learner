@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
+import DataModifier from "../utils/DataModifier";
 
+export interface Lesson {
+    stage?: string,
+    [key: number]: {
+        lesson: string,
+        vocabulary: string[],
+    }
+}
 
 const initialVocabularyState: {
      vocabulary: string[],
@@ -7,11 +15,13 @@ const initialVocabularyState: {
          question: string,
          answer: string
      },
+    stages: Lesson,
+
      loading: boolean, 
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''}, loading: false, error: false}
+    {vocabulary: [], words: {question: '', answer: ''}, stages: {}, loading: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -33,11 +43,17 @@ const vocabularySlice =createSlice({
             state.words= action.payload
         },
 
-        removeVocabulary(){
+        removeVocabulary(state){
             console.log('remove state')
+            state.vocabulary = [];
         },
         addVocabularyFail(state){
             state.error =true
+        },
+
+        addVocabularyByStages(state, action: {payload: string}){
+
+            state.stages = DataModifier.splitByStages(action.payload)
         }
 
 

@@ -45,7 +45,7 @@ import { settingsActions } from '../../store/settings-slice'
 
     <div className={styles.language} > 
     <h3>Choose Questions Language  </h3>
-    <Toggle toggle={language ===LangMode.GEO? true: false } onToggled={toggleHandler} />
+    <Toggle toggle={language ===LangMode.GEO } onToggled={toggleHandler} />
     </div>
    
     <button className={`${styles.form__button} ${processing  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {loading? 'Processing...': 'Start Processing' }</button>

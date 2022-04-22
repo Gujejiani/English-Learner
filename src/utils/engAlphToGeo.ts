@@ -63,6 +63,7 @@ const mappedLetters = ()=>  {
     letters.set('u', 'უ')
     letters.set('v', 'ვ')
     letters.set('w', 'წ')
+    letters.set('W', 'ჭ')
     letters.set('x', 'ხ')
     letters.set('y', 'ყ')
     letters.set('z', 'ზ')
