@@ -49,6 +49,8 @@ margin-top: 20px;
 
 
 
+
+
 .disable{
     opacity: 0.4;
     cursor: no-drop;
@@ -58,11 +60,21 @@ margin-top: 20px;
 
 .count{
     position: absolute;
-    left: 5px;
-    top:5px;
+    left: 40px;
+    top:10px;
     font-weight: bold;
     color: rgb(16, 123, 150);
 
+}
+
+.card__book{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(16, 123, 150);
+    width: 100%;
 }
 
 

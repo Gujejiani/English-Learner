@@ -16,14 +16,22 @@ class DataModifier {
         const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON') && !text.includes('Stage') && text.length >3)
         const updatedWords = this.addMissingWordsBack(splitted)
       
-        let firstWord: Array<string> = this.getWord(updatedWords, 0)
-        const title =  ''
+        let [firstWord, title]: [string[], string] = this.getWord(updatedWords, 0)
+
         done({updatedWords, firstWord, title })
     }
 
 
-    public getWord(words: string[],index: number): string[]{
-    return words[index].split('–').length >1 ? words[index].split('–'): words[index].split('-')
+    public getWord(words: string[],index: number): [string[], string]{
+    let title: string = '';
+    let curIndex = index
+    if(words[index].includes('LESSON')){
+        title =words[index]
+        curIndex++
+    }
+
+
+      return [words[curIndex].split('–').length >1 ? words[curIndex].split('–'): words[index].split('-'), title]
   }
 
 

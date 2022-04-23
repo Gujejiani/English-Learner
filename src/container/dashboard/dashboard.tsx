@@ -6,7 +6,8 @@ import Controller from '../../components/wordsNavController/controller';
 import Sound from '../../components/sound/sound.module';
 import { LangMode, Move } from '../../models';
 import Question from '../../components/question/question';
-const Dashboard: React.FC<{word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
+import LessonChooser from "../../components/lessonChooser/lessonChooser";
+const Dashboard: React.FC<{lesson: string,word: {question: string, answer: string}, buttSettings: {prevDisable: boolean, nextDisable: boolean}, language: string,  onChangeWord: (direction: string)=>void, page: {start: number, last: number}, onChangeWords: ()=> void}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
     const [spoken, setSpoken] = useState<string>('');
@@ -54,12 +55,12 @@ const Dashboard: React.FC<{word: {question: string, answer: string}, buttSetting
     }
 
     return <div className={styles.card} >
-
+      <div  className={styles.card__book} >  < LessonChooser/></div>
         <Sound sound={sound} soundClicked={soundHandler} />
    
 
          <span className={styles.count} >({props.page.start}/{props.page.last})</span>
-         <Question>{ props.language === LangMode.GEO ?  engAlphabetToGeo(props.word.question): props.word.question }</Question>
+         <Question lesson={props.lesson} >{  props.language === LangMode.GEO ?  engAlphabetToGeo(props.word.question): props.word.question }</Question>
         
         <div className={styles.card__answer} >
         <label onClick={showHandler} className={`${styles.card__translate} ${show?  styles.card__show: ''}`} >  {  props.language === LangMode.GEO ?  props.word.answer:  engAlphabetToGeo(props.word.answer) }</label>
