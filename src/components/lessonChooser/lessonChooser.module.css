@@ -26,6 +26,23 @@ display: flex;
 
 
 }
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(19, 17, 17);
+    opacity: 0.8;
+    z-index: 20;
+    transition: all 0.5s ease-in-out;
+}
+
+.overlay__hide {
+    opacity: 0;
+    transform: translateX(-100%);
+}
 .stages__modal__show{
     opacity: 1;
     max-height: 1000px;

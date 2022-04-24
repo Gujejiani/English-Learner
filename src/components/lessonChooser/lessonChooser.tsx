@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/reducer";
 import {vocabularyActions} from "../../store/vocabulary-slice";
 import {RiBookOpenFill} from "@react-icons/all-files/ri/RiBookOpenFill";
+import ReactDom from 'react-dom'
+import { PropsFn } from '../../models';
 const LessonChooser: React.FC = () => {
     const dispatch = useDispatch()
 
@@ -29,8 +31,15 @@ const LessonChooser: React.FC = () => {
         return lesson?.lesson? <Lesson lessonClicked={()=> lessonChoseHandler(Number(key))} active={lesson.active} key={key}  lessonName={lesson.lesson} />: ''
     })
 
+    const Overlay: React.FC<{overlayClicked: PropsFn}> = (props) => {
+        return  <div onClick={props.overlayClicked} className={`${styles.overlay} ${continued? styles.overlay__hide: ''} `}  > </div>
+    }
+
+
+
     return (
         <div className={`${styles.stages} `}>
+            {  ReactDom.createPortal(<Overlay overlayClicked={showLessonsHandler} />, document.getElementById('overlay-root') as HTMLElement )}
             <div className={styles.book} >
                 { continued? <RiBook2Fill onClick={showLessonsHandler} size='2em' className={styles.stages_icon}/>:
                 <RiBookOpenFill  onClick={showLessonsHandler} size='2em' className={styles.stages_icon} />}
