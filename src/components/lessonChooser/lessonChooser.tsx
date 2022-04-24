@@ -10,16 +10,19 @@ const LessonChooser: React.FC = () => {
     const dispatch = useDispatch()
 
     const [continued, setContinued] = useState(false);
-
     const lessons = useSelector((state: RootState)=> state.vocabulary.stages)
-
+    const language = useSelector((state: RootState)=> state.settings.language)
    const lessonChoseHandler =  (key: number)=>{
         dispatch(vocabularyActions.choseLesson(key))
     }
     const continueHandler =()=>{
         console.log('clicked')
         setContinued(prev=> !prev)
-        dispatch(vocabularyActions.lessonsSubmitted())
+        dispatch(vocabularyActions.lessonsSubmitted(language))
+    }
+
+    const showLessonsHandler =() => {
+        setContinued(prev=> !prev)
     }
     const lessonsData =Object.keys(lessons).map((key)=>{
         const lesson = lessons[Number(key)]
@@ -29,8 +32,8 @@ const LessonChooser: React.FC = () => {
     return (
         <div className={`${styles.stages} `}>
             <div className={styles.book} >
-                { continued? <RiBook2Fill onClick={continueHandler} size='2em' className={styles.stages_icon}/>:
-                <RiBookOpenFill  onClick={continueHandler} size='2em' className={styles.stages_icon} />}
+                { continued? <RiBook2Fill onClick={showLessonsHandler} size='2em' className={styles.stages_icon}/>:
+                <RiBookOpenFill  onClick={showLessonsHandler} size='2em' className={styles.stages_icon} />}
             </div>
             <div className={`${styles.stages__modal} ${ !continued? styles.stages__modal__show: ''}`}>
                 <h3 className={styles.modal__title}>Choose Lesson</h3>

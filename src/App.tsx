@@ -15,7 +15,11 @@ function App() {
   const vocabularyQuestion=  useSelector((state: RootState)=> state.vocabulary.words) //useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
   const language = useSelector((state: RootState)=> state.settings.language)
   const dispatch = useDispatch()
-  const [lesson, setLesson] = useState('')
+
+ const lesson = useSelector((state: RootState)=> state.vocabulary.lessonTitle)
+
+
+
   const [index,  setIndex] = useState<number>(0)
   const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
   useEffect(() => {
@@ -35,13 +39,9 @@ function App() {
     }else{
       currentIndex = buttonController({index, next: false, words:!vocabularyByStages.length? vocabulary: vocabularyByStages}, buttons, setButtons)
     }
-    let [currentWord, les] =DataModifier.getWord(!vocabularyByStages.length? vocabulary: vocabularyByStages, currentIndex)
-    if(les){
-      setLesson(les)
-  currentIndex++
-
-    }
-    console.log(les)
+    let currentWord =DataModifier.getWord(!vocabularyByStages.length? vocabulary: vocabularyByStages, currentIndex)
+  
+  
     let questIndex = language===LangMode.GEO? 1: 0
     let answerIndex =  language===LangMode.GEO? 0: 1
 
