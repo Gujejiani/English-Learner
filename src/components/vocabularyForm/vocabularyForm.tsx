@@ -1,7 +1,7 @@
 import  styles from './vocabularyForm.module.css'
 import  React, { useState} from 'react'
 import Toggle from '../../ui/toggle/toggle'
-import FileUpload from '../fileUpload/fileUpload'
+import FileUpload from '../../container/fileUpload/fileUpload'
 import {LangMode} from '../../models/index'
 import { sendPdfData } from '../../store/vocabulary-effects'
 import { useDispatch, useSelector } from 'react-redux'

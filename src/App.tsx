@@ -4,7 +4,7 @@ import Header from './components/header/header';
 import {Route, Switch} from 'react-router-dom'
 import FormPage from './pages/formPage';
 import DashboardPage from './pages/dashboard-page';
-import WelcomePage from './pages/welcome-page';
+
 import AboutPage from './pages/about-page';
 function App() {
 
@@ -12,9 +12,7 @@ function App() {
     <div className="App">
       <Header/>
       <Switch>
-      <Route path="/welcome" >
-        <WelcomePage/>
-        </Route >
+     
       <Route path="/dashboard" >
         <DashboardPage/>
         </Route >
