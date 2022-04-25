@@ -11,7 +11,7 @@ import { settingsActions } from '../../store/settings-slice'
 
     const dispatch = useDispatch()
     const [pdfFile, setPdfFile]= useState<File>()
-    const loading = useSelector((state: RootState)=> state.vocabulary.loading)
+    const uploaded = useSelector((state: RootState)=> state.vocabulary.uploaded)
     const language = useSelector((state: RootState)=> state.settings.language)
     const  [processing, setProcessing ] = useState<boolean>(true) 
   
@@ -48,7 +48,7 @@ import { settingsActions } from '../../store/settings-slice'
     <Toggle toggle={language ===LangMode.GEO } onToggled={toggleHandler} />
     </div>
    
-    <button className={`${styles.form__button} ${processing  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {loading? 'Processing...': 'Start Processing' }</button>
+    <button className={`${styles.form__button} ${processing  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {uploaded? 'Processing...': 'Start Processing' }</button>
     </form>)
 }
 

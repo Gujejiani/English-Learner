@@ -1,73 +1,34 @@
-import React, {useState, useEffect} from 'react';
+
 import './App.css';
-import VocabularyForm from './components/vocabularyForm/vocabularyForm';
-import Dashboard from './container/dashboard/dashboard';
-import {LangMode} from './models/index'
-import {buttonController} from './utils/buttonController'
-import DataModifier from './utils/DataModifier'
-import {useDispatch, useSelector}  from 'react-redux'
-import { RootState } from './store/reducer';
-import { vocabularyActions } from './store/vocabulary-slice';
-import {Move} from './models'
+import Header from './components/header/header';
+import {Route, Switch} from 'react-router-dom'
+import FormPage from './pages/formPage';
+import DashboardPage from './pages/dashboard-page';
+import WelcomePage from './pages/welcome-page';
+import AboutPage from './pages/about-page';
 function App() {
-  const vocabulary = useSelector((state: RootState)=> state.vocabulary.vocabulary)
-  const vocabularyByStages = useSelector((state: RootState)=> state.vocabulary.vocabularyByStages)
-  const vocabularyQuestion=  useSelector((state: RootState)=> state.vocabulary.words) //useState<{words: Array<string>,  language: string}>({words: [], language: 'Eng'})
-  const language = useSelector((state: RootState)=> state.settings.language)
-  const dispatch = useDispatch()
-
- const lesson = useSelector((state: RootState)=> state.vocabulary.lessonTitle)
-
-
-
-  const [index,  setIndex] = useState<number>(0)
-  const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
-  useEffect(() => {
-    setIndex(0)
-    setButtons({
-      prevDisable: true,
-      nextDisable: false
-    })
-  }, [vocabularyByStages]);
-
-
-  const changeWord  = (direction: string)=>{
-
-    let currentIndex: number;
-    if(direction  ===Move.NEXT){
-     currentIndex = buttonController({index, next: true, words: !vocabularyByStages.length? vocabulary: vocabularyByStages}, buttons, setButtons)
-    }else{
-      currentIndex = buttonController({index, next: false, words:!vocabularyByStages.length? vocabulary: vocabularyByStages}, buttons, setButtons)
-    }
-    let currentWord =DataModifier.getWord(!vocabularyByStages.length? vocabulary: vocabularyByStages, currentIndex)
-  
-  
-    let questIndex = language===LangMode.GEO? 1: 0
-    let answerIndex =  language===LangMode.GEO? 0: 1
-
-    dispatch(vocabularyActions.changeWord({
-      question: currentWord[questIndex],
-      answer: currentWord[answerIndex],
-    }))
-
-    setIndex(currentIndex)
-  }
-
-  const changeWordsHandler =()=>{
-    setIndex(0)
-    setButtons({nextDisable: false, prevDisable: true})
-    localStorage.removeItem('data')
-    dispatch(vocabularyActions.removeVocabulary())
-  }
 
   return (
     <div className="App">
-     <h2 className="title" > Welcome Georgian/English PDF vocabulary learner  🤗  </h2>
-      {
-        vocabulary.length?  <Dashboard lesson={lesson} onChangeWords={changeWordsHandler} language={language} page={{start: index+1, last: !vocabularyByStages.length? vocabulary.length: vocabularyByStages.filter(el=>!el.includes('LESSON')) .length}}  buttSettings={buttons} onChangeWord={changeWord} word={vocabularyQuestion} /> : <VocabularyForm  />
-      }
-      
+      <Header/>
+      <Switch>
+      <Route path="/welcome" >
+        <WelcomePage/>
+        </Route >
+      <Route path="/dashboard" >
+        <DashboardPage/>
+        </Route >
+        
+        <Route path="/form" >
+        <FormPage/>
+        </Route>
+        <Route path="/about" >
+        <AboutPage/>
+        </Route>
      
+      </Switch>
+ 
+      
     </div>
   );
 }

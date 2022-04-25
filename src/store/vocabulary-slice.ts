@@ -24,11 +24,11 @@ const initialVocabularyState: {
     totalWordsInActiveLessons?: number,
     stages: Lesson,
     vocabularyByStages: string[]
-     loading: boolean, 
+     uploaded: boolean, 
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''}, lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], loading: false, error: false}
+    {vocabulary: [], words: {question: '', answer: ''}, lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -39,10 +39,10 @@ const vocabularySlice =createSlice({
     reducers: {
 
         addVocabulary(state){
-            state.loading =true
+            state.uploaded =true
         },
         addVocabularySuccess(state, action:{payload: string[]}){
-        state.loading =false
+        state.uploaded =false
         console.log(action)
         state.vocabulary = action.payload
         },

@@ -6,7 +6,8 @@
     width: 100%;
     max-height: 350px;
     height: 350px;
-    border-radius: 10px;
+  
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     margin-top: 160px;
@@ -17,13 +18,14 @@
 
 .card__answer{
 flex: 1;
-background-color: rgb(197, 192, 192);
+background-color: rgb(204, 230, 224);
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
 padding: 10px;
 font-size: 18px;
+border-radius: 10px;
 
 }
 .card__translate{
@@ -42,7 +44,6 @@ margin-top: 20px;
 
 .card__show{
     filter: blur(0);
-   
 }
 
 
