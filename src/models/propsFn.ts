@@ -1,3 +1,3 @@
 
 
-export type  PropsFn = <T>(value: T)=> T | void
+export type  PropsFn = <T>(value?: T)=> T | void
