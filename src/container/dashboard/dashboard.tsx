@@ -12,11 +12,13 @@ import DataModifier from '../../utils/DataModifier';
 import { buttonController } from '../../utils/buttonController';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/reducer';
+import Favorites from '../../components/favourites/favourites';
 const Dashboard: React.FC  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
     const [spoken, setSpoken] = useState<string>('');
 
+    const [showLessons, setShowLessons] = useState<boolean>(false)
 
     const vocabulary = useSelector((state: RootState)=> state.vocabulary.vocabulary)
     const vocabularyByStages = useSelector((state: RootState)=> state.vocabulary.vocabularyByStages)
@@ -57,6 +59,8 @@ const Dashboard: React.FC  = (props)  => {
         question: currentWord[questIndex],
         answer: currentWord[answerIndex],
       }))
+
+     
   
       setIndex(currentIndex)
     }
@@ -72,7 +76,9 @@ const Dashboard: React.FC  = (props)  => {
 
 
 
-
+    const showLessonsHandler =()=>{
+      setShowLessons(prev=> !prev)
+    }
 
 
 
@@ -132,22 +138,27 @@ const Dashboard: React.FC  = (props)  => {
 
 
 
-
+const hardWordAdded  =()=>{
+ 
+  dispatch(vocabularyActions.hardWordAdded(vocabularyQuestion.question))
+}
 
 
     return <div className={styles.card} >
-      <div  className={styles.card__book} >  < LessonChooser/></div>
+      <div  className={styles.card__book} >  <  LessonChooser  showLessons={showLessons} showLessonsClicked={showLessonsHandler} /></div>
         <Sound sound={sound} soundClicked={soundHandler} />
-   
+     <Favorites addedToHardWords={hardWordAdded}  />
 
          <span className={styles.count} >({index+1}/{!vocabularyByStages.length? 
       vocabulary.length: vocabularyByStages.length})</span>
          <Question lesson={lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(vocabularyQuestion.question): vocabularyQuestion.question }</Question>
         
         <div className={styles.card__answer} >
-        <label onClick={showHandler} className={`${styles.card__translate} ${show?  styles.card__show: ''}`} >  {  language === LangMode.GEO ?  vocabularyQuestion.answer:  engAlphabetToGeo(vocabularyQuestion.answer) }</label>
     
-        <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={changeWordsHandler}  />
+
+<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  language === LangMode.GEO ?  vocabularyQuestion.answer:  engAlphabetToGeo(vocabularyQuestion.answer) }</label>
+
+        <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
 

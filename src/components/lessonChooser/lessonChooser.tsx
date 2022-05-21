@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {RiBook2Fill} from "@react-icons/all-files/ri/RiBook2Fill";
 import styles from './lessonChooser.module.css'
 import Lesson from '../../ui/lesson/lesson-card'
@@ -9,10 +9,10 @@ import {RiBookOpenFill} from "@react-icons/all-files/ri/RiBookOpenFill";
 import ReactDom from 'react-dom'
 import { PropsFn } from '../../models';
 
-const LessonChooser: React.FC = () => {
+const LessonChooser: React.FC<{showLessonsClicked: PropsFn, showLessons: boolean}> = (props) => {
     const dispatch = useDispatch()
 
-    const [continued, setContinued] = useState(false);
+ 
     const lessons = useSelector((state: RootState)=> state.vocabulary.stages)
     const language = useSelector((state: RootState)=> state.settings.language)
    const lessonChoseHandler =  (key: number)=>{
@@ -20,32 +20,29 @@ const LessonChooser: React.FC = () => {
     }
     const continueHandler =()=>{
         console.log('clicked')
-        setContinued(prev=> !prev)
+         props.showLessonsClicked()
         dispatch(vocabularyActions.lessonsSubmitted(language))
     }
 
-    const showLessonsHandler =() => {
-        setContinued(prev=> !prev)
-    }
     const lessonsData =Object.keys(lessons).map((key)=>{
         const lesson = lessons[Number(key)]
         return lesson?.lesson? <Lesson lessonClicked={()=> lessonChoseHandler(Number(key))} active={lesson.active} key={key}  lessonName={lesson.lesson} />: ''
     })
 
-    const Overlay: React.FC<{overlayClicked: PropsFn}> = (props) => {
-        return  <div onClick={props.overlayClicked} className={`${styles.overlay} ${continued? styles.overlay__hide: ''} `}  > </div>
+    const Overlay: React.FC<{overlayClicked: PropsFn}> = (prop) => {
+        return  <div onClick={prop.overlayClicked} className={`${styles.overlay} ${props.showLessons? styles.overlay__hide: ''} `}  > </div>
     }
 
 
 
     return (
         <div className={`${styles.stages} `}>
-            {  ReactDom.createPortal(<Overlay overlayClicked={showLessonsHandler} />, document.getElementById('overlay-root') as HTMLElement )}
+            {  ReactDom.createPortal(<Overlay overlayClicked={props.showLessonsClicked} />, document.getElementById('overlay-root') as HTMLElement )}
             <div className={styles.book} >
-                { continued? <RiBook2Fill onClick={showLessonsHandler} size='2em' className={styles.stages_icon}/>:
-                <RiBookOpenFill  onClick={showLessonsHandler} size='2em' className={styles.stages_icon} />}
+                { props.showLessons? <RiBook2Fill onClick={props.showLessonsClicked} size='2em' className={styles.stages_icon}/>:
+                <RiBookOpenFill  onClick={props.showLessonsClicked} size='2em' className={styles.stages_icon} />}
             </div>
-            <div className={`${styles.stages__modal} ${ !continued? styles.stages__modal__show: ''}`}>
+            <div className={`${styles.stages__modal} ${ !props.showLessons? styles.stages__modal__show: ''}`}>
                 <h3 className={styles.modal__title}>Choose Lesson</h3>
                 <div  className={styles.lessons}>
 
