@@ -3,9 +3,11 @@ import './App.css';
 import Header from './components/header/header';
 import {Route, Switch} from 'react-router-dom'
 import FormPage from './pages/formPage';
-import DashboardPage from './pages/dashboard-page';
+import DashboardPage from './pages/vocabulary-page';
 
 import AboutPage from './pages/about-page';
+
+import HardWordsPage from './pages/hard-words-page';
 function App() {
 
   return (
@@ -23,7 +25,9 @@ function App() {
         <Route path="/about" >
         <AboutPage/>
         </Route>
-     
+        <Route path="/hard-words" >
+        <HardWordsPage/>
+        </Route>
       </Switch>
  
       
