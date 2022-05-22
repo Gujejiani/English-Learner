@@ -1,3 +1,4 @@
+import { RootState } from "../store/reducer"
 import { Lesson } from "../store/vocabulary-slice"
 
 /**
@@ -28,4 +29,16 @@ export const determineTitle = (activeStagesKey: number[], lesson: Lesson, currTi
     })
 
     return [found, title]
+}
+
+
+export const determineIfSelectedAsHardWord  =(hardWords: string[], answer: string)=>{
+    if(!hardWords.length){
+        return false
+    }
+    
+ return   hardWords.some(word=>{
+      return word.includes(answer)
+   })
+
 }

@@ -40,6 +40,10 @@
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+   
+}
+.hard__words{
+  width: 100%;
 }
 
 /* .button__direction:hover {

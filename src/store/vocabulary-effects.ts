@@ -20,9 +20,8 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
     
      console.log('sending request')
      formData.append('pdfFile',pdfFile)
-     axios.post<string>('http://localhost:1111/extract-text', formData).then(res=>{
-        //  console.log(res.data)
-        // console.log(res)
+     axios.post<string>('https://english-learner.herokuapp.com/extract-text', formData).then(res=>{
+       
 
         
           const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
@@ -39,7 +38,7 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
 
         DataModifier.splitByStages(res.data)
          dispatch(vocabularyActions.addVocabularyByStages(res.data))
-
+        
         
      }).catch(err=>{
          console.log(err)

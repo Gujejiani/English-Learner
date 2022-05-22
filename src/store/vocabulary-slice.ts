@@ -12,13 +12,17 @@ export interface Lesson {
     }
 }
 
+ export interface Question {
+    question: string,
+    answer: string,
+
+}
+
 const initialVocabularyState: {
      vocabulary: string[],
-     words: {
-         question: string,
-         answer: string,
-
-     },
+     words: Question,
+     hardWordsQuestion: Question,
+    hardWords:  string[],
     lessonTitle: string,
     activeLessonsKeys: number[],
     totalWordsInActiveLessons?: number,
@@ -28,7 +32,7 @@ const initialVocabularyState: {
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''}, lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
+    {vocabulary: [], words: {question: '', answer: ''},hardWordsQuestion: {question: '', answer: ''},  hardWords:  [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -39,27 +43,16 @@ const vocabularySlice =createSlice({
     reducers: {
 
         addVocabulary(state){
-            state.uploaded =true
+            state.uploaded =false
         },
         addVocabularySuccess(state, action:{payload: string[]}){
-        state.uploaded =false
+        state.uploaded =true
         console.log(action)
         state.vocabulary = action.payload
         },
         changeWord(state, action: {payload: {question: string, answer: string}}){
             state.words= action.payload
          
-
-            /**
-             * this logic determines lesson  name
-             */
-             //    state.activeLessonsKeys.some(key=> {
-            //        let includes = state.stages[key].vocabulary.some(voc=> voc.includes(action.payload.answer)) || state.stages[key].vocabulary.some(voc=> voc.includes(action.payload.answer))
-            //         if(includes && state.lessonTitle !== state.stages[key].lesson){
-            //             state.lessonTitle = state.stages[key].lesson
-            //             return true
-            //         }
-            //    })
             if(state.activeLessonsKeys.length){
            
           let [found, title] = determineTitle(state.activeLessonsKeys, state.stages,  state.lessonTitle, action.payload.question)
@@ -79,7 +72,7 @@ const vocabularySlice =createSlice({
         },
 
         addVocabularyByStages(state, action: {payload: string}){
-
+            state.uploaded =true
             state.stages = DataModifier.splitByStages(action.payload)
         },
         choseLesson(state, action: {payload: number}) {
@@ -124,7 +117,44 @@ const vocabularySlice =createSlice({
                 const word = DataModifier.getWord(state.vocabulary, 0)
                 state.words ={ question: word[questIndex],  answer: word[answerIndex] }
             }
-        }
+        },
+        hardWordAdded(state, action: {payload: string}){
+            let vocWords =state?.vocabularyByStages?.length ? state?.vocabularyByStages: state.vocabulary
+            const words = vocWords.find(vocWords=> vocWords.includes(action.payload))
+
+            const alreadyAdded = state.hardWords.findIndex(word=> word.includes(action.payload))
+            console.log(alreadyAdded)
+            if(words && alreadyAdded  === -1){
+                state.hardWords = [...state.hardWords, words]
+            }else {
+                console.log('removed')
+                const hardWordsCopy = [...state.hardWords]
+                hardWordsCopy.splice(alreadyAdded,  1)
+                state.hardWords = hardWordsCopy
+               
+            }
+         
+        },
+        hardWordsPracticeStart(state, action:{payload: LangMode} ){
+            let questIndex = action.payload ===LangMode.GEO? 1: 0
+            let answerIndex =  action.payload===LangMode.GEO? 0: 1
+
+
+         
+            const word = DataModifier.getWord(state.hardWords, 0)
+            state.hardWordsQuestion ={ question: word[questIndex],  answer: word[answerIndex] }
+        },
+        changeHardWord(state, action: {payload: {question: string, answer: string}}){
+            state.hardWordsQuestion= action.payload
+         
+            
+
+        },
+
+       
+
+
+       
     }
 })
 

@@ -7,11 +7,11 @@ const Controller:React.FC<{buttSettings:  ButtonSettings, showClicked: PropsFn, 
     return(
         <React.Fragment>
           <div  className={styles.nav} >
-            <Button onClick={props.prev} disabled={props.buttSettings.prevDisable} >{`<${Move.PREV}`}</Button>
+            <Button onClick={props.prev} directionButton={true} disabled={props.buttSettings.prevDisable} >{`<${Move.PREV}`}</Button>
             <Button onClick={props.showClicked} show={true} >Show</Button>
-            <Button onClick={props.next} disabled={props.buttSettings.nextDisable} >{ `${Move.NEXT}>`}</Button>
+            <Button onClick={props.next} directionButton={true} disabled={props.buttSettings.nextDisable} >{ `${Move.NEXT}>`}</Button>
             </div>
-            <Button onClick={props.changeWords} insert={true}  >Change Words</Button>
+            <Button onClick={props.changeWords} insert={true}  >Change Lesson</Button>
            
         </React.Fragment>
        

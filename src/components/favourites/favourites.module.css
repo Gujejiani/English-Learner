@@ -1,0 +1,13 @@
+
+
+.favorites{
+    position: absolute;
+    right: 20px;
+     top: 15px;
+    cursor: 'pointer';
+    color: #ffc402
+}
+
+.icon{
+    cursor: pointer;
+}
