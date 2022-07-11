@@ -25,8 +25,17 @@ Open [https://gujejiani.github.io/English-Learner/](https://gujejiani.github.io/
 
 # UPDATED VERSION 
 
-## now users can update pdf version 
+## now users can update pdf file 
 ![image](https://user-images.githubusercontent.com/67228459/178221617-4bc77030-ef74-4aad-9531-c4155c7a2478.png)
+
+
+## some visual changes added and users can save hard words, by clicking start
+![image](https://user-images.githubusercontent.com/67228459/178224189-53a0782f-949a-4265-b693-e4064f616da6.png)
+
+
+## and then after some time they can practice only hard words 
+
+![image](https://user-images.githubusercontent.com/67228459/178224299-6cd176f6-bf2a-4a6b-9eec-79514df65b45.png)
 
 
 
