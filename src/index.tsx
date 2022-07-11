@@ -8,7 +8,7 @@ import store from './store/reducer'
 import {BrowserRouter} from 'react-router-dom'
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/English-Learner/'>
     <Provider store={store} >
 
     <App />
