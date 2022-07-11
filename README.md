@@ -23,4 +23,10 @@ Open [https://gujejiani.github.io/English-Learner/](https://gujejiani.github.io/
 
 # here we go, you can check your vocabulary knowledge withoung having trouble to hide half sides of pdf or leptop :D 
 
+# UPDATED VERSION 
+
+## now users can update pdf version 
+![image](https://user-images.githubusercontent.com/67228459/178221617-4bc77030-ef74-4aad-9531-c4155c7a2478.png)
+
+
 
