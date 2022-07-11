@@ -13,7 +13,7 @@ return <header className={styles.header} >
         <nav className={styles.header__nav} >
             <ul className={styles.nav__ul} >
                 <li className={styles.ul__list} > <NavLink activeClassName={styles.active}  to="dashboard">Dashboard</NavLink> </li>
-                <li className={styles.ul__list} > <NavLink activeClassName={styles.active}  to="form">Form</NavLink> </li>
+                <li className={styles.ul__list} > <NavLink activeClassName={styles.active} exact  to="/">Form</NavLink> </li>
                 <li className={styles.ul__list} > <NavLink activeClassName={styles.active}  to="about">About</NavLink> </li>
                 <li className={styles.ul__list} > <NavLink activeClassName={`${styles.active} ${styles.hard__words}`}  to="hard-words">Hard Words</NavLink> <span className={styles.hard__words__count} >{count}</span> </li>
             </ul>

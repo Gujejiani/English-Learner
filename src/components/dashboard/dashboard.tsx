@@ -47,7 +47,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
         nextDisable: false
       })
       if(!props.vocabulary?.length){
-       history.push('/form')
+       history.push('/')
       }
 
 

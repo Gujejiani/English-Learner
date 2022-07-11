@@ -15,18 +15,18 @@ function App() {
       <Header/>
       <Switch>
      
-      <Route path="/dashboard" >
+      <Route exact  path="/dashboard" >
         <DashboardPage/>
         </Route >
         
       
-        <Route path="/about" >
+        <Route exact  path="/about" >
         <AboutPage/>
         </Route>
-        <Route path="/hard-words" >
+        <Route exact  path="/hard-words" >
         <HardWordsPage/>
         </Route>
-        <Route path="/" >
+        <Route exact   path="/" >
         <FormPage/>
         </Route>
       </Switch>
