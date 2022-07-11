@@ -19,14 +19,15 @@ function App() {
         <DashboardPage/>
         </Route >
         
-        <Route path="/form" >
-        <FormPage/>
-        </Route>
+      
         <Route path="/about" >
         <AboutPage/>
         </Route>
         <Route path="/hard-words" >
         <HardWordsPage/>
+        </Route>
+        <Route path="/" >
+        <FormPage/>
         </Route>
       </Switch>
  
