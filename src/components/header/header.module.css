@@ -1,48 +1,44 @@
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgb(82, 115, 230);
-    display: flex;
-    align-items: center;
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(82, 115, 230);
+  display: flex;
+  align-items: center;
 }
-.header__img{
-    margin-left: 20px;
+.header__img {
+  margin-left: 20px;
 }
-.header__nav{
-display: flex;
-width: 100%;
-margin-left: 30px;
-
-}
-
-.nav__ul{
-    
-    padding: 0;
-    display: flex;
-    width: 300px;
-    justify-content: space-between;
-    position: relative;
+.header__nav {
+  display: flex;
+  width: 100%;
+  margin-left: 30px;
 }
 
-.ul__list{
-list-style: none;
+.nav__ul {
+  padding: 0;
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  position: relative;
+}
+
+.ul__list {
+  list-style: none;
 }
 
 .ul__list a {
-    color: #fff;
-    font-weight: bold;
-    text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
 }
-.ul__list a.active{
-    color: rgb(223, 223, 46);
+.ul__list a.active {
+  color: rgb(223, 223, 46);
 }
 
-
-.hard__words__count{
-
-    position: absolute;
+.hard__words__count {
+  position: absolute;
   right: -20px;
   background-color: rgba(12, 123, 143, 0.8);
   width: 20px;
@@ -54,5 +50,52 @@ list-style: none;
   align-items: center;
   top: 10px;
   font-size: 13px;
-   
+}
+
+/* MOBILE */
+.nav__ul__mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+  text-align: start;
+  height: 100vh;
+}
+
+.ul__list__mobile {
+  position: relative;
+  left: -40px;
+  width: 126%;
+  height: 40px;
+  text-align: left;
+  font-size: 25px;
+  list-style: none;
+}
+
+.ul__list__mobile a {
+  color: rgb(82 115 230);
+
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.ul__list__mobile a.active {
+  color: rgb(223, 223, 46);
+  text-decoration: underline;
+}
+
+.button_nav {
+  position: absolute;
+  display: block;
+  top: 10px;
+  right: 10px;
+  background-color: #f2f2f2;
+  border: none;
+}
+.my-div {
+  display: none;
+}
+
+.material-drawer {
+  display: block;
 }
