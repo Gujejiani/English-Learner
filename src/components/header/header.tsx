@@ -7,6 +7,7 @@ import Logo from "../../assets/icons8-learn-64.png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
+import './styles.css';
 const Header: React.FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>(0);
   const [show, setShow] = useState<boolean>();
@@ -66,7 +67,7 @@ const Header: React.FC = () => {
               alt="Logo"
             />
           </button>
-          <Drawer anchor="left" open={show} onClose={toggleDrawer}>
+          <Drawer   anchor="left" open={show} onClose={toggleDrawer}>
             {navLinks()}
           </Drawer>
         </div>
