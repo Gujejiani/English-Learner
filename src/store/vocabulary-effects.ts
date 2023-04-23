@@ -12,17 +12,17 @@ import { vocabularyActions } from "./vocabulary-slice"
 export const sendPdfData =(pdfFile: File, language: LangMode) => {
     return (dispatch: StateDispatch)=>{
  
- 
+    
      dispatch(vocabularyActions.addVocabulary())
  
  
      const formData = new FormData()
     
-     console.log('sending request')
+   
      formData.append('pdfFile',pdfFile)
-     axios.post<string>('https://english-learner.herokuapp.com/extract-text', formData).then(res=>{
+     axios.post<string>('https://extract-text.herokuapp.com/extract-text', formData).then(res=>{
        
-
+    
         
           const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
           dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords)) // {type: some_unique_action_name, payload: what you will pass}
