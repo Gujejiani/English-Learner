@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/English-Learner/static/css/main.030fa10a.css",
-    "main.js": "/English-Learner/static/js/main.d85c2694.js",
+    "main.js": "/English-Learner/static/js/main.637441fc.js",
     "index.html": "/English-Learner/index.html",
     "main.030fa10a.css.map": "/English-Learner/static/css/main.030fa10a.css.map",
-    "main.d85c2694.js.map": "/English-Learner/static/js/main.d85c2694.js.map"
+    "main.637441fc.js.map": "/English-Learner/static/js/main.637441fc.js.map"
   },
   "entrypoints": [
     "static/css/main.030fa10a.css",
-    "static/js/main.d85c2694.js"
+    "static/js/main.637441fc.js"
   ]
 }
