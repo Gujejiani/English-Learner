@@ -27,9 +27,9 @@ import { useHistory } from 'react-router-dom'
             return;
         }
         setProcessing(true)
-        setTimeout(()=> {
+        
             dispatch(sendPdfData(pdfFile, language))
-        }, 2000)
+       
        
     }
   
