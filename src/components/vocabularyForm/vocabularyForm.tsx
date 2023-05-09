@@ -22,13 +22,14 @@ import { useHistory } from 'react-router-dom'
     const submitHandler =(e: React.FormEvent)=>{
         e.preventDefault()
         console.log(pdfFile)
-        setProcessing(true)
+       
 		if(!pdfFile){
             return;
         }
+        setProcessing(true)
         setTimeout(()=> {
             dispatch(sendPdfData(pdfFile, language))
-        }, 3000)
+        }, 2000)
        
     }
   
@@ -62,7 +63,14 @@ import { useHistory } from 'react-router-dom'
     <Toggle toggle={language ===LangMode.GEO } onToggled={toggleHandler} />
     </div>
    
-    <button className={`${styles.form__button} ${!pdfFile  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {processing? 'Processing...': 'Start Processing' }</button>
+    <button style={{'position': 'relative'}} className={`${styles.form__button} ${!pdfFile  ? styles.disable: '' }`}  disabled={processing }  type="submit" > {processing? 'Processing...': 'Start Processing' } 
+    
+    {processing? <div className="loading-dots">
+		<span>.</span>
+		<span>.</span>
+		<span>.</span>
+	</div>:''}
+    </button>
     </form>)
 }
 
