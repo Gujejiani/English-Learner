@@ -1,7 +1,7 @@
 
 import './App.css';
 import Header from './components/header/header';
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import FormPage from './pages/formPage';
 import DashboardPage from './pages/vocabulary-page';
 
@@ -29,6 +29,8 @@ function App() {
         <Route exact   path="/" >
         <FormPage/>
         </Route>
+        
+        <Redirect to={'/'} />
       </Switch>
  
       

@@ -36,7 +36,7 @@ const Header: React.FC = () => {
       </li>
       <li className={styles.ul__list__mobile}>
         <NavLink activeClassName={styles.active} exact to="/">
-          Form
+        Upload Form
         </NavLink>
       </li>
       <li className={styles.ul__list__mobile}>
@@ -58,27 +58,26 @@ const Header: React.FC = () => {
   return (
     <>
       {screenWidth <= 480 ? (
-        <div>
-          <button onClick={toggleDrawer} className={styles.button_nav}>
-            <img
-              className={styles.header__img}
-              height={"35px"}
-              src={Logo}
-              alt="Logo"
-            />
-          </button>
+        <div className="menu-wrapper" >
+          <button onClick={toggleDrawer}  className="hamburger">
+  <span className="hamburger-box">
+    <span className="hamburger-inner"></span>
+  </span>
+</button>
+
+          
+           <NavLink  className={styles.header__img} to="/dashboard"  >EL</NavLink>
+
+          {/* </button> */}
           <Drawer   anchor="left" open={show} onClose={toggleDrawer}>
             {navLinks()}
           </Drawer>
         </div>
       ) : (
         <header className={styles.header}>
-          <img
-            className={styles.header__img}
-            height={"35px"}
-            src={Logo}
-            alt="Logo"
-          />
+         
+          <NavLink  className={styles.header__img} to="/dashboard"  >EL</NavLink>
+          
           <nav className={styles.header__nav}>
             <ul className={styles.nav__ul}>
               <li className={styles.ul__list}>
@@ -87,18 +86,8 @@ const Header: React.FC = () => {
                   Dashboard
                 </NavLink>{" "}
               </li>
-              <li className={styles.ul__list}>
-                {" "}
-                <NavLink activeClassName={styles.active} exact to="/">
-                  Form
-                </NavLink>{" "}
-              </li>
-              <li className={styles.ul__list}>
-                {" "}
-                <NavLink activeClassName={styles.active} to="/about">
-                  About
-                </NavLink>{" "}
-              </li>
+             
+             
               <li className={styles.ul__list}>
                 {" "}
                 <NavLink
@@ -110,6 +99,20 @@ const Header: React.FC = () => {
                 <span className={styles.hard__words__count}>{count}</span>{" "}
               </li>
             </ul>
+            <ul  style={{display: 'flex'}}>
+            <li style={{'marginRight': '30px'}} className={styles.ul__list}>
+                {" "}
+                <NavLink activeClassName={styles.active} exact to="/">
+                 Upload Form
+                </NavLink>{" "}
+              </li>
+              <li className={styles.ul__list}>
+                {" "}
+                <NavLink activeClassName={styles.active} to="/about">
+                  About
+                </NavLink>{" "}
+              </li>
+              </ul>
           </nav>
         </header>
       )}
