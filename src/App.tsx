@@ -61,7 +61,8 @@ function App() {
         <FormPage/>
         </Route>
         
-        <Redirect to={'/'} />
+        <Route  ><DashboardPage/></Route>
+        {/* <Redirect to={'/'} /> */}
       </Switch>
  
       
