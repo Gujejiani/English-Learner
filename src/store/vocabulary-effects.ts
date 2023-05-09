@@ -33,6 +33,8 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
           dispatch(vocabularyActions.changeWord({ question: data.firstWord[questIndex],  answer: data.firstWord[answerIndex], }))
       
         }
+        localStorage.setItem('vocabulary', JSON.stringify(res.data))
+
         // modifying pdf string to array with 
         DataModifier.modifyWords(res.data, done)
 

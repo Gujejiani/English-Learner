@@ -36,7 +36,6 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
    const lesson = useSelector((state: RootState)=> state.vocabulary.lessonTitle)
   
   
-  
     const [index,  setIndex] = useState<number>(0)
     const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
     useEffect(() => {
@@ -45,20 +44,16 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
         prevDisable: true,
         nextDisable: false
       })
-      if(!props.vocabulary?.length){
-       history.push('/')
-      }
+      const vocabulary = localStorage.getItem('vocabulary')? JSON.parse(localStorage.getItem('vocabulary') as string): undefined
 
+        if(!props.vocabulary.length && !vocabulary){
+          history.push('/')
+         }
+    
+      
+    }, [props.vocabulary, history]);
 
-    }, [props.vocabulary]);
-
-    useEffect(()=>{
-      const hardWords = localStorage.getItem('hardWords')  ? JSON.parse(localStorage.getItem('hardWords') as string): []
-
-      if(hardWords){
-        store.dispatch(vocabularyActions.insertHardWords(hardWords))
-      }
-    }, [])
+    
   
   
     const changeWord  = (direction: string)=>{
