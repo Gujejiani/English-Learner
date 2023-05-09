@@ -60,8 +60,6 @@ class DataModifier {
           }
 
       })
-      console.log(stagesData)
-      console.log(vocabulary)
       return stagesData
 
   }

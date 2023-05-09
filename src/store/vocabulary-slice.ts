@@ -47,7 +47,6 @@ const vocabularySlice =createSlice({
         },
         addVocabularySuccess(state, action:{payload: string[]}){
         state.uploaded =true
-        console.log(action)
         state.vocabulary = action.payload
         },
         changeWord(state, action: {payload: {question: string, answer: string}}){
@@ -107,7 +106,7 @@ const vocabularySlice =createSlice({
 
                 state.words ={ question: word[questIndex],  answer: word[answerIndex] }
                 let [found, title] = determineTitle(activeLessonKeys, state.stages,  state.lessonTitle, state.words.answer, true)
-                console.log(activeLessonKeys, state.stages, state.lessonTitle, state.words.question)
+                // console.log(activeLessonKeys, state.stages, state.lessonTitle, state.words.question)
                 if(found){
                     state.lessonTitle =title
                 }
@@ -123,7 +122,7 @@ const vocabularySlice =createSlice({
             const words = vocWords.find(vocWords=> vocWords.includes(action.payload))
 
             const alreadyAdded = state.hardWords.findIndex(word=> word.includes(action.payload))
-            console.log(alreadyAdded)
+            // console.log(alreadyAdded)
             if(words && alreadyAdded  === -1){
                 state.hardWords = [...state.hardWords, words]
             }else {
@@ -133,6 +132,8 @@ const vocabularySlice =createSlice({
                 state.hardWords = hardWordsCopy
                
             }
+
+            localStorage.setItem('hardWords', JSON.stringify(state.hardWords))
          
         },
         hardWordsPracticeStart(state, action:{payload: LangMode} ){
@@ -150,7 +151,9 @@ const vocabularySlice =createSlice({
             
 
         },
-
+        insertHardWords(state, action: {payload: string[]}){
+            state.hardWords = action.payload
+        }
        
 
 

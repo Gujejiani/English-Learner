@@ -21,7 +21,7 @@ import { useHistory } from 'react-router-dom'
 
     const submitHandler =(e: React.FormEvent)=>{
         e.preventDefault()
-        console.log(pdfFile)
+        // console.log(pdfFile)
        
 		if(!pdfFile){
             return;

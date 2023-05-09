@@ -11,10 +11,9 @@ import { vocabularyActions } from '../../store/vocabulary-slice';
 import DataModifier from '../../utils/DataModifier';
 import { buttonController } from '../../utils/buttonController';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store/reducer';
+import store, { RootState } from '../../store/reducer';
 import Favorites from '../favourites/favourites';
 import { determineIfSelectedAsHardWord } from '../../utils/utils';
-import { selectVocabulary } from '../../store/vocabulary.slice.selectors';
 import { useHistory } from 'react-router-dom';
 const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
   question: string;
@@ -52,6 +51,14 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
     }, [props.vocabulary]);
+
+    useEffect(()=>{
+      const hardWords = localStorage.getItem('hardWords')  ? JSON.parse(localStorage.getItem('hardWords') as string): []
+
+      if(hardWords){
+        store.dispatch(vocabularyActions.insertHardWords(hardWords))
+      }
+    }, [])
   
   
     const changeWord  = (direction: string)=>{
