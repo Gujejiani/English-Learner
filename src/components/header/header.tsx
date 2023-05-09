@@ -36,7 +36,7 @@ const Header: React.FC = () => {
       </li>
       <li className={styles.ul__list__mobile}>
         <NavLink activeClassName={styles.active} exact to="/">
-        Upload Form
+        Upload PDF
         </NavLink>
       </li>
       <li className={styles.ul__list__mobile}>
@@ -103,7 +103,7 @@ const Header: React.FC = () => {
             <li style={{'marginRight': '30px'}} className={styles.ul__list}>
                 {" "}
                 <NavLink activeClassName={styles.active} exact to="/">
-                 Upload Form
+                Upload PDF
                 </NavLink>{" "}
               </li>
               <li className={styles.ul__list}>
