@@ -39,15 +39,16 @@ class DataModifier {
      *
      */
   splitByStages(words: string){
-       const stagesData: Lesson ={};
-
-    const vocabulary = words.split('LESSON').map((el)=>{
+        const stagesData: Lesson ={};
+        const updatedWords =  words.replace(/LEESON/g, 'LESSON');
+        const vocabulary =  updatedWords.split('LESSON').map((el)=>{
         return  el.split('\n').filter(text=> text && text.length >3)
     })
-
+    
       vocabulary.forEach((stage, i)=>{
-          const stages = [...stage]
-
+          
+          const stages =  [...stage]
+     
           if(stage.length ===1){
               stagesData.stage = stage[0]
           }else {
@@ -55,7 +56,7 @@ class DataModifier {
 
               stagesData[key]={
                   lesson: 'LESSON ' + stages[0],
-                  vocabulary: stages.slice(1, stages.length)
+                  vocabulary: this.addMissingWordsBack(stages.slice(1, stages.length))
               }
           }
 
@@ -71,7 +72,7 @@ class DataModifier {
  * @param vocabulary words 
  * @returns ads missing word back, because we are splitting  words with /n new line, some long words are jumping down and this function adds them back
  */
-  private  addMissingWordsBack(vocabulary: Array<string>): Array<string>  {
+  public  addMissingWordsBack(vocabulary: Array<string>): Array<string>  {
         const vocabularyCopy = [...vocabulary]
         vocabularyCopy.forEach((sentence: string, index)=>{
           if(!sentence.includes('-') && !sentence.includes('–') && !sentence.includes('LESSON')){
