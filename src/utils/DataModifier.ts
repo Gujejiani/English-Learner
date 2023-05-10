@@ -14,7 +14,9 @@ class DataModifier {
    */
    modifyWords(words: string, done:  (data: {updatedWords: string[], firstWord: Array<string>, title: string})=> void ){
         const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON') && !text.includes('Stage') && text.length >3)
-        const updatedWords = this.addMissingWordsBack(splitted)
+        const updatedWords = this.addMissingWordsBack(this.addMissingWordsBack(this.addMissingWordsBack(splitted)))
+
+
 
         let firstWord: string[] = this.getWord(updatedWords, 0)
     let title =''
@@ -56,7 +58,7 @@ class DataModifier {
 
               stagesData[key]={
                   lesson: 'LESSON ' + stages[0],
-                  vocabulary: this.addMissingWordsBack(stages.slice(1, stages.length))
+                  vocabulary: this.addMissingWordsBack(this.addMissingWordsBack(this.addMissingWordsBack(stages.slice(1, stages.length))))
               }
           }
 
@@ -81,7 +83,7 @@ class DataModifier {
           }
          
         })
-    
+        
         return [...vocabularyCopy]
     }
 

@@ -11,7 +11,7 @@ import { vocabularyActions } from '../../store/vocabulary-slice';
 import DataModifier from '../../utils/DataModifier';
 import { buttonController } from '../../utils/buttonController';
 import { useSelector, useDispatch } from 'react-redux';
-import store, { RootState } from '../../store/reducer';
+import  { RootState } from '../../store/reducer';
 import Favorites from '../favourites/favourites';
 import { determineIfSelectedAsHardWord } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
@@ -53,11 +53,11 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       
     }, [props.vocabulary, history]);
 
-
-  
+   
+     
   
     const changeWord  = (direction: string)=>{
-  
+      
       let currentIndex: number;
       if(direction  ===Move.NEXT){
       currentIndex = buttonController({index, next: true, words: props.vocabulary}, buttons, setButtons)
@@ -96,7 +96,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
 
-    
+
 
     const showLessonsHandler =()=>{
       setShowLessons(prev=> !prev)
@@ -165,8 +165,33 @@ const hardWordAdded  =()=>{
   dispatch(vocabularyActions.hardWordAdded(props.vocabularyQuestion.question))
 }
 
+function keyDownHandler(event: any){
+  event.preventDefault()
+    switch(event.key){
+      case 'ArrowRight':
+        if(!buttons.nextDisable){
+           changeHandler(Move.NEXT);
+        }
+        
+        break;
+      case 'ArrowLeft': 
+      if(!buttons.prevDisable){
+         changeHandler(Move.PREV);
+      }
+        break;
+      case 'Enter':
+       showHandler()
+        break;
+      default:
+        break;
+    }
+    if(event?.keyCode ===32){
+      showHandler()
+    }
+}
 
-    return <div className={styles.card} >
+
+    return <div onKeyDown={keyDownHandler} className={styles.card} >
       {!props.hardWords ?<div  className={styles.card__book} >  <  LessonChooser  showLessons={showLessons} showLessonsClicked={showLessonsHandler} /></div>: ''}
         <Sound sound={sound} soundClicked={soundHandler} />
    
@@ -179,7 +204,7 @@ const hardWordAdded  =()=>{
 
 <label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  language === LangMode.GEO && show ?   props.vocabularyQuestion.answer: show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
-        <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
+<Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
 
