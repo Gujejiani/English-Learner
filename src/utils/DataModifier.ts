@@ -14,7 +14,7 @@ class DataModifier {
    */
    modifyWords(words: string, done:  (data: {updatedWords: string[], firstWord: Array<string>, title: string})=> void ){
         const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON') && !text.includes('Stage') && text.length >3)
-        const updatedWords = this.addMissingWordsBack(this.addMissingWordsBack(this.addMissingWordsBack(splitted)))
+        const updatedWords = this.addMissingWordsBack(splitted)
 
 
 
@@ -58,7 +58,7 @@ class DataModifier {
 
               stagesData[key]={
                   lesson: 'LESSON ' + stages[0],
-                  vocabulary: this.addMissingWordsBack(this.addMissingWordsBack(this.addMissingWordsBack(stages.slice(1, stages.length))))
+                  vocabulary: this.addMissingWordsBack(stages.slice(1, stages.length))
               }
           }
 
@@ -74,18 +74,21 @@ class DataModifier {
  * @param vocabulary words 
  * @returns ads missing word back, because we are splitting  words with /n new line, some long words are jumping down and this function adds them back
  */
-  public  addMissingWordsBack(vocabulary: Array<string>): Array<string>  {
-        const vocabularyCopy = [...vocabulary]
-        vocabularyCopy.forEach((sentence: string, index)=>{
-          if(!sentence.includes('-') && !sentence.includes('–') && !sentence.includes('LESSON')){
-            vocabularyCopy.splice(index, 1)
-            vocabularyCopy[index-1] =   `${vocabularyCopy[index-1]} ` + sentence
-          }
-         
-        })
-        
-        return [...vocabularyCopy]
+  public  addMissingWordsBack(vocabulary: Array<string>, index: number = 0): Array<string> {
+    if (index >= vocabulary.length) {
+      return [...vocabulary];
     }
+  
+    const sentence = vocabulary[index];
+  
+    if (!sentence.includes('-') && !sentence.includes('–') && !sentence.includes('LESSON')) {
+      vocabulary.splice(index, 1);
+      vocabulary[index-1] = `${vocabulary[index-1]} ` + sentence;
+      return this.addMissingWordsBack(vocabulary, index);
+    }
+  
+    return this.addMissingWordsBack(vocabulary, index + 1);
+  }
 
 }
 
