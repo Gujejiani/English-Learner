@@ -53,7 +53,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       
     }, [props.vocabulary, history]);
 
-    
+
   
   
     const changeWord  = (direction: string)=>{
@@ -96,7 +96,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
 
-
+    
 
     const showLessonsHandler =()=>{
       setShowLessons(prev=> !prev)
@@ -157,7 +157,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
         })
     }
 
-
+  
 
 
 const hardWordAdded  =()=>{
@@ -177,7 +177,7 @@ const hardWordAdded  =()=>{
         <div className={styles.card__answer} >
         <Favorites hardWord={determineIfSelectedAsHardWord(hardWords, props.vocabularyQuestion.answer)} addedToHardWords={hardWordAdded}  />
 
-<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  language === LangMode.GEO ?  props.vocabularyQuestion.answer:  engAlphabetToGeo(props.vocabularyQuestion.answer) }</label>
+<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  language === LangMode.GEO && show ?   props.vocabularyQuestion.answer: show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
         <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
