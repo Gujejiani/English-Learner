@@ -1,0 +1,119 @@
+:root {
+    --primary: white;
+    --dark: #fff;
+  }
+  
+ 
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .inp {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 280px;
+    border-radius: 3px;
+    overflow: hidden;
+    width: 200px;
+    position: relative;
+  }
+  
+  .inp .label {
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    font-size: 16px;
+    color: rgba(var(--dark), .5);
+    font-weight: 500;
+    transform-origin: 0 0;
+    transform: translate3d(0, 0, 0);
+    transition: all .2s ease;
+    pointer-events: none;
+  }
+  
+  .inp .focus-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--dark), .05);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  
+  .inp input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    padding: 16px 12px 0 12px;
+    height: 56px;
+    font-size: 16px;
+    font-weight: 400;
+    background: rgba(var(--dark), .02);
+    box-shadow: inset 0 -1px 0 rgba(var(--dark), .3);
+    color: var(--dark);
+    transition: all .15s ease;
+    background: rgba(var(--dark), .05);
+    outline: none;
+    box-shadow: inset 0 -2px 0 var(--primary);
+    text-align: center;
+    max-width: 300px;
+  }
+  
+  .inp input:hover {
+    background: rgba(var(--dark), .04);
+    /* box-shadow: inset 0 -1px 0 rgba(var(--dark), .5); */
+  }
+  
+  .inp input:not(:placeholder-shown) + .label {
+    color: rgba(var(--dark), .5);
+    transform: translate3d(0, -12px, 0) scale(.75);
+   
+  }
+  
+  .inp input::placeholder{
+    color: #fff;
+  }
+  .inp input:focus {
+    background: rgba(var(--dark), .05);
+    outline: none;
+    box-shadow: inset 0 -2px 0 var(--primary);
+  }
+  
+  .inp input:focus + .label {
+    color: var(--primary);
+    transform: translate3d(0, -12px, 0) scale(.75);
+  }
+  
+  .inp input:focus + .label + .focus-bg {
+    transform: scaleX(1);
+    transition: all .1s ease;
+  }
+  
+
+
+
+  
+
+.answer {
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 1.5rem;
+  font-weight: 800;
+ 
+}
+input:focus + span::before {
+  transition:  1s ease-out;
+  
+}
+.showAnswer{
+  filter: blur(0) !important;
+  
+  transition: none;
+}

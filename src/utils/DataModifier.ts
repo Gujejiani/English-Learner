@@ -1,3 +1,5 @@
+import { georgianLetters } from './engAlphToGeo';
+import { LangMode } from './../models/langMode';
 /**
   * modifies pdf string into suitable format
   *
@@ -16,7 +18,7 @@ class DataModifier {
         const splitted = words.split('\n').filter(text=> text && !text.includes('LESSON') && !text.includes('Stage') && text.length >3)
         const updatedWords = this.addMissingWordsBack(splitted)
 
-
+       
 
         let firstWord: string[] = this.getWord(updatedWords, 0)
     let title =''
@@ -26,6 +28,7 @@ class DataModifier {
 
     public getWord(words: string[],index: number):string[]{
       let receivedWords = words
+     
       let splitted =  receivedWords[index].split('–').length >1 ? receivedWords[index].split('–'): receivedWords[index].split('-')
       if(splitted.length > 2){
         splitted = splitted.filter(word=> !word.includes(')'))
@@ -46,7 +49,7 @@ class DataModifier {
         const vocabulary =  updatedWords.split('LESSON').map((el)=>{
         return  el.split('\n').filter(text=> text && text.length >3)
     })
-    
+
       vocabulary.forEach((stage, i)=>{
           
           const stages =  [...stage]
@@ -58,7 +61,7 @@ class DataModifier {
 
               stagesData[key]={
                   lesson: 'LESSON ' + stages[0],
-                  vocabulary: this.addMissingWordsBack(stages.slice(1, stages.length))
+                  vocabulary: this.addMissingWordsBack(this.removeGeorgianWords(stages.slice(1, stages.length)))
               }
           }
 
@@ -90,6 +93,29 @@ class DataModifier {
     return this.addMissingWordsBack(vocabulary, index + 1);
   }
 
+
+  public removeGeorgianWords(vocabulary: string[]){
+    const language =JSON.parse(localStorage.getItem('language') as string) 
+   
+    const updVocabulary =  LangMode.GEO ===language?   vocabulary.filter((word, index)=>{
+      
+ 
+    const englishWord =   word.split('–').length >1 ? word.split('–')[0]: word.split('-')[0]
+
+    return  !englishWord.split('').some((letter, index)=>{
+           
+            return georgianLetters.includes(letter)
+
+
+               
+            })
+            
+      }): vocabulary
+
+
+      return updVocabulary
+
+  }
 }
 
 export default new DataModifier()

@@ -15,16 +15,20 @@ import  { RootState } from '../../store/reducer';
 import Favorites from '../favourites/favourites';
 import { determineIfSelectedAsHardWord } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
+import MyInput from '../../ui/input/input';
 const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
   question: string;
   answer: string;
-}, hardWords?: boolean}>  = (props)  => {
+}, hardWords?: boolean, children?: any}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
     const [spoken, setSpoken] = useState<string>('');
     const history = useHistory();
     const [showLessons, setShowLessons] = useState<boolean>(false)
 
+    const [wordChanged, setWordChanged] = useState(0)
+
+    const [isActive, setIsActive] = useState(false);
 
     const language = useSelector((state: RootState)=> state.settings.language)
     const dispatch = useDispatch()
@@ -56,13 +60,16 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
    
      
   
-    const changeWord  = (direction: string)=>{
-      
+    const changeWord  = (direction: string, hardWordRemoved?: boolean)=>{
+      setWordChanged(prev=>{
+        return prev = prev+1
+      })
+
       let currentIndex: number;
       if(direction  ===Move.NEXT){
       currentIndex = buttonController({index, next: true, words: props.vocabulary}, buttons, setButtons)
       }else{
-        currentIndex = buttonController({index, next: false, words: props.vocabulary}, buttons, setButtons)
+        currentIndex = buttonController({index: hardWordRemoved? index-1: index, next: false, words: props.vocabulary}, buttons, setButtons)
       }
       let currentWord =DataModifier.getWord(props.vocabulary, currentIndex)
     
@@ -146,9 +153,9 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
     }
  
 
-    const changeHandler =(direction: string): any=>{
+    const changeHandler =(direction: string, hardWordRemoved?: boolean): any=>{
         setShow(false)
-        changeWord(direction)
+        changeWord(direction, hardWordRemoved)
     }
 
     const soundHandler = ()=>{
@@ -161,12 +168,25 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
 const hardWordAdded  =()=>{
- 
+  if(props.hardWords){
+    const hardWordRemoved = props.vocabulary.findIndex(word=> word.includes(props.vocabularyQuestion.question))
+   
+    if(hardWordRemoved !== -1 && props.vocabulary.length>1){
+      if(index===0){
+        changeHandler(Move.NEXT)
+      }else {
+        changeHandler(Move.PREV)
+      }
+     
+    }
+  }
   dispatch(vocabularyActions.hardWordAdded(props.vocabularyQuestion.question))
+
+ 
 }
 
 function keyDownHandler(event: any){
-  event.preventDefault()
+  
     switch(event.key){
       case 'ArrowRight':
         if(!buttons.nextDisable){
@@ -180,13 +200,15 @@ function keyDownHandler(event: any){
       }
         break;
       case 'Enter':
+        event.preventDefault()
        showHandler()
         break;
       default:
         break;
     }
     if(event?.keyCode ===32){
-      showHandler()
+      // event.preventDefault()
+      // showHandler()
     }
 }
 
@@ -202,13 +224,15 @@ function keyDownHandler(event: any){
         <div className={styles.card__answer} >
         <Favorites hardWord={determineIfSelectedAsHardWord(hardWords, props.vocabularyQuestion.answer)} addedToHardWords={hardWordAdded}  />
 
-<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  language === LangMode.GEO && show ?   props.vocabularyQuestion.answer: show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
+{language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
+
+:<MyInput  onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ")} />}
 <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
 
-    
+       
     </div>
 
 

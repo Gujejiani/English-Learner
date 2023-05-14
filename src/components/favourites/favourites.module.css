@@ -3,7 +3,7 @@
 .favorites{
     position: absolute;
     right: 20px;
-     top: 15px;
+     top: 10px;
     cursor: 'pointer';
     color: #ffc402
 }

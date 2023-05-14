@@ -47,7 +47,10 @@ const vocabularySlice =createSlice({
         },
         addVocabularySuccess(state, action:{payload: string[]}){
         state.uploaded =true
-        state.vocabulary = action.payload
+        state.vocabulary =DataModifier.removeGeorgianWords(action.payload)
+          
+       
+       
         },
         changeWord(state, action: {payload: {question: string, answer: string}}){
             state.words= action.payload
@@ -71,7 +74,7 @@ const vocabularySlice =createSlice({
         },
 
         addVocabularyByStages(state, action: {payload: string}){
-            state.uploaded =true
+            state.uploaded =true      
             state.stages = DataModifier.splitByStages(action.payload)
         },
         choseLesson(state, action: {payload: number}) {
@@ -130,7 +133,7 @@ const vocabularySlice =createSlice({
                 const hardWordsCopy = [...state.hardWords]
                 hardWordsCopy.splice(alreadyAdded,  1)
                 state.hardWords = hardWordsCopy
-               
+                
             }
 
             localStorage.setItem('hardWords', JSON.stringify(state.hardWords))

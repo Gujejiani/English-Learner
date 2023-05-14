@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Dashboard from '../../components/dashboard/dashboard'
 import { RootState } from '../../store/reducer'
@@ -11,7 +11,7 @@ import styles from './hard-words.module.css'
 
 
 export const HardWordsContainer:  React.FC =()=>{
-    const hardWords = useSelector((state:RootState)=> state.vocabulary.hardWords)
+    const hardWordss = useSelector((state:RootState)=> state.vocabulary.hardWords)
     const language = useSelector((state: RootState)=> state.settings.language)
     const hardWordQuestion = useSelector((state: RootState)=> state.vocabulary.hardWordsQuestion)
     const dispatch = useDispatch()
@@ -21,6 +21,11 @@ export const HardWordsContainer:  React.FC =()=>{
     setShowDashboard(true)
     dispatch(vocabularyActions.hardWordsPracticeStart(language))
     }
+    const [hardWords, setHardWords] = useState(hardWordss)
+
+    useEffect(()=>{
+        setHardWords(hardWordss)
+    }, [hardWordss])
 
     const HardWordsPractice = !showDashboard? <div  className={styles.hard__words__start}  >
             <h3>There is {hardWords.length} hard words to practice</h3>
