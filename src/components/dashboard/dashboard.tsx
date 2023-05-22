@@ -211,7 +211,15 @@ function keyDownHandler(event: any){
       // showHandler()
     }
 }
+function removeParentheses(text: string) {
+  // Define a regular expression pattern to match the content inside parentheses
+  var pattern = /\([^)]*\)/g;
 
+  // Use the replace() method to replace the matched pattern with an empty string
+  var cleanedText = text.replace(pattern, "");
+
+  return cleanedText;
+}
 
     return <div onKeyDown={keyDownHandler} className={styles.card} >
       {!props.hardWords ?<div  className={styles.card__book} >  <  LessonChooser  showLessons={showLessons} showLessonsClicked={showLessonsHandler} /></div>: ''}
@@ -227,7 +235,7 @@ function keyDownHandler(event: any){
 {language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
 
-:<MyInput  onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ")} />}
+:<MyInput  onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
 <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
