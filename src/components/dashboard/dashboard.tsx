@@ -16,6 +16,8 @@ import Favorites from '../favourites/favourites';
 import { determineIfSelectedAsHardWord } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 import MyInput from '../../ui/input/input';
+import Animation from '../../ui/animation/animation';
+
 const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
   question: string;
   answer: string;
@@ -24,11 +26,12 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
     const [sound, setSound] = useState<boolean>(true)
     const [spoken, setSpoken] = useState<string>('');
     const history = useHistory();
+
+    const [hintIndex, setHintIndex]=useState(0)
     const [showLessons, setShowLessons] = useState<boolean>(false)
 
     const [wordChanged, setWordChanged] = useState(0)
 
-    const [isActive, setIsActive] = useState(false);
 
     const language = useSelector((state: RootState)=> state.settings.language)
     const dispatch = useDispatch()
@@ -64,7 +67,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       setWordChanged(prev=>{
         return prev = prev+1
       })
-
+      setHintIndex(0)
       let currentIndex: number;
       if(direction  ===Move.NEXT){
       currentIndex = buttonController({index, next: true, words: props.vocabulary}, buttons, setButtons)
@@ -145,7 +148,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
         setShow((current)=>{
             return !current
         })
-       
+        setHintIndex(0)
         if(language ===LangMode.GEO && !show && sound){
             speak(props.vocabularyQuestion.answer)
         }
@@ -221,10 +224,20 @@ function removeParentheses(text: string) {
   return cleanedText;
 }
 
+const  handleHintShow=()=>{
+  setHintIndex((prev)=>{
+
+    return prev +1
+  
+})
+}
+
     return <div onKeyDown={keyDownHandler} className={styles.card} >
       {!props.hardWords ?<div  className={styles.card__book} >  <  LessonChooser  showLessons={showLessons} showLessonsClicked={showLessonsHandler} /></div>: ''}
         <Sound sound={sound} soundClicked={soundHandler} />
    
+   
+   <Animation wordChangeCount={wordChanged} onShowHint={handleHintShow}  />
 
          <span className={styles.count} >({index+1}/{props.vocabulary.length})</span>
          <Question lesson={props.hardWords?'Hard Words': lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(props.vocabularyQuestion.question): props.vocabularyQuestion.question }</Question>
@@ -235,7 +248,7 @@ function removeParentheses(text: string) {
 {language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
 
-:<MyInput  onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
+:<MyInput hintIndex={hintIndex} onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
 <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>

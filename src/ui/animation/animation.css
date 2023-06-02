@@ -1,0 +1,78 @@
+.animation{
+    position: absolute;
+    background-color: transparent;
+    right: 2px;
+    bottom: -30px;
+    z-index: 230;
+    transition: opacity 3s ease-in-out;
+  opacity: 0;
+}
+.show-animation{
+  opacity: 1;
+}
+
+
+.message-container {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-name: slide-up;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    width: 100px;
+   
+  }
+  
+  .message-bubble {
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+    transition:  all ease-in-out 3s;
+   
+  }
+  
+  .message-text {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .speech-arrow {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7.5px;
+    border-color: white transparent transparent transparent;
+    transition:  opacity ease-in-out 1.5s;
+ 
+    
+  }
+
+  .hide{
+    transform: translateY(50%);
+    opacity: 0;
+
+  }
+  .hide-arrow{
+    opacity: 0;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 100%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
