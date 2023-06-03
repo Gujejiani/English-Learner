@@ -237,7 +237,7 @@ const  handleHintShow=()=>{
         <Sound sound={sound} soundClicked={soundHandler} />
    
    
-   <Animation wordChangeCount={wordChanged} onShowHint={handleHintShow}  />
+   {showLessons ? <Animation wordChangeCount={wordChanged} onShowHint={handleHintShow}  />:''}
 
          <span className={styles.count} >({index+1}/{props.vocabulary.length})</span>
          <Question lesson={props.hardWords?'Hard Words': lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(props.vocabularyQuestion.question): props.vocabularyQuestion.question }</Question>

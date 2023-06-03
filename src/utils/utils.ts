@@ -42,3 +42,24 @@ export const determineIfSelectedAsHardWord  =(hardWords: string[], answer: strin
    })
 
 }
+
+
+
+/**
+ * 
+ * @param text1 
+ * @param text2 
+ * @returns matching number from this two parameters
+ */
+export function findMatchingLetters(text1: string, text2: string): number {
+    const length = Math.min(text1.length, text2.length);
+    let counter = 0;
+    for (let i = 0; i < length; i++) {
+      if (text1[i] === text2[i]) {
+        counter++;
+      } else {
+        break;
+      }
+    }
+    return counter;
+  }

@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState, useRef, useEffect } from 'react';
 import './input.css';
 import successSound from '../../audio/success1.mp3';
 import { PropsFn } from '../../models';
+import { findMatchingLetters } from '../../utils/utils';
 
 const MyInput: React.FC<{show?: boolean, hintIndex:number, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn}> = (props) => {
   const [isActive, setIsActive] = useState(false);
@@ -37,7 +38,15 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, answerWord: string, s
   }
 
   useEffect(()=>{
-    setHintIndex(props.hintIndex)
+    
+
+    let hintedIndex = props.hintIndex
+
+    if(insertedText.length){
+      hintedIndex += findMatchingLetters(insertedText, props.answerWord) 
+    }
+  
+    setHintIndex(hintedIndex)
     if(props.hintIndex){
       playAudio()
     }
