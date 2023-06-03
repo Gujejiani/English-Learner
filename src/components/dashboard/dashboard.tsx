@@ -237,7 +237,7 @@ const  handleHintShow=()=>{
         <Sound sound={sound} soundClicked={soundHandler} />
    
    
-   {showLessons ? <Animation wordChangeCount={wordChanged} onShowHint={handleHintShow}  />:''}
+   {showLessons ? <Animation  wordChangeCount={wordChanged} onShowHint={handleHintShow}  />:''}
 
          <span className={styles.count} >({index+1}/{props.vocabulary.length})</span>
          <Question lesson={props.hardWords?'Hard Words': lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(props.vocabularyQuestion.question): props.vocabularyQuestion.question }</Question>
@@ -248,7 +248,7 @@ const  handleHintShow=()=>{
 {language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
 
-:<MyInput hintIndex={hintIndex} onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
+:<MyInput resetHintIndex={()=> setHintIndex(0)} hintIndex={hintIndex} onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
 <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>

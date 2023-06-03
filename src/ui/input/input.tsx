@@ -4,7 +4,7 @@ import successSound from '../../audio/success1.mp3';
 import { PropsFn } from '../../models';
 import { findMatchingLetters } from '../../utils/utils';
 
-const MyInput: React.FC<{show?: boolean, hintIndex:number, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn}> = (props) => {
+const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: PropsFn, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn}> = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [insertedText, setInsertedText] = useState('');
 
@@ -45,11 +45,20 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, answerWord: string, s
     if(insertedText.length){
       hintedIndex += findMatchingLetters(insertedText, props.answerWord) 
     }
+
+    const timeOut= setTimeout(()=>{
+      
+         props.resetHintIndex()
+      
+    }, 1500)
+
+    
   
     setHintIndex(hintedIndex)
     if(props.hintIndex){
       playAudio()
     }
+    return ()=> clearTimeout(timeOut)
    
   }, [props.hintIndex, insertedText])
 
