@@ -3,14 +3,13 @@
 Visit [https://gujejiani.github.io/English-Learner/](https://gujejiani.github.io/English-Learner/) to view the application in your browser.
 
 ## Introduction
-Sometimes it's inconvenient to learn words from a vocabulary list because you have to hide half of it to test your knowledge. This application makes the learning process easier by allowing you to simply copy and paste vocabulary from a PDF.
+Sometimes it's inconvenient to learn words from a vocabulary list because you have to hide half of it to test your knowledge. This application makes the learning process easier by allowing you to simply upload vocabulary from a PDF.
 
-# Aplication  makes this process easier, you can upload vocabulary from Pdf just simply coping it
 
 ## Preview after Processing
 After processing, you can see the page with the vocabulary displayed.
 
-![Processed Page](https://user-images.githubusercontent.com/67228459/152652257-054fd0ff-1772-4526-b9b6-6a027ffd54b7.png)
+<img width="1719" alt="image" src="https://github.com/Gujejiani/English-Learner/assets/67228459/eb371297-c676-4c80-8cb2-64267b2238ab">
 
 ## Features
 - You can check your vocabulary knowledge without the hassle of hiding half of the PDF or using a laptop.
