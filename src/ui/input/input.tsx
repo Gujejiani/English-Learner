@@ -51,7 +51,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, answerWord: string, s
       playAudio()
     }
    
-  }, [props.hintIndex])
+  }, [props.hintIndex, insertedText])
 
   useEffect(()=>{
     const au = new Audio(successSound)
