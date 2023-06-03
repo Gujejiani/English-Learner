@@ -14,7 +14,7 @@ After processing, you can see the page with the vocabulary displayed.
 
 ## Features
 - You can check your vocabulary knowledge without the hassle of hiding half of the PDF or using a laptop.
-- Updated Version: Users can now update the PDF file.
+- Updated Version: Users can now upload the PDF file.
 
 ![Updated Version](https://user-images.githubusercontent.com/67228459/178221617-4bc77030-ef74-4aad-9531-c4155c7a2478.png)
 
