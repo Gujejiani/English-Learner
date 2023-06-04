@@ -50,7 +50,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
       
          props.resetHintIndex()
       
-    }, 1500)
+    }, 1000)
 
     
   

@@ -39,18 +39,29 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
   const hardWords = useSelector((state: RootState)=> state.vocabulary.hardWords)
 
 
-  
    const lesson = useSelector((state: RootState)=> state.vocabulary.lessonTitle)
   
   
     const [index,  setIndex] = useState<number>(0)
     const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
     useEffect(() => {
-      setIndex(0)
-      setButtons({
-        prevDisable: true,
-        nextDisable: false
-      })
+      if(!props.hardWords){
+        setIndex(0)
+      }
+      if(!props.hardWords){
+        setButtons({
+          prevDisable: true,
+          nextDisable: false
+        })
+      }
+
+      if(props.vocabulary.length===1){
+        setButtons({
+          prevDisable: true,
+          nextDisable: true
+        })
+      }
+     
       const vocabulary = localStorage.getItem('vocabulary')? JSON.parse(localStorage.getItem('vocabulary') as string): undefined
 
         if(!props.vocabulary.length && !vocabulary){
@@ -92,8 +103,8 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       }
      
 
-     
-  
+
+      
       setIndex(currentIndex)
     }
   
