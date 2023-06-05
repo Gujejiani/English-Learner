@@ -107,7 +107,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
  
   function getLetterStyle(letterIndex: number): React.CSSProperties {
   
-    let isMatching = insertedText.charAt(letterIndex) === props.answerWord.charAt(letterIndex);
+    let isMatching = insertedText.toLowerCase().charAt(letterIndex) === props.answerWord.toLowerCase().charAt(letterIndex);
 
     if(hintIndex && (hintIndex-1 >= letterIndex)){
       isMatching=true
