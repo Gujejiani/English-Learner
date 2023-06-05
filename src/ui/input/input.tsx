@@ -75,7 +75,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
 
 
   useEffect(()=>{
-    if(props.playSound && audio && insertedText.length && insertedText.trim() === props.answerWord.trim()){
+    if(props.playSound && audio && insertedText.length && insertedText.toLocaleLowerCase().trim() === props.answerWord.toLowerCase().trim()){
     
       playAudio()
       props.showAnswer()
