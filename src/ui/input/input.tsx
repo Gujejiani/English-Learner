@@ -4,7 +4,7 @@ import successSound from '../../audio/success1.mp3';
 import { PropsFn } from '../../models';
 import { findMatchingLetters } from '../../utils/utils';
 
-const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: PropsFn, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn, repeatCount?: number}> = (props) => {
+const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: PropsFn, answerWord: string, showAnswer: (arg: boolean)=>void, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn, repeatCount?: number}> = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [insertedText, setInsertedText] = useState('');
   const [audio, setAudio] = useState<HTMLAudioElement>()
@@ -76,7 +76,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
     if(props.playSound && audio && insertedText.length && insertedText.toLocaleLowerCase().trim() === props.answerWord.toLowerCase().trim()){
     
       playAudio()
-      props.showAnswer()
+      props.showAnswer(false)
       setTimeout(()=>{
         props.onSuccess()
       }, 1400)
@@ -127,7 +127,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
   return (
     <div>
       {props.answerWord.split('').map((letter, index) => (
-        <span onClick={props.showAnswer} className={`answer ${props.show? 'showAnswer': ''}`} key={index} style={getLetterStyle(index)}>
+        <span onClick={()=>props.showAnswer(true)} className={`answer ${props.show? 'showAnswer': ''}`} key={index} style={getLetterStyle(index)}>
           {letter}
         </span>
       ))}

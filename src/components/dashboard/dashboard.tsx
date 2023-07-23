@@ -158,8 +158,13 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
 
-    const showHandler = ()=>{
+    const showHandler = (turnOnRepeat?: boolean)=>{
+      console.log('repeat is on its true', turnOnRepeat)
+
+      if(turnOnRepeat){
         setRepeatMode(true)
+      }
+  
         if(repeatCount===0){
           setRepeatCount(3)
         }
@@ -176,8 +181,8 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
  
 
     const changeHandler =(direction: string, hardWordRemoved?: boolean): any=>{
-        
-        setShow(false)
+
+      setShow(false)
         changeWord(direction, hardWordRemoved)
         setRepeatMode(false)
         setRepeatCount(3)      
@@ -281,11 +286,11 @@ const successHandler =()=>{
         <div className={styles.card__answer} >
         <Favorites hardWord={determineIfSelectedAsHardWord(hardWords, props.vocabularyQuestion.answer)} addedToHardWords={hardWordAdded}  />
 
-{language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
+{language ===LangMode.ENG?<label onClick={()=>showHandler()} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
 
 :<MyInput repeatCount={repeatCount} resetHintIndex={()=> setHintIndex(0)} hintIndex={hintIndex} onSuccess={successHandler} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
-<Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
+<Controller buttSettings={buttons} showClicked={()=>showHandler()} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
 
