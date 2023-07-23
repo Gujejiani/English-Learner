@@ -15,7 +15,11 @@
   opacity: 1;
 }
 
-
+.animation__repeat-mode{
+  opacity: 1;
+  left: 0;
+  max-width: 220px;
+}
 .message-container {
     position: absolute;
     top: -38px;
@@ -28,7 +32,11 @@
     width: 100px;
    
   }
-  
+  .message-container__repeat{
+    left: 70px;
+    width: 140px;
+    top: -48px;
+  }
   .message-bubble {
     position: relative;
     display: inline-block;
@@ -38,6 +46,11 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
     transition:  all ease-in-out 3s;
    
+  }
+  .repeat-count{
+    font-weight: bold;
+   font-size: 18px;
+   color: rgb(82 115 230)
   }
   
   .message-text {
@@ -79,4 +92,23 @@
       opacity: 1;
       transform: translate(-50%, 0);
     }
+  }
+
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    50% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes colorChange {
+    0% { color: black; }
+    50% { color: green; }
+    100% { color: black; }
+  }
+  
+  .animatedMessage {
+    animation: shake 2s infinite, colorChange 2s infinite;
   }

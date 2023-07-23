@@ -4,12 +4,10 @@ import successSound from '../../audio/success1.mp3';
 import { PropsFn } from '../../models';
 import { findMatchingLetters } from '../../utils/utils';
 
-const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: PropsFn, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn}> = (props) => {
+const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: PropsFn, answerWord: string, showAnswer: PropsFn, wordChangeCount: number, playSound: boolean, onSuccess: PropsFn, repeatCount?: number}> = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [insertedText, setInsertedText] = useState('');
-
   const [audio, setAudio] = useState<HTMLAudioElement>()
-
   const [hintIndex, setHintIndex]=useState(0)
 
   function changeHandler(e: ChangeEvent<HTMLInputElement>) {
@@ -26,7 +24,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
     focusOnInput()
     
   
-  }, [props.wordChangeCount])
+  }, [props.wordChangeCount, props.repeatCount])
 
   function focusOnInput(){
     const input = document.getElementById('inp') as HTMLInputElement

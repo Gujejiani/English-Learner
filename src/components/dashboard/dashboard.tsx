@@ -24,6 +24,9 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 }, hardWords?: boolean, children?: any}>  = (props)  => {
     const [show, setShow] = useState<boolean>(false)
     const [sound, setSound] = useState<boolean>(true)
+    const [repeatCount, setRepeatCount] = useState<number>(3)
+    const [repeatMode, setRepeatMode] = useState<boolean>(false)
+
     const [spoken, setSpoken] = useState<string>('');
     const history = useHistory();
 
@@ -71,7 +74,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       
     }, [props.vocabulary, history]);
 
-   
+  
      
   
     const changeWord  = (direction: string, hardWordRemoved?: boolean)=>{
@@ -156,6 +159,11 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
     const showHandler = ()=>{
+        setRepeatMode(true)
+        if(repeatCount===0){
+          setRepeatCount(3)
+        }
+       
         setShow((current)=>{
             return !current
         })
@@ -168,8 +176,11 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
  
 
     const changeHandler =(direction: string, hardWordRemoved?: boolean): any=>{
+        
         setShow(false)
         changeWord(direction, hardWordRemoved)
+        setRepeatMode(false)
+        setRepeatCount(3)      
     }
 
     const soundHandler = ()=>{
@@ -243,12 +254,26 @@ const  handleHintShow=()=>{
 })
 }
 
+const successHandler =()=>{
+  if (repeatCount!==0){
+    setRepeatCount(prev=>{
+      return prev -1
+    })
+    setShow(false)
+  }
+  if(!repeatMode || repeatCount ===1){
+    setRepeatMode(false)
+    changeHandler(Move.NEXT)
+  }
+
+}
+
     return <div onKeyDown={keyDownHandler} className={styles.card} >
       {!props.hardWords ?<div  className={styles.card__book} >  <  LessonChooser  showLessons={showLessons} showLessonsClicked={showLessonsHandler} /></div>: ''}
         <Sound sound={sound} soundClicked={soundHandler} />
+       { repeatMode && language === LangMode.GEO?<Animation  wordChangeCount={wordChanged} onShowHint={handleHintShow} repeatMode={true}  repeatCount={repeatCount} />: ''}
    
-   
-   {(showLessons || props.hardWords) ? <Animation  wordChangeCount={wordChanged} onShowHint={handleHintShow}  />:''}
+   {(showLessons || props.hardWords) && !repeatMode && language === LangMode.GEO ? <div className='animation__remind'><Animation   wordChangeCount={wordChanged} onShowHint={handleHintShow}  /></div>:''}
 
          <span className={styles.count} >({index+1}/{props.vocabulary.length})</span>
          <Question lesson={props.hardWords?'Hard Words': lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(props.vocabularyQuestion.question): props.vocabularyQuestion.question }</Question>
@@ -259,7 +284,7 @@ const  handleHintShow=()=>{
 {language ===LangMode.ENG?<label onClick={showHandler} className={`${styles.card__translate}  ${show?  styles.card__show: styles.card__show__hide}`} > {show? '':"just place holder stuff"} {  show?  engAlphabetToGeo(props.vocabularyQuestion.answer): '' }</label>
 
 
-:<MyInput resetHintIndex={()=> setHintIndex(0)} hintIndex={hintIndex} onSuccess={()=>changeHandler(Move.NEXT)} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
+:<MyInput repeatCount={repeatCount} resetHintIndex={()=> setHintIndex(0)} hintIndex={hintIndex} onSuccess={successHandler} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
 <Controller buttSettings={buttons} showClicked={showHandler} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>

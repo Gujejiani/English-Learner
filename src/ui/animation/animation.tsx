@@ -4,10 +4,11 @@ import animationData from './birds.json';
 import './animation.css';
 import { PropsFn } from '../../models';
 
-export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number}> = (props) => {
+export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number, repeatMode?: boolean, repeatCount?: number}> = (props) => {
  
   const [helpWithHint, setHelpWithHint]=useState(false)
   const [showInfo, setShowInfo]= useState(true)
+  const [animateRepeatText, setAnimateRepeatText] = useState(false)
 
   const clickEvent = (e: any)=>{
 
@@ -27,6 +28,16 @@ export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number}>
    return ()=> clearTimeout(timeOut);
     
   }, [showInfo])
+
+  useEffect(()=>{
+    setAnimateRepeatText(true)
+
+    const timer = setTimeout(()=>{
+      setAnimateRepeatText(false)
+    }, 2000)
+    
+   return ()=> clearTimeout(timer)
+  }, [props.repeatCount])
 
   useEffect(()=>{
 
@@ -52,12 +63,15 @@ export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number}>
 
 
   return (
-    <div className={`animation ${helpWithHint? 'show-animation': ''} `}>
-      <div className={`message-container`}>
-        <div className={`message-bubble  ${showInfo? '': 'hide'}`}>
-          <p className="message-text">Click Us For Hint</p>
+    <div className={`animation ${helpWithHint? 'show-animation': ''} ${props.repeatMode? 'animation__repeat-mode': ''} `}>
+      <div className={`message-container ${props.repeatMode? 'message-container__repeat': ''}`}>
+        <div className={`message-bubble  ${showInfo || props.repeatMode? '': 'hide'}`}>
+       { !props.repeatMode?  <p  className="message-text ">Click Us For Hint</p>: <p  className={`message-text ${ animateRepeatText ? 'animatedMessage': ''} `}>
+       Please Repeat <span className='repeat-count' >{props.repeatCount} </span> More {props.repeatCount===1 ? 'time': 'times'}
+        </p>
+        }
         </div>
-        <div className={`speech-arrow ${showInfo? '': 'hide-arrow'}`  } ></div>
+        <div className={`speech-arrow ${showInfo ||props.repeatMode ? '': 'hide-arrow'}`  } ></div>
       </div>
       <Lottie
         onClick={clickEvent}
