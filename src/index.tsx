@@ -5,7 +5,7 @@ import App from './App';
 
 import {Provider} from 'react-redux'
 import store from './store/reducer'
-import {BrowserRouter, HashRouter} from 'react-router-dom'
+import { HashRouter} from 'react-router-dom'
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter  basename='/English-Learner/'>

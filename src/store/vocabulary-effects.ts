@@ -5,7 +5,7 @@ import { StateDispatch } from "./reducer"
 import { vocabularyActions } from "./vocabulary-slice"
 
 
-
+export const PDF_EXTRACT_URL ='https://pdf-extractor-lty1.onrender.com/extract-text'
 
 
 
@@ -20,7 +20,7 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
     
    
      formData.append('pdfFile',pdfFile)
-     axios.post<string>('https://extract-text.herokuapp.com/extract-text', formData).then(res=>{
+     axios.post<string>(PDF_EXTRACT_URL, formData).then(res=>{
        
     
         
