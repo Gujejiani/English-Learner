@@ -1,16 +1,20 @@
-.animation{
-    position: absolute;
-    background-color: transparent;
-    right: 2px;
-    bottom: -30px;
-    z-index: 230;
-    transition: opacity 3s ease-in-out;
-   opacity: 0;
-  @media only screen and (max-width: 600px) {
-    top: -80px;
-    height: 150px
+.animation {
+  position: absolute;
+  background-color: transparent;
+  right: 2px;
+  bottom: -30px;
+  z-index: 230;
+  transition: opacity 3s ease-in-out;
+  opacity: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .animation {
+      top: -80px;
+      height: 150px;
   }
 }
+
 .show-animation{
   opacity: 1;
 }
