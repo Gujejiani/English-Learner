@@ -28,7 +28,7 @@ export const HardWordsContainer:  React.FC =()=>{
     }, [hardWordss])
 
     const HardWordsPractice = !showDashboard? <div  className={styles.hard__words__start}  >
-            <h3> <span style={{'color': '#8B0000'}} >You have {hardWords.length}</span>  hard  {hardWords.length>1? 'words': 'word'}  to practice</h3>
+            <h3>You have <span style={{'color': '#8B0000'}} > {hardWords.length}</span>  hard  {hardWords.length>1? 'words': 'word'}  to practice</h3>
             <Button hardWords={true} onClick={startHandler} directionButton={true}  >Start Practicing hard  words</Button>
         </div>:
         <Dashboard hardWords={true} vocabularyQuestion={hardWordQuestion} vocabulary={hardWords}/>
