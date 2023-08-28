@@ -12,6 +12,16 @@
     flex-direction: column;
     margin-top: 160px;
     position: relative;
+    
+   
+   
+   
+}
+
+@media screen and (max-width: 600px) {
+    .card{
+        max-width: 380px;
+    }
    
 }
 
