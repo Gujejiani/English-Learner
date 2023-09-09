@@ -290,7 +290,7 @@ const successHandler =()=>{
 
 
 :<MyInput repeatCount={repeatCount} resetHintIndex={()=> setHintIndex(0)} hintIndex={hintIndex} onSuccess={successHandler} playSound={sound} wordChangeCount ={wordChanged} showAnswer={showHandler} show={show} answerWord={removeParentheses(props.vocabularyQuestion.answer?.replace(/\s{2,}/g, " ").trim())} />}
-<Controller buttSettings={buttons} showClicked={()=>showHandler()} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
+<Controller buttSettings={buttons} showClicked={()=>showHandler(true)} prev={()=>changeHandler(Move.PREV)} next={()=>changeHandler(Move.NEXT)}changeWords={showLessonsHandler}  />
             
         </div>
 
