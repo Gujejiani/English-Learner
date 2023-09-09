@@ -9,10 +9,13 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
   const [insertedText, setInsertedText] = useState('');
   const [audio, setAudio] = useState<HTMLAudioElement>()
   const [hintIndex, setHintIndex]=useState(0)
-
+  const inputRef = useRef<HTMLInputElement | null>(null);
   function changeHandler(e: ChangeEvent<HTMLInputElement>) {
   
     setInsertedText(e.target.value);
+    if (inputRef.current) {
+      //inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
   
 
@@ -32,6 +35,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
 
     if(input){
      input.focus()
+     input.scrollIntoView({behavior: 'smooth', block: 'center'})
     }
   }
 
@@ -121,18 +125,20 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
 
     }
     
-    return { color, filter, transition };
+    return { color, filter, transition, userSelect: 'none', WebkitUserSelect: 'none' };
   }
 
   return (
     <div>
       {props.answerWord.split('').map((letter, index) => (
-        <span onClick={()=>props.showAnswer(true)} className={`answer ${props.show? 'showAnswer': ''}`} key={index} style={getLetterStyle(index)}>
+        <span  
+        onClick={()=>props.showAnswer(true)} className={`answer ${props.show? 'showAnswer': ''}`} key={index} style={getLetterStyle(index)}>
           {letter}
         </span>
       ))}
       <label htmlFor="inp" className={`inp ${isActive ? 'active' : ''}`}>
         <input
+           ref={inputRef}
           type="text"
           onChange={changeHandler}
           onFocus={focusHandler}

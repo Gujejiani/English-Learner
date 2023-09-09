@@ -45,7 +45,7 @@ export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number, 
     const timeOut = setTimeout(()=>{
         setHelpWithHint(true)
         setShowInfo(true)
-    }, 10000);
+    }, 7000);
 
 
 
@@ -76,8 +76,9 @@ export const Animation: React.FC<{onShowHint: PropsFn, wordChangeCount: number, 
       <Lottie
         onClick={clickEvent}
         animationData={animationData}
-        style={{ width: '140px', height: '120px', backgroundColor: 'transparent' }}
+        classID='animation_data'
         loop={true}
+        className='animation__lottie'
         controls
         autoplay
       />

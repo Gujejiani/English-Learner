@@ -10,7 +10,7 @@
 
 @media only screen and (max-width: 600px) {
   .animation {
-      top: -80px;
+      top: 90px;
       height: 150px;
   }
 }
@@ -35,7 +35,9 @@
     animation-fill-mode: forwards;
     width: 100px;
    
+   
   }
+
   .message-container__repeat{
     left: 70px;
     width: 140px;
@@ -55,6 +57,29 @@
     font-weight: bold;
    font-size: 18px;
    color: rgb(82 115 230)
+  }
+
+
+  @media only screen and (max-width: 600px) {
+    .message-container {
+      /* position: absolute;
+      top: -38px;
+      left: 500px; */
+      
+     
+     
+    }
+    .message-container__repeat{
+      left: 60px;
+    width: 140px;
+    top: -40px;
+      
+    }
+    .message-bubble{
+      padding: 4px;
+      width: 100px;
+      
+    }
   }
   
   .message-text {
@@ -115,4 +140,19 @@
   
   .animatedMessage {
     animation: shake 2s infinite, colorChange 2s infinite;
+  }
+
+  .animation__lottie{
+   
+    width: 140px;
+    height: 120px;
+    background-color: transparent;
+
+  }
+
+  @media only screen and (max-width: 600px) {
+    .animation__lottie {
+      width: 100px;
+      height: 100px;
+    }
   }
