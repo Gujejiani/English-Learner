@@ -37,6 +37,11 @@
     background: #00bd68;
 }
 .lesson__inactive {
-   opacity: 0.5;
-    background-image: linear-gradient(-180deg, #c5d5cf, #c3d9cc);
+   /* Apply opacity to the entire element */
+
+opacity: 0.5;
+/* Set the background gradient without opacity */
+background-image: linear-gradient(-180deg, rgba(197, 213, 207, 0.2), rgba(195, 217, 204, 0.2));
+
+
  }
