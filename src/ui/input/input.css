@@ -117,3 +117,12 @@ input:focus + span::before {
   
   transition: none;
 }
+
+
+/* Change the cursor color to red when focusing on the input */
+input:focus {
+  caret-color: #fff; /* Modern browsers */
+  caret-color: #fff !important; /* For older browsers that support the property without prefix */
+  -webkit-caret-color: #fff; /* WebKit browsers (Safari, older versions of Chrome) */
+  -moz-caret-color: #fff; /* Firefox */
+}
