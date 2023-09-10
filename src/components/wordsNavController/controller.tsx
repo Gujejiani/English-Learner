@@ -3,7 +3,7 @@ import styles from './controller.module.css'
 import {ButtonSettings, PropsFn, Move} from '../../models'
 import Button  from '../../ui/button/button';
 
-const Controller:React.FC<{buttSettings:  ButtonSettings, showClicked: PropsFn, next: PropsFn, prev:PropsFn, changeWords: PropsFn}> =(props)=>{
+const Controller:React.FC<{buttSettings:  ButtonSettings, showClicked: PropsFn, next: PropsFn, prev:PropsFn, changeWords: PropsFn, hardWords?: boolean}> =(props)=>{
     return(
         <React.Fragment>
           <div  className={styles.nav} >
@@ -11,7 +11,7 @@ const Controller:React.FC<{buttSettings:  ButtonSettings, showClicked: PropsFn, 
             <Button onClick={props.showClicked} show={true} >Show</Button>
             <Button onClick={props.next} directionButton={true} disabled={props.buttSettings.nextDisable} >{ `${Move.NEXT}>`}</Button>
             </div>
-            <Button onClick={props.changeWords} insert={true}  >Change Lesson</Button>
+           { !props.hardWords? <Button onClick={props.changeWords} insert={true}  >Change Lesson</Button>:''}
            
         </React.Fragment>
        
