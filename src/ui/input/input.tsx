@@ -35,7 +35,7 @@ const MyInput: React.FC<{show?: boolean, hintIndex:number, resetHintIndex: Props
 
     if(input){
      input.focus()
-     input.scrollIntoView({behavior: 'smooth', block: 'center'})
+    // input.scrollIntoView({behavior: 'smooth', block: 'center'})
     }
   }
 
