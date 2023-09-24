@@ -13,15 +13,25 @@ import { vocabularyActions } from './store/vocabulary-slice';
 import store from './store/reducer';
 import { LangMode } from './models';
 import DataModifier from './utils/DataModifier'
+import { ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+  useAuth,  } from "@clerk/clerk-react";
+import { FireStore } from './firestore/firestore.service';
+if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
+const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
 function App() {
 
   useEffect(()=>{
-    const hardWords = localStorage.getItem('hardWords')  ? JSON.parse(localStorage.getItem('hardWords') as string): []
+  
     const vocabulary = localStorage.getItem('vocabulary')? JSON.parse(localStorage.getItem('vocabulary') as string): []
     const language: LangMode = localStorage.getItem('language')? JSON.parse(localStorage.getItem('language') as string): 'Geo'
-    if(hardWords){
-      store.dispatch(vocabularyActions.insertHardWords(hardWords))
-    }
+
+  
   
     if(vocabulary.length){
       const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
@@ -40,34 +50,63 @@ function App() {
       // store.dispatch(vocabularyActions.addVocabularySuccess(vocabulary))
     }
   }, [])
-
+  
   return (
-    <div className="App">
-      <Header/>
-      <Switch>
-     
-      <Route exact  path="/dashboard" >
-        <DashboardPage/>
-        </Route >
-        
-      
-        <Route exact  path="/about" >
-        <AboutPage/>
-        </Route>
-        <Route exact  path="/hard-words" >
-        <HardWordsPage/>
-        </Route>
-        <Route exact   path="/" >
-        <FormPage/>
-        </Route>
-        
-        <Route  ><DashboardPage/></Route>
-        {/* <Redirect to={'/'} /> */}
-      </Switch>
- 
-      
-    </div>
+    <ClerkProvider publishableKey={clerkPubKey}>
+    <SignedIn>
+    <Welcome/>
+    </SignedIn>
+    <SignedOut>
+      <RedirectToSignIn />
+    </SignedOut>
+  </ClerkProvider>
   );
 }
+function Welcome() {
 
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    const signInWithClerk = async () => {
+       await FireStore.initializeFirebase()
+      await FireStore.loginInFirebase(getToken)  
+      const localStorageHardWords = localStorage.getItem('hardWords')  ? JSON.parse(localStorage.getItem('hardWords') as string): []
+      const databaseHardWords = await FireStore.getUserHardWords() as {hardWords: Array<string>}
+      if(databaseHardWords?.hardWords?.length || localStorageHardWords.length){
+        
+        store.dispatch(vocabularyActions.insertHardWords(databaseHardWords.hardWords || localStorageHardWords))
+      }
+      
+      };
+  
+      signInWithClerk();
+  }, [getToken])
+
+
+  return  <div className="App">
+  <Header/>
+  <Switch>
+ 
+  <Route exact  path="/dashboard" >
+    <DashboardPage/>
+    </Route >
+    
+  
+    <Route exact  path="/about" >
+    <AboutPage/>
+    </Route>
+    <Route exact  path="/hard-words" >
+    <HardWordsPage/>
+    </Route>
+    <Route exact   path="/" >
+    <FormPage/>
+    </Route>
+    
+    <Route  ><DashboardPage/></Route>
+    {/* <Redirect to={'/'} /> */}
+  </Switch>
+
+  
+</div>
+}
 export default App;

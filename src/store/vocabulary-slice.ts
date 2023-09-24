@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { LangMode } from "../models";
 import DataModifier from "../utils/DataModifier";
 import { determineTitle } from "../utils/utils";
+import { FireStore } from "../firestore/firestore.service";
 
 export interface Lesson {
     stage?: string,
@@ -135,6 +136,7 @@ const vocabularySlice =createSlice({
                 state.hardWords = hardWordsCopy
                 
             }
+            FireStore.saveDataInCollection(state.hardWords)
 
             localStorage.setItem('hardWords', JSON.stringify(state.hardWords))
          

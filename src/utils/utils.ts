@@ -1,4 +1,4 @@
-import { RootState } from "../store/reducer"
+
 import { Lesson } from "../store/vocabulary-slice"
 
 /**

@@ -3,7 +3,6 @@ import Drawer from "@mui/material/Drawer";
 
 import styles from "./header.module.css";
 
-import Logo from "../../assets/icons8-learn-64.png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
@@ -50,6 +49,8 @@ const Header: React.FC = () => {
           to="hard-words"
         >
           Hard Words
+          <span className={styles.hard__words__count}>{count}</span>{" "}
+
         </NavLink>
       </li>
     </ul>
