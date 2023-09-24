@@ -111,12 +111,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       setIndex(currentIndex)
     }
   
-    const changeWordsHandler =()=>{
-      setIndex(0)
-      setButtons({nextDisable: false, prevDisable: true})
-      localStorage.removeItem('data')
-      dispatch(vocabularyActions.removeVocabulary())
-    }
+   
 
 
 

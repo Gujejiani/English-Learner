@@ -1,4 +1,4 @@
-import React, { Props, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import animationData from './birds.json';
 import './animation.css';

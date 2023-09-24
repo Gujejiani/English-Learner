@@ -1,4 +1,4 @@
-import { getAuth, RecaptchaVerifier, signInWithCustomToken } from "firebase/auth";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
 
 
 import { initializeApp } from "firebase/app";
@@ -26,7 +26,7 @@ export class AuthService  {
 
  async loginInFirebase(getToken: any){
   const token = await getToken({ template: "integration_firebase" }) as string;
-  const userCredentials = await signInWithCustomToken(this.auth, token) as any;
+ await signInWithCustomToken(this.auth, token) as any;
   //]]console.log("user ::", userCredentials, token);
  }
 
