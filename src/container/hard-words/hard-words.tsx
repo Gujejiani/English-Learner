@@ -22,7 +22,9 @@ export const HardWordsContainer:  React.FC =()=>{
     dispatch(vocabularyActions.hardWordsPracticeStart(language))
     }
     const [hardWords, setHardWords] = useState(hardWordss)
-
+    useEffect(()=>{
+        dispatch(vocabularyActions.changeActiveWordsIndex(0))
+    }, [])
     useEffect(()=>{
         setHardWords(hardWordss)
     }, [hardWordss])

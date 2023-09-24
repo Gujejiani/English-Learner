@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, } from "@reduxjs/toolkit"
 import { LangMode } from "../models";
 import DataModifier from "../utils/DataModifier";
 import { determineTitle } from "../utils/utils";
@@ -22,6 +22,7 @@ export interface Lesson {
 const initialVocabularyState: {
      vocabulary: string[],
      words: Question,
+     activeWordsIndex: number,
      hardWordsQuestion: Question,
     hardWords:  string[],
     lessonTitle: string,
@@ -33,7 +34,7 @@ const initialVocabularyState: {
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''},hardWordsQuestion: {question: '', answer: ''},  hardWords:  [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
+    {vocabulary: [], words: {question: '', answer: ''}, activeWordsIndex: 0,hardWordsQuestion: {question: '', answer: ''},  hardWords:  [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -136,17 +137,13 @@ const vocabularySlice =createSlice({
                 state.hardWords = hardWordsCopy
                 
             }
-            FireStore.saveDataInCollection(state.hardWords)
-
-            localStorage.setItem('hardWords', JSON.stringify(state.hardWords))
-         
+            FireStore.saveDataInCollection(state.hardWords)         
         },
         hardWordsPracticeStart(state, action:{payload: LangMode} ){
             let questIndex = action.payload ===LangMode.GEO? 1: 0
             let answerIndex =  action.payload===LangMode.GEO? 0: 1
 
 
-         
             const word = DataModifier.getWord(state.hardWords, 0)
             state.hardWordsQuestion ={ question: word[questIndex],  answer: word[answerIndex] }
         },
@@ -158,6 +155,9 @@ const vocabularySlice =createSlice({
         },
         insertHardWords(state, action: {payload: string[]}){
             state.hardWords = action.payload
+        },
+        changeActiveWordsIndex(state, action: {payload: number}){
+            state.activeWordsIndex = action.payload
         }
        
 

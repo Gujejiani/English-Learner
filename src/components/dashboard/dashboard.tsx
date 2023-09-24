@@ -31,7 +31,7 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
     const history = useHistory();
 
     const [hintIndex, setHintIndex]=useState(0)
-    const [showLessons, setShowLessons] = useState<boolean>(false)
+    const [showLessons, setShowLessons] = useState<boolean>(true)
 
     const [wordChanged, setWordChanged] = useState(0)
 
@@ -43,18 +43,30 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
    const lesson = useSelector((state: RootState)=> state.vocabulary.lessonTitle)
+
+   const activeLessons = useSelector((state: RootState)=> state.vocabulary.activeLessonsKeys)
+   
   
   
-    const [index,  setIndex] = useState<number>(0)
+    const activeWordsIndex = useSelector((state: RootState)=> state.vocabulary.activeWordsIndex)??0
     const [buttons,  setButtons] = useState<{prevDisable: boolean, nextDisable: boolean}>({prevDisable: true, nextDisable: false})
+   useEffect(()=>{
+    if(!activeLessons.length){
+      // it won't be visible
+      setShowLessons(false)
+    }else {
+      activeLessons.forEach((key)=>{
+        dispatch(vocabularyActions.choseLesson(key))
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
+  
     useEffect(() => {
       if(!props.hardWords){
-        setIndex(0)
-      }
-      if(!props.hardWords){
         setButtons({
-          prevDisable: true,
-          nextDisable: false
+          prevDisable: activeWordsIndex===0? true: false,
+          nextDisable: props.vocabulary.length-1 ===activeWordsIndex? true: false
         })
       }
 
@@ -65,9 +77,8 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
         })
       }
      
-      const vocabulary = localStorage.getItem('vocabulary')? JSON.parse(localStorage.getItem('vocabulary') as string): undefined
 
-        if(!props.vocabulary.length && !vocabulary){
+        if(!props.vocabulary.length){
           history.push('/')
          }
     
@@ -84,12 +95,11 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       setHintIndex(0)
       let currentIndex: number;
       if(direction  ===Move.NEXT){
-      currentIndex = buttonController({index, next: true, words: props.vocabulary}, buttons, setButtons)
+      currentIndex = buttonController({index: activeWordsIndex, next: true, words: props.vocabulary}, buttons, setButtons)
       }else{
-        currentIndex = buttonController({index: hardWordRemoved? index-1: index, next: false, words: props.vocabulary}, buttons, setButtons)
+        currentIndex = buttonController({index: hardWordRemoved? activeWordsIndex-1: activeWordsIndex, next: false, words: props.vocabulary}, buttons, setButtons)
       }
       let currentWord =DataModifier.getWord(props.vocabulary, currentIndex)
-    
     
       let questIndex = language===LangMode.GEO? 1: 0
       let answerIndex =  language===LangMode.GEO? 0: 1
@@ -106,9 +116,8 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
       }
      
 
-
-      
-      setIndex(currentIndex)
+      dispatch(vocabularyActions.changeActiveWordsIndex(currentIndex))
+    
     }
   
    
@@ -154,7 +163,6 @@ const Dashboard: React.FC<{vocabulary: string[], vocabularyQuestion: {
 
 
     const showHandler = (turnOnRepeat?: boolean)=>{
-      console.log('repeat is on its true', turnOnRepeat)
 
       if(turnOnRepeat){
         setRepeatMode(true)
@@ -197,7 +205,7 @@ const hardWordAdded  =()=>{
     const hardWordRemoved = props.vocabulary.findIndex(word=> word.includes(props.vocabularyQuestion.question))
    
     if(hardWordRemoved !== -1 && props.vocabulary.length>1){
-      if(index===0){
+      if(activeWordsIndex===0){
         changeHandler(Move.NEXT)
       }else {
         changeHandler(Move.PREV)
@@ -275,7 +283,7 @@ const successHandler =()=>{
    
    {(showLessons || props.hardWords) && !repeatMode && language === LangMode.GEO ? <div className='animation__remind'><Animation   wordChangeCount={wordChanged} onShowHint={handleHintShow}  /></div>:''}
 
-         <span className={styles.count} >({index+1}/{props.vocabulary.length})</span>
+         <span className={styles.count} >({activeWordsIndex+1}/{props.vocabulary.length})</span>
          <Question lesson={props.hardWords?'Hard Words': lesson} >{  language === LangMode.GEO ?  engAlphabetToGeo(props.vocabularyQuestion.question): props.vocabularyQuestion.question }</Question>
         
         <div className={styles.card__answer} >

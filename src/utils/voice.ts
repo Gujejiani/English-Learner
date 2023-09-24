@@ -4,7 +4,7 @@ export const speak = (msg: string, geo?: boolean): void => {
 
   // Get the list of available voices
   const availableVoices = speechSynthesis.getVoices();
-  console.log(availableVoices);
+
 
   // for mobile setting 146
   if (window.innerWidth <= 768 ) {
