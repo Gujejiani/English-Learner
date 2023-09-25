@@ -9,7 +9,7 @@ import settingsReducer from './settings-slice';
 import localStorageMiddleware from './middlware/local-storage';
 
 
-
+import thunk from 'redux-thunk';
 /**
  * configureStore will merge all reducers for as => quite nice doesn't it?
  */
@@ -18,7 +18,7 @@ const preloadedState = JSON.parse(localStorage.getItem('myAppReduxState') as str
 const store = configureStore({
     reducer: {vocabulary: vocabularyReducer, settings: settingsReducer}, //we can use object if we have multiple 
     preloadedState,
-    middleware: [localStorageMiddleware],
+    middleware: [thunk, localStorageMiddleware],
 })
 
 export type StateDispatch  = typeof store.dispatch

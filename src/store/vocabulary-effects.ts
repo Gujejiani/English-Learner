@@ -10,7 +10,7 @@ export const PDF_EXTRACT_URL ='https://pdf-extractor-lty1.onrender.com/extract-t
 
 
 export const sendPdfData =(pdfFile: File, language: LangMode) => {
-    return (dispatch: StateDispatch)=>{
+    return async (dispatch: StateDispatch)=>{
  
     
      dispatch(vocabularyActions.addVocabulary())
