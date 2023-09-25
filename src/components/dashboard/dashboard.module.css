@@ -1,120 +1,98 @@
+.card {
+  background-color: #f5eeee;
+  max-width: 800px;
+  margin: auto;
+  width: 100%;
+  max-height: 350px;
+  height: 350px;
 
-.card{
-    background-color: #f5eeee;
-    max-width: 800px;
-    margin: auto;
-    width: 100%;
-    max-height: 350px;
-    height: 350px;
-  
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 160px;
-    position: relative;
-    
-   
-   
-   
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 160px;
+  position: relative;
 }
 
 @media screen and (max-width: 600px) {
-    .card{
-        max-width: 380px;
-    }
-   
+  .card {
+    max-width: 380px;
+  }
 }
 
-.birds{
-    position: absolute;
-    background-color: transparent;
-    right: 20px;
-    bottom: 0px;
-    z-index: 230;
+.birds {
+  position: absolute;
+  background-color: transparent;
+  right: 20px;
+  bottom: 0px;
+  z-index: 230;
 }
-.card__answer{
-flex: 1;
-background-color: rgb(82, 115, 230);
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-padding: 10px;
-font-size: 18px;
-border-radius: 10px;
-position: relative;
+.card__answer {
+  flex: 1;
+  background-color: rgb(82, 115, 230);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  position: relative;
 }
-.card__translate{
-
-font-size: 18px;
-opacity: 1;
-color: white;
-font-weight: bold;
-filter: blur(7px);
-cursor: pointer;
-display: flex;
-margin-top: 20px;
-transition: 0.5s filter ease-out;
--webkit-transition: 0.5s -webkit-filter linear;
--moz-transition: 0.5s -moz-filter linear;
--ms-transition: 0.5s -ms-filter linear;
--o-transition: 0.5s -o-filter linear;
-
+.card__translate {
+  font-size: 18px;
+  opacity: 1;
+  color: white;
+  font-weight: bold;
+  filter: blur(7px);
+  cursor: pointer;
+  display: flex;
+  margin-top: 20px;
+  transition: 0.5s filter ease-out;
+  -webkit-transition: 0.5s -webkit-filter linear;
+  -moz-transition: 0.5s -moz-filter linear;
+  -ms-transition: 0.5s -ms-filter linear;
+  -o-transition: 0.5s -o-filter linear;
 }
 
-.card__show{
-    filter: blur(0);
+.card__show {
+  filter: blur(0);
 }
 
-
-.blur__place_holder{
-    font-size: 18px;
-opacity: 1;
-color: white;
-font-weight: bold;
-filter: blur(7px);
-cursor: pointer;
-display: flex;
-margin-top: 20px;
- 
+.blur__place_holder {
+  font-size: 18px;
+  opacity: 1;
+  color: white;
+  font-weight: bold;
+  filter: blur(7px);
+  cursor: pointer;
+  display: flex;
+  margin-top: 20px;
 }
-.card__show__hide{
-    transition: none;
+.card__show__hide {
+  transition: none;
 }
 
-
-
-
-
-.disable{
-    opacity: 0.4;
-    cursor: no-drop;
-    background-color: gray;
-    transition: all 0.4s ease-in-out;
+.disable {
+  opacity: 0.4;
+  cursor: no-drop;
+  background-color: gray;
+  transition: all 0.4s ease-in-out;
 }
 
-.count{
-    position: absolute;
-    left: 40px;
-    top:10px;
-    font-weight: bold;
-    color: rgb(16, 123, 150);
-
+.count {
+  position: absolute;
+  left: 40px;
+  top: 10px;
+  font-weight: bold;
+  color: rgb(16, 123, 150);
 }
 
-.card__book{
-    position: absolute;
-    left: 5px;
-    top: 5px;
+.card__book {
+  position: absolute;
+  left: 5px;
+  top: 5px;
 
-    font-weight: bold;
-    color: rgb(16, 123, 150);
-    width: 100%;
+  font-weight: bold;
+  color: rgb(16, 123, 150);
+  width: 100%;
 }
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
-.sound{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-    color: rgb(16, 123, 150);
+.sound {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: rgb(16, 123, 150);
 }

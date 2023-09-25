@@ -10,149 +10,152 @@
 
 @media only screen and (max-width: 600px) {
   .animation {
-      top: 90px;
-      height: 150px;
+    top: 90px;
+    height: 150px;
   }
 }
 
-.show-animation{
+.show-animation {
   opacity: 1;
 }
 
-.animation__repeat-mode{
+.animation__repeat-mode {
   opacity: 1;
   left: 0;
   max-width: 220px;
 }
 .message-container {
-    position: absolute;
-    top: -38px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-name: slide-up;
-    animation-duration: 2s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    width: 100px;
-   
-   
-  }
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-name: slide-up;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  width: 100px;
+}
 
-  .message-container__repeat{
-    left: 70px;
-    width: 140px;
-    top: -48px;
-  }
-  .message-bubble {
-    position: relative;
-    display: inline-block;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
-    transition:  all ease-in-out 3s;
-   
-  }
-  .repeat-count{
-    font-weight: bold;
-   font-size: 18px;
-   color: rgb(82 115 230)
-  }
+.message-container__repeat {
+  left: 70px;
+  width: 140px;
+  top: -48px;
+}
+.message-bubble {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  transition: all ease-in-out 3s;
+}
+.repeat-count {
+  font-weight: bold;
+  font-size: 18px;
+  color: rgb(82 115 230);
+}
 
-
-  @media only screen and (max-width: 600px) {
-    .message-container {
-      /* position: absolute;
+@media only screen and (max-width: 600px) {
+  .message-container {
+    /* position: absolute;
       top: -38px;
       left: 500px; */
-      
-     
-     
-    }
-    .message-container__repeat{
-      left: 60px;
+  }
+  .message-container__repeat {
+    left: 60px;
     width: 140px;
     top: -40px;
-      
-    }
-    .message-bubble{
-      padding: 4px;
-      width: 100px;
-      
-    }
   }
-  
-  .message-text {
-    margin: 0;
-    font-size: 14px;
-    color: #333;
+  .message-bubble {
+    padding: 4px;
+    width: 100px;
   }
-  
-  .speech-arrow {
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 7.5px;
-    border-color: white transparent transparent transparent;
-    transition:  opacity ease-in-out 1.5s;
- 
-    
-  }
+}
 
-  .hide{
-    transform: translateY(50%);
+.message-text {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.speech-arrow {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7.5px;
+  border-color: white transparent transparent transparent;
+  transition: opacity ease-in-out 1.5s;
+}
+
+.hide {
+  transform: translateY(50%);
+  opacity: 0;
+}
+.hide-arrow {
+  opacity: 0;
+}
+
+@keyframes slide-up {
+  from {
     opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 
+@keyframes shake {
+  0% {
+    transform: translateX(0);
   }
-  .hide-arrow{
-    opacity: 0;
+  25% {
+    transform: translateX(-5px) rotate(-5deg);
   }
+  50% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translate(-50%, 100%);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
+@keyframes colorChange {
+  0% {
+    color: black;
   }
+  50% {
+    color: green;
+  }
+  100% {
+    color: black;
+  }
+}
 
+.animatedMessage {
+  animation:
+    shake 2s infinite,
+    colorChange 2s infinite;
+}
 
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px) rotate(-5deg); }
-    50% { transform: translateX(5px) rotate(5deg); }
-    75% { transform: translateX(-5px) rotate(-5deg); }
-    100% { transform: translateX(0); }
-  }
-  
-  @keyframes colorChange {
-    0% { color: black; }
-    50% { color: green; }
-    100% { color: black; }
-  }
-  
-  .animatedMessage {
-    animation: shake 2s infinite, colorChange 2s infinite;
-  }
+.animation__lottie {
+  width: 140px;
+  height: 120px;
+  background-color: transparent;
+}
 
-  .animation__lottie{
-   
-    width: 140px;
-    height: 120px;
-    background-color: transparent;
-
+@media only screen and (max-width: 600px) {
+  .animation__lottie {
+    width: 100px;
+    height: 100px;
   }
-
-  @media only screen and (max-width: 600px) {
-    .animation__lottie {
-      width: 100px;
-      height: 100px;
-    }
-  }
+}

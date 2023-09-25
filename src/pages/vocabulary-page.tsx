@@ -1,17 +1,7 @@
+import VocabularyPracticeContainer from "../container/vocabularyPractice/vocabularyPracticeContainer";
 
-import VocabularyPracticeContainer from '../container/vocabularyPractice/vocabularyPracticeContainer';
+const DashboardPage: React.FC = () => {
+  return <VocabularyPracticeContainer />;
+};
 
-
-const DashboardPage: React.FC = () =>{
-
-
-
-
-
-
-
-    return  <VocabularyPracticeContainer/>
-}
-
-
-export default DashboardPage
+export default DashboardPage;

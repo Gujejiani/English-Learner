@@ -1,30 +1,22 @@
-.wrapper{
-    display: flex;
-    margin-top: 120px;
-   justify-content: center;
-    color: #fff;
-   
-    
+.wrapper {
+  display: flex;
+  margin-top: 120px;
+  justify-content: center;
+  color: #fff;
 }
 
 .welcome {
-    width: 100%;
-    max-width: 750px;
-    padding: 10px;
-  
-    background-color: rgb(82, 115, 230);
-    border-radius:  10px;
-    text-align: left;
-    
+  width: 100%;
+  max-width: 750px;
+  padding: 10px;
+
+  background-color: rgb(82, 115, 230);
+  border-radius: 10px;
+  text-align: left;
 }
-
-
-
-
 
 /* CSS */
 .button {
-    
   margin: auto;
   padding: 15px 30px;
   text-align: center;
@@ -37,7 +29,12 @@
   border: 0px;
   font-weight: 700;
   box-shadow: 0px 0px 14px -7px #f09819;
-  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;

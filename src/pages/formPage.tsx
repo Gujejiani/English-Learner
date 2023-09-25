@@ -1,11 +1,7 @@
-import VocabularyForm from "../components/vocabularyForm/vocabularyForm"
+import VocabularyForm from "../components/vocabularyForm/vocabularyForm";
 
+const FormPage: React.FC = () => {
+  return <VocabularyForm />;
+};
 
-
-
-const FormPage: React.FC = () =>{
-    return <VocabularyForm/>
-}
-
-
-export default FormPage
+export default FormPage;

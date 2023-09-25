@@ -1,8 +1,8 @@
-.nav{
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    max-width: 300px;
-    align-items: flex-end;
-    height: 100%;
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  max-width: 300px;
+  align-items: flex-end;
+  height: 100%;
 }

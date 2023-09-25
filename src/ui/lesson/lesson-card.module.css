@@ -1,47 +1,51 @@
-
-
-
-
 .button_41 {
-
-   background-color: initial;
-   background-image: linear-gradient(-180deg, #00D775, #00BD68);
-   border-radius: 5px;
-   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-   color: #FFFFFF;
-   cursor: pointer;
-    display: flex;
-    box-sizing: border-box;
-   font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
-   height: 44px;
-   line-height: 44px;
-   outline: 0;
-   overflow: hidden;
-   padding: 0 20px;
-   pointer-events: auto;
-   position: relative;
-   text-align: center;
-   touch-action: manipulation;
-   user-select: none;
-   -webkit-user-select: none;
-   vertical-align: top;
-   white-space: nowrap;
-    width: 120px;
-   z-index: 9;
-   border: 0;
-    margin-bottom: 10px;
-    margin-left: 10px;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #00d775, #00bd68);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  box-sizing: border-box;
+  font-family:
+    Inter,
+    -apple-system,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 120px;
+  z-index: 9;
+  border: 0;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .button_41:hover {
-    background: #00bd68;
+  background: #00bd68;
 }
 .lesson__inactive {
-   /* Apply opacity to the entire element */
+  /* Apply opacity to the entire element */
 
-opacity: 0.5;
-/* Set the background gradient without opacity */
-background-image: linear-gradient(-180deg, rgba(197, 213, 207, 0.2), rgba(195, 217, 204, 0.2));
-
-
- }
+  opacity: 0.5;
+  /* Set the background gradient without opacity */
+  background-image: linear-gradient(
+    -180deg,
+    rgba(197, 213, 207, 0.2),
+    rgba(195, 217, 204, 0.2)
+  );
+}

@@ -6,7 +6,7 @@ import styles from "./header.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
-import './styles.css';
+import "./styles.css";
 const Header: React.FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>(0);
   const [show, setShow] = useState<boolean>();
@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   };
 
   const count = useSelector(
-    (state: RootState) => state.vocabulary.hardWords.length
+    (state: RootState) => state.vocabulary.hardWords.length,
   );
 
   const navLinks = () => (
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
       </li>
       <li className={styles.ul__list__mobile}>
         <NavLink activeClassName={styles.active} exact to="/">
-        Upload PDF
+          Upload PDF
         </NavLink>
       </li>
       <li className={styles.ul__list__mobile}>
@@ -50,7 +50,6 @@ const Header: React.FC = () => {
         >
           Hard Words
           <span className={styles.hard__words__count}>{count}</span>{" "}
-
         </NavLink>
       </li>
     </ul>
@@ -59,26 +58,28 @@ const Header: React.FC = () => {
   return (
     <>
       {screenWidth <= 480 ? (
-        <div className="menu-wrapper" >
-          <button onClick={toggleDrawer}  className="hamburger">
-  <span className="hamburger-box">
-    <span className="hamburger-inner"></span>
-  </span>
-</button>
+        <div className="menu-wrapper">
+          <button onClick={toggleDrawer} className="hamburger">
+            <span className="hamburger-box">
+              <span className="hamburger-inner"></span>
+            </span>
+          </button>
 
-          
-           <NavLink  className={styles.header__img} to="/dashboard"  >EL</NavLink>
+          <NavLink className={styles.header__img} to="/dashboard">
+            EL
+          </NavLink>
 
           {/* </button> */}
-          <Drawer   anchor="left" open={show} onClose={toggleDrawer}>
+          <Drawer anchor="left" open={show} onClose={toggleDrawer}>
             {navLinks()}
           </Drawer>
         </div>
       ) : (
         <header className={styles.header}>
-         
-          <NavLink  className={styles.header__img} to="/dashboard"  >EL</NavLink>
-          
+          <NavLink className={styles.header__img} to="/dashboard">
+            EL
+          </NavLink>
+
           <nav className={styles.header__nav}>
             <ul className={styles.nav__ul}>
               <li className={styles.ul__list}>
@@ -87,8 +88,7 @@ const Header: React.FC = () => {
                   Dashboard
                 </NavLink>{" "}
               </li>
-             
-             
+
               <li className={styles.ul__list}>
                 {" "}
                 <NavLink
@@ -100,11 +100,11 @@ const Header: React.FC = () => {
                 <span className={styles.hard__words__count}>{count}</span>{" "}
               </li>
             </ul>
-            <ul  style={{display: 'flex'}}>
-            <li style={{'marginRight': '30px'}} className={styles.ul__list}>
+            <ul style={{ display: "flex" }}>
+              <li style={{ marginRight: "30px" }} className={styles.ul__list}>
                 {" "}
                 <NavLink activeClassName={styles.active} exact to="/">
-                Upload PDF
+                  Upload PDF
                 </NavLink>{" "}
               </li>
               <li className={styles.ul__list}>
@@ -113,7 +113,7 @@ const Header: React.FC = () => {
                   About
                 </NavLink>{" "}
               </li>
-              </ul>
+            </ul>
           </nav>
         </header>
       )}

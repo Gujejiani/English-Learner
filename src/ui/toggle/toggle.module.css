@@ -1,38 +1,37 @@
-.toggle{
-    color: red;
-    display: flex;
-    position: relative;
-    right: 10px;
-    top: 10px;
-    width: 80px;
-    height: 35px;
-    border-radius: 10px;
-    background-color: rgb(185, 200, 211);
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
+.toggle {
+  color: red;
+  display: flex;
+  position: relative;
+  right: 10px;
+  top: 10px;
+  width: 80px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgb(185, 200, 211);
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
 }
 
-.toggle__box{
-    display: flex;
-    width: 46%;
-    height: 80%;
-    background-color: rgb(82 115 230);
-    border-radius: 5px;
-    color: #fff;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    transition: all 0.4s ease-in-out;
-    left: 3px;
- 
+.toggle__box {
+  display: flex;
+  width: 46%;
+  height: 80%;
+  background-color: rgb(82 115 230);
+  border-radius: 5px;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transition: all 0.4s ease-in-out;
+  left: 3px;
 }
-.eng{
-    color: #fff;
-    z-index: 1;
-    font-size: 15px;
+.eng {
+  color: #fff;
+  z-index: 1;
+  font-size: 15px;
 }
 
-.toggled{
-    transform: translateX(38px);
+.toggled {
+  transform: translateX(38px);
 }

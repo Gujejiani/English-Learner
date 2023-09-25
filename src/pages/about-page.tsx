@@ -1,11 +1,7 @@
-import About from "../container/about/about"
+import About from "../container/about/about";
 
+const AboutPage: React.FC = () => {
+  return <About />;
+};
 
-
-
-const AboutPage: React.FC = ()=>{
-return <About/>
-}
-
-
-export default AboutPage
+export default AboutPage;

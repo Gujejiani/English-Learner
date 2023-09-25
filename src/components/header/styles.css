@@ -1,81 +1,81 @@
-.MuiDrawer-paperAnchorLeft{
-    background-color: rgb(82 115 230) !important;
-  }
-  .hamburger {
-    display: inline-block;
-    cursor: pointer;
-    padding: 10px 15px;
-    background-color: transparent;
-    border: 0;
-    margin: 0;
-    padding-left: 30px;
-  }
-  
-  .hamburger-box {
-    width: 30px;
-    height: 24px;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .hamburger-inner {
-    display: block;
-    position: absolute;
-    top: 50%;
-    margin-top: -2px;
-    width: 30px;
-    height: 4px;
-    background-color: #333;
-    border-radius: 4px;
-    transition-duration: 0.15s;
-    transition-timing-function: ease-in-out;
-  }
-  
-  .hamburger-inner::before,
-  .hamburger-inner::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 30px;
-    height: 4px;
-    background-color: #333;
-    border-radius: 4px;
-    transition-duration: 0.15s;
-    transition-timing-function: ease-in-out;
-  }
-  
-  .hamburger-inner::before {
-    top: -10px;
-  }
-  
-  .hamburger-inner::after {
-    bottom: -10px;
-  }
-  
-  /* Add styles for the active/hover state of the button */
-  
-  .hamburger:hover .hamburger-inner {
-    /* background-color: #666; */
-  }
-  
-  .hamburger.is-active .hamburger-inner {
-    background-color: transparent;
-  }
-  
-  .hamburger.is-active .hamburger-inner::before {
-    transform: rotate(45deg);
-    top: 0;
-  }
-  
-  .hamburger.is-active .hamburger-inner::after {
-    transform: rotate(-45deg);
-    bottom: 0;
-  }
-  .menu-wrapper{
-    display: flex;
-    align-items: center;
-    background-color: rgb(82, 115, 230);
-    justify-content: space-between;
-    padding-right: 30px;
-  }
+.MuiDrawer-paperAnchorLeft {
+  background-color: rgb(82 115 230) !important;
+}
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding-left: 30px;
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.hamburger-inner {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -2px;
+  width: 30px;
+  height: 4px;
+  background-color: #333;
+  border-radius: 4px;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  background-color: #333;
+  border-radius: 4px;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+
+.hamburger-inner::before {
+  top: -10px;
+}
+
+.hamburger-inner::after {
+  bottom: -10px;
+}
+
+/* Add styles for the active/hover state of the button */
+
+.hamburger:hover .hamburger-inner {
+  /* background-color: #666; */
+}
+
+.hamburger.is-active .hamburger-inner {
+  background-color: transparent;
+}
+
+.hamburger.is-active .hamburger-inner::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.hamburger.is-active .hamburger-inner::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+.menu-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: rgb(82, 115, 230);
+  justify-content: space-between;
+  padding-right: 30px;
+}
