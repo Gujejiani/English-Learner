@@ -166,7 +166,7 @@ const vocabularySlice =createSlice({
         },
         resetVocabularyState(state){
            
-            return { ...initialVocabularyState };
+            return { ...initialVocabularyState, hardWords: state.hardWords };
 
         }
        
