@@ -1,6 +1,6 @@
 import styles from "./vocabularyForm.module.css";
 import React, { useEffect, useState } from "react";
-import Toggle from "../../ui/toggle/toggle";
+// import Toggle from "../../ui/toggle/toggle";
 import FileUpload from "../../container/fileUpload/fileUpload";
 import { LangMode } from "../../models/index";
 import { sendPdfData } from "../../store/vocabulary-effects";
@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/reducer";
 import { settingsActions } from "../../store/settings-slice";
 import { useHistory } from "react-router-dom";
+import englishImg from '../../assets/english.png'
+import georgianImg from '../../assets/georgian.png'
+
 const VocabularyForm: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,8 +31,11 @@ const VocabularyForm: React.FC = () => {
     dispatch(sendPdfData(pdfFile, language));
   };
 
-  const toggleHandler = () => {
-    dispatch(settingsActions.changeLanguage());
+  const toggleHandler = (lang: LangMode) => {
+    if(lang === language){
+      dispatch(settingsActions.changeLanguage());
+    }
+   
   };
 
   const pdfHandler = (file: File) => {
@@ -53,10 +59,26 @@ const VocabularyForm: React.FC = () => {
       <FileUpload fileUploaded={pdfHandler} />
 
       <div className={styles.language}>
-        <h3>Choose Questions Language </h3>
-        <Toggle toggle={language === LangMode.GEO} onToggled={toggleHandler} />
+        <h3>Which Language to be hidden? </h3>
+        {/* <Toggle toggle={language === LangMode.GEO} onToggled={toggleHandler} /> */}
       </div>
+      <div className={styles.languages}>
+        <div onClick={()=>toggleHandler(LangMode.ENG)}  className={`${styles.languages_item} ${language===LangMode.GEO ? styles.languages_item__selected : ''}`}  >
+        <div className={styles.language__item__overlay}></div>
+          <p className={styles.languages_item_text} >
+          <div className={`${styles.circle} ${language ===LangMode.GEO? styles.circle__selected: ''}`} ></div> 
+            ENG</p>
+       <img className={styles.languages_item_img} src={georgianImg}alt="flag" />
+        </div>
+        <div onClick={()=>toggleHandler(LangMode.GEO)}   className={`${styles.languages_item} ${language===LangMode.ENG ? styles.languages_item__selected : ''}`} >
+        <div className={styles.language__item__overlay}></div>
 
+        <img className={styles.languages_item_img} src={englishImg} alt="flag" />
+
+        <p className={styles.languages_item_text} >
+          <div className={`${styles.circle} ${language ===LangMode.ENG? styles.circle__selected: ''}`} ></div> GEO</p>
+        </div>
+      </div>
       <button
         style={{ position: "relative" }}
         className={`${styles.form__button} ${!pdfFile ? styles.disable : ""}`}
