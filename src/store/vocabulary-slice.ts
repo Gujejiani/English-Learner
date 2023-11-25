@@ -163,6 +163,11 @@ const vocabularySlice =createSlice({
         },
         changeActiveWordsIndex(state, action: {payload: number}){
             state.activeWordsIndex = action.payload
+        },
+        resetVocabularyState(state){
+           
+            return { ...initialVocabularyState };
+
         }
        
 

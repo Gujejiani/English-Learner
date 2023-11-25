@@ -25,6 +25,8 @@ export const sendPdfData =(pdfFile: File, language: LangMode) => {
     
         
           const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
+            dispatch(vocabularyActions.resetVocabularyState());
+
           dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords)) // {type: some_unique_action_name, payload: what you will pass}
 
           let questIndex = language ===LangMode.GEO? 1: 0
