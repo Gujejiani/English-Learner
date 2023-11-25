@@ -11,6 +11,8 @@ const Header: React.FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>(0);
   const [show, setShow] = useState<boolean>();
 
+  const [countAnimation, setCountAnimation] = useState<boolean>(false)
+
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     handleResize();
@@ -26,6 +28,15 @@ const Header: React.FC = () => {
     (state: RootState) => state.vocabulary.hardWords.length,
   );
 
+
+      useEffect(()=>{
+        console.log('count changed')
+        setCountAnimation(true)
+      const timer =  setTimeout(()=>{
+          setCountAnimation(false)
+        }, 5000)
+        return () => clearTimeout(timer)
+  }, [count])
   const navLinks = () => (
     <ul className={styles.nav__ul__mobile}>
       <li className={styles.ul__list__mobile}>
@@ -49,7 +60,7 @@ const Header: React.FC = () => {
           to="hard-words"
         >
           Hard Words
-          <span className={styles.hard__words__count}>{count}</span>{" "}
+          <span className={`${styles.hard__words__count} ${countAnimation? styles.hard__words__count__animation: ''} `}>{count}</span>{" "}
         </NavLink>
       </li>
     </ul>
@@ -97,7 +108,7 @@ const Header: React.FC = () => {
                 >
                   Hard Words
                 </NavLink>{" "}
-                <span className={styles.hard__words__count}>{count}</span>{" "}
+                <span className={`${styles.hard__words__count} ${countAnimation? styles.hard__words__count__animation: ''} `}>{count}</span>{" "}
               </li>
             </ul>
             <ul style={{ display: "flex" }}>

@@ -59,6 +59,13 @@
   align-items: center;
   top: 10px;
   font-size: 13px;
+  transition: all 0.3s ease-in-out;
+  /* support other browsers */
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+
+
+  
 }
 @media screen and (max-width: 768px) {
   .hard__words__count {
@@ -123,4 +130,19 @@
 
 .material-drawer {
   display: block;
+}
+.hard__words__count__animation {
+
+  background-color: orange !important;
+ 
+  animation: pulseAnimation 1s infinite alternate;
+
+}
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
 }
