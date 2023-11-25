@@ -18,7 +18,33 @@ export const sendPdfData = (pdfFile: File, language: LangMode) => {
 
     // Attach the cancel token to each request
     const request1 = axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token });
-    const request2 = axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token });
+ 
+  
+         /**
+          * we using free server hosting so it sleeps for some time and then it wakes up, so we need to send request twice
+          * first request wakes up server and second request gets data
+          */
+    const request2 = new Promise<string>((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+      
+
+        axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token })
+          .then((res) => resolve(res.data))
+          .catch((err) => {
+            if (axios.isCancel(err)) {
+              console.log('Request canceled:', err.message);
+            } else {
+              console.log(err);
+              dispatch(vocabularyActions.addVocabularyFail());
+              reject(err);
+            }
+          });
+      }, 4000); // 4-second delay
+
+
+      request1.then(() => clearTimeout(timeoutId));
+    });
+
 
     // Use Promise.race to resolve with the result of the first completed request
     Promise.race([request1, request2])
