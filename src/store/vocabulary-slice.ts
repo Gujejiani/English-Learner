@@ -80,7 +80,12 @@ const vocabularySlice =createSlice({
             state.stages = DataModifier.splitByStages(action.payload)
         },
         choseLesson(state, action: {payload: number}) {
-            state.stages[action.payload].active = !state.stages[action.payload].active
+            if(state.stages[action.payload]){
+                state.stages[action.payload].active = !state.stages[action.payload].active
+
+            }else {
+                console.log('no such lesson')
+            }
 
         },
         lessonsSubmitted(state, action: {payload: LangMode}){
