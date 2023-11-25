@@ -1,53 +1,54 @@
-import axios from "axios"
-import { LangMode } from "../models"
-import DataModifier from "../utils/DataModifier"
-import { StateDispatch } from "./reducer"
-import { vocabularyActions } from "./vocabulary-slice"
+import axios, {  } from "axios";
+import { LangMode } from "../models";
+import DataModifier from "../utils/DataModifier";
+import { StateDispatch } from "./reducer";
+import { vocabularyActions } from "./vocabulary-slice";
 
+export const PDF_EXTRACT_URL = 'https://pdf-extractor-lty1.onrender.com/extract-text';
 
-export const PDF_EXTRACT_URL ='https://pdf-extractor-lty1.onrender.com/extract-text'
+export const sendPdfData = (pdfFile: File, language: LangMode) => {
+  return async (dispatch: StateDispatch) => {
+    dispatch(vocabularyActions.addVocabulary());
 
+    const formData = new FormData();
+    formData.append('pdfFile', pdfFile);
 
+    // Create a cancel token source
+    const cancelTokenSource = axios.CancelToken.source();
 
-export const sendPdfData =(pdfFile: File, language: LangMode) => {
-    return async (dispatch: StateDispatch)=>{
- 
-    
-     dispatch(vocabularyActions.addVocabulary())
- 
- 
-     const formData = new FormData()
-    
-   
-     formData.append('pdfFile',pdfFile)
-     axios.post<string>(PDF_EXTRACT_URL, formData).then(res=>{
-       
-    
-        
-          const done =  (data:{updatedWords: string[], firstWord: Array<string>, title: string})=>{
-            dispatch(vocabularyActions.resetVocabularyState());
+    // Attach the cancel token to each request
+    const request1 = axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token });
+    const request2 = axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token });
 
-          dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords)) // {type: some_unique_action_name, payload: what you will pass}
+    // Use Promise.race to resolve with the result of the first completed request
+    Promise.race([request1, request2])
+      .then((res: any) => {
+        // Cancel the other request
+        cancelTokenSource.cancel('Request canceled because another request succeeded');
 
-          let questIndex = language ===LangMode.GEO? 1: 0
-          let answerIndex =  language===LangMode.GEO? 0: 1
+        const done = (data: { updatedWords: string[], firstWord: Array<string>, title: string }) => {
+          dispatch(vocabularyActions.resetVocabularyState());
+          dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords));
 
-          dispatch(vocabularyActions.changeWord({ question: data.firstWord[questIndex],  answer: data.firstWord[answerIndex], }))
-      
+          let questIndex = language === LangMode.GEO ? 1 : 0;
+          let answerIndex = language === LangMode.GEO ? 0 : 1;
+
+          dispatch(vocabularyActions.changeWord({ question: data.firstWord[questIndex], answer: data.firstWord[answerIndex] }));
+        };
+
+        // Modify pdf string to array
+        DataModifier.modifyWords(res.data, done);
+
+        DataModifier.splitByStages(res.data);
+        dispatch(vocabularyActions.addVocabularyByStages(res.data));
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log('Request canceled:', err.message);
+        } else {
+          console.log(err);
+          dispatch(vocabularyActions.addVocabularyFail());
         }
-
-        // modifying pdf string to array with 
-        DataModifier.modifyWords(res.data, done)
-
-        DataModifier.splitByStages(res.data)
-         dispatch(vocabularyActions.addVocabularyByStages(res.data))
-        
-        
-     }).catch(err=>{
-         console.log(err)
-         dispatch(vocabularyActions.addVocabularyFail())
-     })  
- 
- 
-    }
- }
+      });
+  };
+};

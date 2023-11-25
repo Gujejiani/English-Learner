@@ -65,9 +65,9 @@ const VocabularyForm: React.FC = () => {
       <div className={styles.languages}>
         <div onClick={()=>toggleHandler(LangMode.ENG)}  className={`${styles.languages_item} ${language===LangMode.GEO ? styles.languages_item__selected : ''}`}  >
         <div className={styles.language__item__overlay}></div>
-          <p className={styles.languages_item_text} >
+          <div className={styles.languages_item_text} >
           <div className={`${styles.circle} ${language ===LangMode.GEO? styles.circle__selected: ''}`} ></div> 
-            ENG</p>
+            ENG</div>
        <img className={styles.languages_item_img} src={georgianImg}alt="flag" />
         </div>
         <div onClick={()=>toggleHandler(LangMode.GEO)}   className={`${styles.languages_item} ${language===LangMode.ENG ? styles.languages_item__selected : ''}`} >
@@ -75,8 +75,8 @@ const VocabularyForm: React.FC = () => {
 
         <img className={styles.languages_item_img} src={englishImg} alt="flag" />
 
-        <p className={styles.languages_item_text} >
-          <div className={`${styles.circle} ${language ===LangMode.ENG? styles.circle__selected: ''}`} ></div> GEO</p>
+        <div className={styles.languages_item_text} >
+          <div className={`${styles.circle} ${language ===LangMode.ENG? styles.circle__selected: ''}`} ></div> GEO</div>
         </div>
       </div>
       <button
