@@ -39,7 +39,7 @@ export const sendPdfData = (pdfFile: File, language: LangMode) => {
               reject(err);
             }
           });
-      }, 4000); // 4-second delay
+      }, 8000); // 8-second delay
 
 
       request1.then(() => clearTimeout(timeoutId));
