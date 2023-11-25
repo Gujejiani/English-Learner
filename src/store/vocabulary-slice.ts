@@ -168,6 +168,13 @@ const vocabularySlice =createSlice({
            
             return { ...initialVocabularyState, hardWords: state.hardWords };
 
+        },
+        shuffleWords(state){
+            // state.activeWordsIndex = 0
+            state.vocabulary = DataModifier.shuffle(state.vocabulary)
+            state.hardWords = DataModifier.shuffle(state.hardWords)
+            state.vocabularyByStages = DataModifier.shuffle(state.vocabularyByStages)
+          
         }
        
 

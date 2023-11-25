@@ -116,6 +116,10 @@ class DataModifier {
       return updVocabulary
 
   }
+  shuffle(array: string[]) {
+    let shuffled = array.sort(() => Math.random() - 0.5);
+    return [...shuffled]
+  }
 }
 
 export default new DataModifier()

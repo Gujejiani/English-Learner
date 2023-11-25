@@ -96,3 +96,10 @@
   color: rgb(16, 123, 150);
   width: 100%;
 }
+
+.shuffle{
+  position: absolute;
+  right: 60px;
+  top: 18px;
+  color: rgb(16, 123, 150);
+}

@@ -18,6 +18,8 @@ import { useHistory } from "react-router-dom";
 import MyInput from "../../ui/input/input";
 import Animation from "../../ui/animation/animation";
 
+import { RiExchangeLine } from "@react-icons/all-files/ri/RiExchangeLine";
+
 const Dashboard: React.FC<{
   vocabulary: string[];
   vocabularyQuestion: {
@@ -94,22 +96,26 @@ const Dashboard: React.FC<{
     }
   }, [props.vocabulary, history]);
 
-  const changeWord = (direction: string, hardWordRemoved?: boolean) => {
+  const changeWord = (direction: string, hardWordRemoved?: boolean, jumpToIndex?: number) => {
     setWordChanged((prev) => {
       return (prev = prev + 1);
     });
+
+    let wordIndex = jumpToIndex ?? activeWordsIndex;
+
+    // console.log(wordIndex, 'wordIndex')
     setHintIndex(0);
     let currentIndex: number;
     if (direction === Move.NEXT) {
       currentIndex = buttonController(
-        { index: activeWordsIndex, next: true, words: props.vocabulary },
+        { index: wordIndex, next: true, words: props.vocabulary },
         buttons,
         setButtons,
       );
     } else {
       currentIndex = buttonController(
         {
-          index: hardWordRemoved ? activeWordsIndex - 1 : activeWordsIndex,
+          index: hardWordRemoved ? wordIndex - 1 : wordIndex,
           next: false,
           words: props.vocabulary,
         },
@@ -263,7 +269,12 @@ const Dashboard: React.FC<{
       changeHandler(Move.NEXT);
     }
   };
-
+  const handleShuffle =()=>{
+    dispatch(vocabularyActions.shuffleWords())
+    changeWord(Move.PREV, false, 1)
+   
+  
+  }
   return (
     <div onKeyDown={keyDownHandler} className={styles.card}>
       {!props.hardWords ? (
@@ -278,6 +289,7 @@ const Dashboard: React.FC<{
         ""
       )}
       <Sound sound={sound} soundClicked={soundHandler} />
+      <div onClick={handleShuffle} className={styles.shuffle} ><RiExchangeLine size="25px" /></div>
       {repeatMode && language === LangMode.GEO ? (
         <Animation
           wordChangeCount={wordChanged}

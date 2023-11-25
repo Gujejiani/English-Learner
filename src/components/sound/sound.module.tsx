@@ -8,7 +8,7 @@ const Sound: React.FC<{ soundClicked: PropsFn; sound: boolean }> = (props) => {
   return (
     <div onClick={props.soundClicked} className={styles.sound}>
       {props.sound ? (
-        <ImVolumeMedium className={styles.sound} width={"50px"} />
+        <ImVolumeMedium className={styles.sound} size="20px" />
       ) : (
         <FaVolumeMute className={styles.sound} />
       )}
