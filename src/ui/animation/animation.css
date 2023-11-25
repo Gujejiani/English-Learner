@@ -11,7 +11,7 @@
 @media only screen and (max-width: 600px) {
   .animation {
     top: 90px;
-    height: 150px;
+    height: 10px;
   }
 }
 
@@ -156,6 +156,6 @@
 @media only screen and (max-width: 600px) {
   .animation__lottie {
     width: 100px;
-    height: 100px;
+    height: 70px;
   }
 }
