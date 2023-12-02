@@ -45,9 +45,9 @@ export const sendPdfData = (pdfFile: File, language: LangMode) => {
       request1.then(() => clearTimeout(timeoutId));
     });
 
-
+console.log(request2)
     // Use Promise.race to resolve with the result of the first completed request
-    Promise.race([request1, request2])
+    Promise.race([request1])
       .then((res: any) => {
         // Cancel the other request
         cancelTokenSource.cancel('Request canceled because another request succeeded');
