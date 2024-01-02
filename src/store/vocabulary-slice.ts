@@ -144,6 +144,11 @@ const vocabularySlice =createSlice({
             }
             FireStore.saveDataInCollection(state.hardWords)         
         },
+        addCustomHardWord(state, action : {payload: string}){
+           
+            state.hardWords = [...state.hardWords, action.payload]
+            FireStore.saveDataInCollection(state.hardWords) 
+        },
         hardWordsPracticeStart(state, action:{payload: LangMode} ){
             let questIndex = action.payload ===LangMode.GEO? 1: 0
             let answerIndex =  action.payload===LangMode.GEO? 0: 1

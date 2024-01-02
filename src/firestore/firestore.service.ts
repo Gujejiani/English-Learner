@@ -3,10 +3,7 @@ import { collection, doc, setDoc, getDoc, } from 'firebase/firestore';
 
 class FireStoreClass extends AuthService {
 
-    constructor() {
-        super()
-        
-    }
+   
 
 
     async saveDataInCollection( data: string[]) {

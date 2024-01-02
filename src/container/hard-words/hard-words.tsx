@@ -15,12 +15,32 @@ export const HardWordsContainer: React.FC = () => {
     (state: RootState) => state.vocabulary.hardWordsQuestion,
   );
   const dispatch = useDispatch();
+  const [addHardWordMode, setAddHardWordMode] = useState(false);
+  const [englishWord, setEnglishWord] = useState('');
+  const [georgianWord, setGeorgianWord] = useState('');
 
   const [showDashboard, setShowDashboard] = useState(false);
   const startHandler = () => {
     setShowDashboard(true);
     dispatch(vocabularyActions.hardWordsPracticeStart(language));
   };
+ const addCustomWordHandler =()=>{
+ 
+  const word = `${englishWord} - ${georgianWord}`
+
+  dispatch(vocabularyActions.addCustomHardWord(word))
+  setEnglishWord('');
+  setGeorgianWord('');
+  setAddHardWordMode(false)
+
+  
+  }
+
+
+  
+  const changeAddHardWordsMode =()=>{
+   setAddHardWordMode(!addHardWordMode)
+  }
   const [hardWords, setHardWords] = useState(hardWordss);
   useEffect(() => {
     dispatch(vocabularyActions.changeActiveWordsIndex(0));
@@ -29,12 +49,48 @@ export const HardWordsContainer: React.FC = () => {
     setHardWords(hardWordss);
   }, [hardWordss]);
 
+  const onChangeGeorgianWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setGeorgianWord(inputValue);
+    // Define a regex pattern for Georgian words
+    // const georgianWordPattern = /^[\u10A0-\u10FF]+$/;
+  
+    // // Check if the input matches the Georgian word pattern
+    // if (georgianWordPattern.test(inputValue) || inputValue === '') {
+    //   // If the input is a valid Georgian word or empty, update the state
+    //   setGeorgianWord(inputValue);
+    // }
+  };
+  
+  const onChangeEnglishWord = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEnglishWord(e.target.value);
+  }
+
   const HardWordsPractice = !showDashboard ? (
     <div className={styles.hard__words__start}>
+    
       <h3>
         You have <span style={{ color: "#8B0000" }}> {hardWords.length}</span>{" "}
         hard {hardWords.length > 1 ? "words" : "word"} to practice
       </h3>
+      {
+        addHardWordMode?   <div className={styles.addHardWords} >
+        <input onChange={onChangeEnglishWord}  placeholder="English Word" className={styles.addHardWords_input} ></input>
+        <input onChange={onChangeGeorgianWord} placeholder="Georgian Word" className={styles.addHardWords_input} ></input>
+
+    </div>: ''
+      }
+     
+      {
+       ! addHardWordMode?    <Button styles={{backgroundColor: '#8B0000', marginBottom: '8px',}} hardWords={true}  onClick={changeAddHardWordsMode} directionButton={true}>
+        Add Custom Hard Word
+      </Button>: 
+        <Button disabled={(englishWord && georgianWord) ? false: true} styles={{backgroundColor: '#232142', marginBottom: '8px',}} hardWords={true}  onClick={addCustomWordHandler} directionButton={true}>
+        Save Word
+      </Button>
+      }
+    
+      
       <Button hardWords={true} onClick={startHandler} directionButton={true}>
         Start Practicing hard words
       </Button>

@@ -9,12 +9,14 @@ const Button: React.FC<{
   insert?: boolean;
   directionButton?: boolean;
   hardWords?: boolean;
+  styles?: {}
 }> = (props) => {
   return (
     <React.Fragment>
       <button
         disabled={props.disabled}
         onClick={props.onClick}
+        style={props.styles}
         className={`${styles.nav__button} ${
           props.disabled ? styles.disable : ""
         } ${props.show ? styles.button__show : ""} ${

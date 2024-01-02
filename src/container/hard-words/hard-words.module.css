@@ -1,5 +1,7 @@
 .hard__words {
   margin-top: 100px;
+  transition: ease-in 0.5 all;
+  
 }
 
 .hard__words__start {
@@ -9,4 +11,39 @@
   margin: 100px auto;
   padding: 30px;
   border-radius: 10px;
+  transition: ease-in 0.5 all;
+}
+
+/* Your existing styles for the container */
+.addHardWords {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.addHardWords_input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: 0.3s;
+
+  /* Add a box-shadow on focus for a nice effect */
+  &:focus {
+    box-shadow: 0 0 8px rgba(9, 2, 9, 0.6);
+  }
+
+  /* Add some hover effect */
+  &:hover {
+    border-color: #111318;
+  }
+}
+
+/* Optional: Add some styling for better focus visibility */
+.addHardWords_input:focus {
+  border-color: #0d0e0e;
 }
