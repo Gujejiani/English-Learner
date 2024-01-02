@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/English-Learner/static/css/main.f7b9e6da.css",
-    "main.js": "/English-Learner/static/js/main.70196bb3.js",
+    "main.css": "/English-Learner/static/css/main.a025be45.css",
+    "main.js": "/English-Learner/static/js/main.8d23c02e.js",
     "static/media/english.png": "/English-Learner/static/media/english.9655757cd21d00062409.png",
     "static/media/georgian.png": "/English-Learner/static/media/georgian.b5c4fad39dc7746f6382.png",
     "static/media/success1.mp3": "/English-Learner/static/media/success1.fd2c2fea27379cbc44da.mp3",
     "index.html": "/English-Learner/index.html",
-    "main.f7b9e6da.css.map": "/English-Learner/static/css/main.f7b9e6da.css.map",
-    "main.70196bb3.js.map": "/English-Learner/static/js/main.70196bb3.js.map"
+    "main.a025be45.css.map": "/English-Learner/static/css/main.a025be45.css.map",
+    "main.8d23c02e.js.map": "/English-Learner/static/js/main.8d23c02e.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7b9e6da.css",
-    "static/js/main.70196bb3.js"
+    "static/css/main.a025be45.css",
+    "static/js/main.8d23c02e.js"
   ]
 }
