@@ -11,6 +11,7 @@ export const HardWordsContainer: React.FC = () => {
     (state: RootState) => state.vocabulary.hardWords,
   );
   const language = useSelector((state: RootState) => state.settings.language);
+  const [shakeButton, setShakeButton] = useState(false);
   const hardWordQuestion = useSelector(
     (state: RootState) => state.vocabulary.hardWordsQuestion,
   );
@@ -35,7 +36,14 @@ export const HardWordsContainer: React.FC = () => {
 
   
   }
-
+  useEffect(()=>{
+    setShakeButton(true)
+   return  ()=>{
+      setTimeout(()=>{
+        setShakeButton(false)
+      }, 2000)
+    }
+  }, [hardWordss])
 
   
   const changeAddHardWordsMode =()=>{
@@ -52,14 +60,7 @@ export const HardWordsContainer: React.FC = () => {
   const onChangeGeorgianWord = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setGeorgianWord(inputValue);
-    // Define a regex pattern for Georgian words
-    // const georgianWordPattern = /^[\u10A0-\u10FF]+$/;
-  
-    // // Check if the input matches the Georgian word pattern
-    // if (georgianWordPattern.test(inputValue) || inputValue === '') {
-    //   // If the input is a valid Georgian word or empty, update the state
-    //   setGeorgianWord(inputValue);
-    // }
+    
   };
   
   const onChangeEnglishWord = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,15 +86,16 @@ export const HardWordsContainer: React.FC = () => {
        ! addHardWordMode?    <Button styles={{backgroundColor: '#8B0000', marginBottom: '8px',}} hardWords={true}  onClick={changeAddHardWordsMode} directionButton={true}>
         Add Custom Hard Word
       </Button>: 
-        <Button disabled={(englishWord && georgianWord) ? false: true} styles={{backgroundColor: '#232142', marginBottom: '8px',}} hardWords={true}  onClick={addCustomWordHandler} directionButton={true}>
+      
+        <Button  disabled={(englishWord && georgianWord) ? false: true} styles={{backgroundColor: '#232142', marginBottom: '8px',}} hardWords={true}  onClick={addCustomWordHandler} directionButton={true}>
         Save Word
       </Button>
       }
     
       
-      <Button hardWords={true} onClick={startHandler} directionButton={true}>
+    <div className={shakeButton? styles.element_to_shake: ''} > <Button hardWords={true} onClick={startHandler} directionButton={true}>
         Start Practicing hard words
-      </Button>
+      </Button> </div>
     </div>
   ) : (
     <Dashboard
