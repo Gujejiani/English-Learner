@@ -15,6 +15,8 @@ export const HardWordsContainer: React.FC = () => {
   const hardWordQuestion = useSelector(
     (state: RootState) => state.vocabulary.hardWordsQuestion,
   );
+  const [hardWords, setHardWords] = useState(hardWordss);
+
   const dispatch = useDispatch();
   const [addHardWordMode, setAddHardWordMode] = useState(false);
   const [englishWord, setEnglishWord] = useState('');
@@ -38,18 +40,16 @@ export const HardWordsContainer: React.FC = () => {
   }
   useEffect(()=>{
     setShakeButton(true)
-   return  ()=>{
-      setTimeout(()=>{
-        setShakeButton(false)
-      }, 2000)
-    }
-  }, [hardWordss])
+   const timer = setTimeout(()=>{
+      setShakeButton(false)
+    }, 1000)
+   return   ()=> clearTimeout(timer)
+  }, [hardWords])
 
   
   const changeAddHardWordsMode =()=>{
    setAddHardWordMode(!addHardWordMode)
   }
-  const [hardWords, setHardWords] = useState(hardWordss);
   useEffect(() => {
     dispatch(vocabularyActions.changeActiveWordsIndex(0));
   }, []);
