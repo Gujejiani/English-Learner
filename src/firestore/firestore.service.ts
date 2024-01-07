@@ -6,7 +6,7 @@ class FireStoreClass extends AuthService {
    
 
 
-    async saveDataInCollection( data: string[]) {
+    async saveDataInCollection( data: any, learnedWords?: boolean) {
                 const user =   this.auth.currentUser
           //  console.log('USER ', user, this.auth.currentUser, data)
             try{
@@ -23,6 +23,11 @@ class FireStoreClass extends AuthService {
 
               // Reference a specific document within the 'users' collection
               const userDoc = doc(usersCollection, userId);
+
+              if(learnedWords){
+                await setDoc(userDoc, { learnedWords: data });
+                return
+              }
               // Save data to this user's collection
               await setDoc(userDoc, { hardWords: data });
 
@@ -57,6 +62,32 @@ class FireStoreClass extends AuthService {
       }
      return hardWordsObj
     }
+    async   getLearnedHardWords() {
+      const user =   this.auth.currentUser
+      let hardWordsObj = {hardWords: []}
+          try{
+            const usersCollection = collection(this.db, 'users');
+            const userDoc = doc(usersCollection, user.uid);
+            // To get data from the user's document
+          const userDocSnapshot = await getDoc(userDoc);
+          // Check if the document exists
+            if (userDocSnapshot.exists()) {
+              // Access the data in the document
+              const userData = userDocSnapshot.data();
+              // console.log('HERE We GI ', userData)
+           
+              return userData as {learnedWords: string[]}
+              // Now, userData contains the data from the user's document
+              // You can access specific fields like userData.hardWords
+            } else {
+              // The document does not exist
+              console.log("User document does not exist.");
+            }
+          }catch (err){
+            console.log(err)
+          }
+         return hardWordsObj
+        }
 }
 
 

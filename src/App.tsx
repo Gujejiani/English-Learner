@@ -19,6 +19,7 @@ import {
 } from "@clerk/clerk-react";
 import { FireStore } from "./firestore/firestore.service";
 import { useSelector } from "react-redux";
+import LearnedWords from "./container/learnedWords/Learned-words";
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
@@ -61,6 +62,9 @@ function Welcome() {
       const databaseHardWords = (await FireStore.getUserHardWords()) as {
         hardWords: Array<string>;
       };
+      const databaseLearnedHardWords = (await FireStore.getLearnedHardWords()) as {
+        learnedWords: Array<any>;
+      };
       if (
         databaseHardWords?.hardWords?.length ||
         localStorageHardWords.length
@@ -68,6 +72,14 @@ function Welcome() {
         store.dispatch(
           vocabularyActions.insertHardWords(
             databaseHardWords.hardWords || localStorageHardWords,
+          ),
+        );
+      }
+      console.log(databaseHardWords)
+      if(databaseLearnedHardWords?.learnedWords?.length){
+        store.dispatch(
+          vocabularyActions.insertLearnedWords(
+            databaseLearnedHardWords.learnedWords,
           ),
         );
       }
@@ -89,6 +101,9 @@ function Welcome() {
         </Route>
         <Route exact path="/hard-words">
           <HardWordsPage />
+        </Route>
+        <Route exact path="/learned-words">
+          <LearnedWords />
         </Route>
         <Route exact path="/">
           <FormPage />

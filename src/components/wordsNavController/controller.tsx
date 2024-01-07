@@ -10,6 +10,7 @@ const Controller: React.FC<{
   prev: PropsFn;
   changeWords: PropsFn;
   hardWords?: boolean;
+  insertButtonStyles? : {}
 }> = (props) => {
   return (
     <React.Fragment>
@@ -28,13 +29,11 @@ const Controller: React.FC<{
           disabled={props.buttSettings.nextDisable}
         >{`${Move.NEXT}>`}</Button>
       </div>
-      {!props.hardWords ? (
-        <Button onClick={props.changeWords} insert={true}>
-          Change Lesson
+    
+        <Button styles={props.insertButtonStyles} onClick={props.changeWords} insert={true}>
+         {props.hardWords ? 'Add to Learned ': 'Change Lesson'}
         </Button>
-      ) : (
-        ""
-      )}
+      
     </React.Fragment>
   );
 };

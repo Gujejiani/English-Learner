@@ -28,13 +28,14 @@
 .nav__ul {
   padding: 0;
   display: flex;
-  width: 200px;
+  width: 350px;
   justify-content: space-between;
   position: relative;
 }
 
 .ul__list {
   list-style: none;
+  position: relative;
 }
 
 .ul__list a {
@@ -48,7 +49,7 @@
 
 .hard__words__count {
   position: absolute;
-  right: -20px;
+  right:-20px;
   background-color: rgba(12, 123, 143, 0.8);
   width: 20px;
   height: 20px;
@@ -67,6 +68,9 @@
 
   
 }
+
+
+
 @media screen and (max-width: 768px) {
   .hard__words__count {
     right: -10px;
@@ -138,6 +142,14 @@
   animation: pulseAnimation 1s infinite alternate;
 
 }
+
+.hard__words__count__learned {
+
+  background-color: rgb(3, 171, 193) !important;
+ 
+  animation: pulseAnimation 1s infinite alternate;
+
+}
 @keyframes pulseAnimation {
   0% {
     transform: scale(1);
@@ -146,3 +158,6 @@
     transform: scale(1.2);
   }
 }
+.hard__words__count_learned{
+  background-color: gray;
+  }

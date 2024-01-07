@@ -18,6 +18,12 @@
     max-width: 380px;
   }
 }
+.learned{
+  position: absolute;
+  right: 0;
+  top: 10px;
+  right: 60px;
+}
 
 .birds {
   position: absolute;

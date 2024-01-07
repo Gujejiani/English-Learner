@@ -18,6 +18,14 @@ export interface Lesson {
     answer: string,
 
 }
+export interface LearnedWord {
+    georgian: string,
+    english: string,
+    georgianVisible?: boolean,
+    englishVisible?: boolean,
+    
+
+}
 
 const initialVocabularyState: {
      vocabulary: string[],
@@ -25,6 +33,7 @@ const initialVocabularyState: {
      activeWordsIndex: number,
      hardWordsQuestion: Question,
     hardWords:  string[],
+    learnedWords: LearnedWord[],
     lessonTitle: string,
     activeLessonsKeys: number[],
     totalWordsInActiveLessons?: number,
@@ -34,7 +43,7 @@ const initialVocabularyState: {
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''}, activeWordsIndex: 0,hardWordsQuestion: {question: '', answer: ''},  hardWords:  [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
+    {vocabulary: [], words: {question: '', answer: ''}, activeWordsIndex: 0,hardWordsQuestion: {question: '', answer: ''},  hardWords:  [], learnedWords: [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -144,6 +153,58 @@ const vocabularySlice =createSlice({
             }
             FireStore.saveDataInCollection(state.hardWords)         
         },
+        learnedWordAdded(state, action: {payload: {georgian: string, english: string}}){
+                if(!state.learnedWords){
+                    state.learnedWords = []
+                }
+
+                
+            const alreadyAdded = state.learnedWords.findIndex(word=> word.georgian.includes(action.payload.georgian)) || state.learnedWords.findIndex(word=> word.english.includes(action.payload.english))
+            if( alreadyAdded  === -1){
+                state.learnedWords = [...state.learnedWords, {georgian: action.payload.georgian, english: action.payload.english, georgianVisible: false, englishVisible: false}]
+            }else {
+                console.log('removed')
+                const learnedWordsCopy = [...state.learnedWords]
+                learnedWordsCopy.splice(alreadyAdded,  1)
+                state.learnedWords = learnedWordsCopy
+                
+            }
+            FireStore.saveDataInCollection(state.learnedWords, true)         
+        },
+        changeVisibility(state, action: {payload: {word: LearnedWord, updateEnglish: boolean}}){
+            state.learnedWords.map(word=> {
+                if(!action.payload.updateEnglish){
+                    if(word.georgian === action.payload.word.georgian){
+                        word.georgianVisible = !word.georgianVisible
+                    }
+                }else {
+                    if(word.english === action.payload.word.english){
+                        word.englishVisible = !word.englishVisible
+                    }
+                }
+               
+                return word
+            }) 
+
+        },
+        changeEveryLearnedWordVisibility(state, action: {payload: {english: boolean}}){
+            state.learnedWords.map(word=> {
+                if(!action.payload.english){
+                        word.georgianVisible = !word.georgianVisible
+                }else {
+                        word.englishVisible = !word.englishVisible
+                }
+               
+                return word
+            }) 
+        },
+        insertLearnedWords(state, action: {payload: {georgian: string, english: string}[]}){
+            if(!state.learnedWords){
+                state.learnedWords = []
+            }
+       
+             state.learnedWords = action.payload   
+    },
         addCustomHardWord(state, action : {payload: string}){
            
             state.hardWords = [...state.hardWords, action.payload]

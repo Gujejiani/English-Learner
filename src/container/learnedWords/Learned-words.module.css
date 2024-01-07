@@ -1,0 +1,111 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    width: 100%;
+    max-height: 350px;
+    height: 350px;
+    border-radius: 20px;
+    display: flex;
+    margin-top: 160px;
+    position: relative;
+    background-color: #fff;
+    flex-direction: column;
+  }
+  .titles{
+    display: flex;
+    flex: 1;
+    max-height: 60px;
+  }
+  .dictionary{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dictionary_list{
+    list-style: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    width: 100%;
+    margin: 0;
+   padding: 0;
+  }
+
+  .georgian,
+  .english {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+}
+.english_title,
+.georgian_title{
+    display: flex;
+    align-items: center;
+   margin-right: 2px;
+}
+  
+  .delete{
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    color: gray;
+  }
+  .delete:hover{
+    color: rgb(123, 34, 34);
+    cursor: pointer;
+  }
+  
+  .word_list_word {
+    margin: 0;
+    flex:1;
+    position: relative;
+
+
+    
+  }
+  .blur__place_holder {
+    font-size: 18px;
+    opacity: 1;
+    color: gray;
+    font-weight: bold;
+    filter: blur(7px);
+    cursor: pointer;
+   
+   
+  }
+  
+  
+  /* Add slashes using the ::after pseudo-element */
+
+  .georgian_word::after {
+    content: '';
+    display: block; /* Ensure slashes are on a new line */
+    position: absolute;
+    right: -20px;
+    top: 16px;
+    display: flex;
+    width: 50px;
+    height: 2px;
+    
+    background-color: #000;
+}
+/* Blur effect */
+.blurred {
+    filter: blur(5px); /* Adjust the blur radius as needed */
+    opacity: 0.7; /* Adjust the opacity for a faded appearance */
+    color: #888; /* Adjust the color for a subtle gray tone */
+  }
+
+  .word_text_blurred {
+    filter: blur(5px); /* Adjust the blur radius as needed */
+    opacity: 0.7; /* Adjust the opacity for a faded appearance */
+    color: #888; /* Adjust the color for a subtle gray tone */
+    width: 100px;
+
+}
+.word_text{
+    width: 100%;
+}

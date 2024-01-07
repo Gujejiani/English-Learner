@@ -147,7 +147,21 @@ const Dashboard: React.FC<{
   };
 
   const showLessonsHandler = () => {
-    setShowLessons((prev) => !prev);
+    if(!props.hardWords){
+      setShowLessons((prev) => !prev);
+    }else {
+      // remove word from hard words
+     // hardWordAdded()
+      // add word to learned
+ 
+      const word = {
+        english: language === LangMode.ENG? props.vocabularyQuestion.question: props.vocabularyQuestion.answer,
+        georgian:  language ===LangMode.ENG ? props.vocabularyQuestion.answer: props.vocabularyQuestion.question,
+      }
+    dispatch(vocabularyActions.learnedWordAdded(word))
+      
+    }
+   
   };
 
   useEffect(() => {
@@ -324,6 +338,11 @@ const Dashboard: React.FC<{
       </Question>
 
       <div className={styles.card__answer}>
+        {/* <div className={styles.learned} >
+        <AiOutlineFileDone size="1.8em" color="yellow" />
+        </div> */}
+   
+        
         <Favorites
           hardWord={determineIfSelectedAsHardWord(
             hardWords,
@@ -359,8 +378,9 @@ const Dashboard: React.FC<{
           />
         )}
         <Controller
-          hardWords={props?.hardWords}
+          hardWords={props.hardWords}
           buttSettings={buttons}
+          insertButtonStyles={{backgroundColor: '#008080'}}
           showClicked={() => showHandler(true)}
           prev={() => changeHandler(Move.PREV)}
           next={() => changeHandler(Move.NEXT)}

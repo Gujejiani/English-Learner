@@ -12,7 +12,14 @@ const Header: React.FC = () => {
   const [show, setShow] = useState<boolean>();
 
   const [countAnimation, setCountAnimation] = useState<boolean>(false)
+  const [countAnimationOnLearnedWords, setCountAnimationOnLearnedWords] = useState<boolean>(false)
+  const count = useSelector(
+    (state: RootState) => state.vocabulary.hardWords.length,
+  );
 
+  const learnedWordsCount = useSelector(
+    (state: RootState) => state.vocabulary.learnedWords.length,
+  );
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     handleResize();
@@ -24,12 +31,9 @@ const Header: React.FC = () => {
     setShow(!show);
   };
 
-  const count = useSelector(
-    (state: RootState) => state.vocabulary.hardWords.length,
-  );
+ 
 
-
-      useEffect(()=>{
+  useEffect(()=>{
         console.log('count changed')
         setCountAnimation(true)
       const timer =  setTimeout(()=>{
@@ -37,6 +41,14 @@ const Header: React.FC = () => {
         }, 5000)
         return () => clearTimeout(timer)
   }, [count])
+  useEffect(()=>{
+    console.log('count changed')
+    setCountAnimationOnLearnedWords(true)
+  const timer =  setTimeout(()=>{
+      setCountAnimationOnLearnedWords(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+}, [learnedWordsCount])
   const navLinks = () => (
     <ul className={styles.nav__ul__mobile}>
       <li className={styles.ul__list__mobile}>
@@ -62,6 +74,16 @@ const Header: React.FC = () => {
           Hard Words
           <span className={`${styles.hard__words__count} ${countAnimation? styles.hard__words__count__animation: ''} `}>{count}</span>{" "}
         </NavLink>
+      </li>
+      <li className={styles.ul__list__mobile}>
+        <NavLink
+          activeClassName={`${styles.active} ${styles.hard__words}`}
+          to="learned-words"
+        >
+          Learned Words
+        </NavLink>
+        <span className={`${styles.hard__words__count} ${styles.hard__words__count_learned} ${countAnimationOnLearnedWords? styles.hard__words__count__learned : ''} `}>{learnedWordsCount}</span>{" "}
+
       </li>
     </ul>
   );
@@ -109,6 +131,18 @@ const Header: React.FC = () => {
                   Hard Words
                 </NavLink>{" "}
                 <span className={`${styles.hard__words__count} ${countAnimation? styles.hard__words__count__animation: ''} `}>{count}</span>{" "}
+              </li>
+              <li className={styles.ul__list}>
+                {" "}
+                <NavLink
+                  activeClassName={`${styles.active} ${styles.hard__wordsx}`}
+                  to="learned-words"
+                >
+                  Learned Words
+
+                </NavLink>{" "}
+                <span className={`${styles.hard__words__count} ${styles.hard__words__count_learned} ${countAnimationOnLearnedWords? styles.hard__words__count__learned : ''} `}>{learnedWordsCount}</span>{" "}
+
               </li>
             </ul>
             <ul style={{ display: "flex" }}>
