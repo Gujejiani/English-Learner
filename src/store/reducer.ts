@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 /**
  * configureStore will merge all reducers for as => quite nice doesn't it?
  */
-const preloadedState = JSON.parse(localStorage.getItem('myAppReduxState') as string) ?? {};
+const preloadedState = JSON.parse(localStorage.getItem('myAppReduxState2') as string) ?? {};
 
 const store = configureStore({
     reducer: {vocabulary: vocabularyReducer, settings: settingsReducer}, //we can use object if we have multiple 

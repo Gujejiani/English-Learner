@@ -10,7 +10,7 @@ const settingsSlice = createSlice({
 
             state.language =  state.language !==LangMode.ENG ? LangMode.ENG: LangMode.GEO
 
-            localStorage.setItem('language', JSON.stringify(state.language))
+            localStorage.setItem('language2', JSON.stringify(state.language))
         },
         toggleSound(state, _action){
             state.sound = !state.sound

@@ -30,7 +30,7 @@ function App() {
     // Subscribe to Redux state changes
     const unsubscribe = store.subscribe(() => {
       // Update local storage whenever the state changes
-      localStorage.setItem("myAppReduxState", JSON.stringify(store.getState()));
+      localStorage.setItem("myAppReduxState2", JSON.stringify(store.getState()));
     });
 
     return () => {

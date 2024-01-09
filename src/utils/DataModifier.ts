@@ -95,7 +95,7 @@ class DataModifier {
 
 
   public removeGeorgianWords(vocabulary: string[]){
-    const language =JSON.parse(localStorage.getItem('language') as string) 
+    const language =JSON.parse(localStorage.getItem('language2') as string) 
    
     const updVocabulary =  LangMode.GEO ===language?   vocabulary.filter((word, index)=>{
       
