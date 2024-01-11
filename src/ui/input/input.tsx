@@ -56,6 +56,7 @@ const MyInput: React.FC<{
     }, 1000);
 
     setHintIndex(hintedIndex);
+    focusOnInput()
     if (props.hintIndex) {
       playAudio();
     }
