@@ -5,13 +5,9 @@ export const speak = (msg: string, geo?: boolean): void => {
   // Get the list of available voices
   const availableVoices = speechSynthesis.getVoices();
 
-
-  // for mobile setting 146
-  if (window.innerWidth <= 768 ) {
-    sp.voice = availableVoices[146];
-  } else {
-    [sp.voice] = availableVoices;
-  }
+  // Set the voice for native British English
+  const britishVoiceIndex = availableVoices.findIndex(voice => voice.lang === 'en-GB');
+  sp.voice = britishVoiceIndex !== -1 ? availableVoices[britishVoiceIndex] : availableVoices[0];
 
   speechSynthesis.speak(sp);
 };
