@@ -93,8 +93,8 @@ export const HardWordsContainer: React.FC = () => {
       }
     
       
-    <div className={shakeButton? styles.element_to_shake: ''} > <Button hardWords={true} onClick={startHandler} directionButton={true}>
-        Start Practicing hard words
+    <div className={shakeButton? styles.element_to_shake: ''} > <Button disabled={hardWords.length===0} hardWords={true} onClick={startHandler} directionButton={true}>
+       { hardWords.length ? 'Start Practicing hard words' : 'Please Add Hard Words'}
       </Button> </div>
     </div>
   ) : (
@@ -105,11 +105,7 @@ export const HardWordsContainer: React.FC = () => {
     />
   );
 
-  return !hardWords?.length ? (
-    <div className={styles.hard__words}>No Marked Hard Words yet...</div>
-  ) : (
-    <div className={styles.hard__words__in}>{HardWordsPractice}</div>
-  );
+  return     <div className={styles.hard__words__in}>{HardWordsPractice}</div>
 };
 
 export default HardWordsContainer;
