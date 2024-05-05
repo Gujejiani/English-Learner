@@ -7,6 +7,8 @@ const urlsToCache = [
   '/index.html',
   '/css/main.css',
   '/js/main.js',
+  '/static',
+  '/assets'
   // Add more URLs of your app's assets here
 ];
 
