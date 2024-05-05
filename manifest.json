@@ -9,12 +9,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "engl.jpg",
+      "src": "engl.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "engl.jpg",
+      "src": "engl.png",
       "type": "image/png",
       "sizes": "512x512"
     }
