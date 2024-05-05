@@ -5,8 +5,8 @@ const CACHE_NAME = 'your-app-cache';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/css/main.css',
-  '/js/main.js',
+  '/static/css/main.css',
+  '/static/js/main.js',
   // Add more URLs of your app's assets here
 ];
 
