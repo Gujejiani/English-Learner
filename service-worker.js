@@ -5,8 +5,8 @@ const CACHE_NAME = 'your-app-cache';
 const urlsToCache = [
   '/',
   'index.html',
-  'static/css/{{HASHED_CSS_URL}}',
-  'static/js/{{HASHED_JS_URL}}',
+  'static/css/main.31b8cf48.css',
+  'static/js/main.bd27e0a1.js',
   // Add more URLs of your app's assets here
 ];
 
