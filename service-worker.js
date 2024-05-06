@@ -3,7 +3,7 @@ const CACHE_NAME = 'your-app-cache';
 
 // List of assets to cache
 const urlsToCache = [
-  'English-Learner/',
+  '/',
   'index.html',
   'static/css/main.css',
   'static/js/main.js',
