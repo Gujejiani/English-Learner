@@ -34,6 +34,8 @@ const Dashboard: React.FC<{
   const [repeatCount, setRepeatCount] = useState<number>(3);
   const [repeatMode, setRepeatMode] = useState<boolean>(false);
 
+  const [enableSound, setEnableSound] = useState<boolean>(false)
+
   const [spoken, setSpoken] = useState<string>("");
   const history = useHistory();
 
@@ -90,9 +92,10 @@ const Dashboard: React.FC<{
         nextDisable: true,
       });
     }
+ 
 
     if (!props.vocabulary.length) {
-      history.push("/");
+      history.push("/form");
     }
   }, [props.vocabulary, history]);
 
@@ -169,15 +172,20 @@ const Dashboard: React.FC<{
      * @description to  not speak every word when user changes word fast
      */
     let timeOut: NodeJS.Timeout;
-    if (language !== LangMode.GEO && sound) {
+    if (language !== LangMode.GEO && sound && enableSound) {
       timeOut = setTimeout(() => {
         setSpoken(props.vocabularyQuestion.question);
         if (spoken !== props.vocabularyQuestion.question) {
           speak(props.vocabularyQuestion.question);
         }
       }, 1000);
+    }else {
+      setEnableSound(true)
     }
-    return () => clearTimeout(timeOut);
+    return () => {
+      setEnableSound(false)
+      clearTimeout(timeOut)
+    };
   }, [language, props.vocabularyQuestion.question, sound, spoken]);
 
   const showHandler = (turnOnRepeat?: boolean) => {

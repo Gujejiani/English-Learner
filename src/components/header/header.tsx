@@ -13,6 +13,7 @@ const Header: React.FC = () => {
 
   const [countAnimation, setCountAnimation] = useState<boolean>(false)
   const [countAnimationOnLearnedWords, setCountAnimationOnLearnedWords] = useState<boolean>(false)
+  const vocabulary = useSelector((state: RootState) => state.vocabulary.vocabulary);
   const count = useSelector(
     (state: RootState) => state.vocabulary.hardWords.length,
   );
@@ -51,13 +52,13 @@ const Header: React.FC = () => {
 }, [learnedWordsCount])
   const navLinks = () => (
     <ul className={styles.nav__ul__mobile}>
-      <li className={styles.ul__list__mobile}>
+     { vocabulary.length ?<li className={styles.ul__list__mobile}>
         <NavLink activeClassName={styles.active} to="/dashboard">
           Dashboard
         </NavLink>
-      </li>
+      </li>: ''}
       <li className={styles.ul__list__mobile}>
-        <NavLink activeClassName={styles.active} exact to="/">
+        <NavLink activeClassName={styles.active} exact to="/form">
           Upload PDF
         </NavLink>
       </li>
@@ -117,9 +118,9 @@ const Header: React.FC = () => {
             <ul className={styles.nav__ul}>
               <li className={styles.ul__list}>
                 {" "}
-                <NavLink activeClassName={styles.active} to="/dashboard">
+               { vocabulary.length? <NavLink activeClassName={styles.active} to="/dashboard">
                   Dashboard
-                </NavLink>{" "}
+                </NavLink>: ''}{" "}
               </li>
 
               <li className={styles.ul__list}>
@@ -148,7 +149,7 @@ const Header: React.FC = () => {
             <ul style={{ display: "flex" }}>
               <li style={{ marginRight: "30px" }} className={styles.ul__list}>
                 {" "}
-                <NavLink activeClassName={styles.active} exact to="/">
+                <NavLink activeClassName={styles.active} exact to="/form">
                   Upload PDF
                 </NavLink>{" "}
               </li>
