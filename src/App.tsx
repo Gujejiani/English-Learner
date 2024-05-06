@@ -105,7 +105,7 @@ function Welcome() {
         <Route exact path="/learned-words">
           <LearnedWords />
         </Route>
-        <Route exact path="/">
+        <Route exact path="/form">
           <FormPage />
         </Route>
 
