@@ -20,7 +20,7 @@ if ('serviceWorker' in navigator) {
 }
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter basename="/English-Learner/">
+    <HashRouter >
       <Provider store={store}>
         <App />
       </Provider>
