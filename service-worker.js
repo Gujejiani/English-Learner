@@ -1,13 +1,12 @@
 // Define a cache name
-const CACHE_NAME = 'your-app-cache';
+const CACHE_NAME = 'your-app-cache-v2';
 
 // List of assets to cache
 const urlsToCache = [
   '/',
   'index.html',
   'static/css/main.31b8cf48.css',
-  'static/js/main.bd27e0a1.js',
-  '/fake'
+  'static/js/main.12157825.js',
   // Add more URLs of your app's assets here
 ];
 
