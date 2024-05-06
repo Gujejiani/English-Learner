@@ -7,6 +7,13 @@ const urlsToCache = [
   'index.html',
   'static/css/main.31b8cf48.css',
   'static/js/main.12157825.js',
+  'assets/english.png',
+  'assets/georgian.png',
+  'logo192.png',
+  'logo512.png',
+  'manifest.json',
+  'favicon.ico',
+  
   // Add more URLs of your app's assets here
 ];
 
