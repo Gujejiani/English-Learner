@@ -6,6 +6,18 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/reducer";
 import { HashRouter } from "react-router-dom";
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registered successfully:', registration);
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter basename="/English-Learner/">
