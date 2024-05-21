@@ -10,7 +10,7 @@
   max-width: 750px;
   padding: 10px;
 
-  background-color: rgb(82, 115, 230);
+  background-color:   var(--primary-bg);
   border-radius: 10px;
   text-align: left;
 }

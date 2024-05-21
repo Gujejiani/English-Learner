@@ -4,54 +4,28 @@ import DataModifier from "../utils/DataModifier";
 import { StateDispatch } from "./reducer";
 import { vocabularyActions } from "./vocabulary-slice";
 
-export const PDF_EXTRACT_URL = 'https://pdf-extractor-lty1.onrender.com/extract-text';
+export const PDF_EXTRACT_URL = 3>5? 'http://localhost:3001/extract-text': 'https://pdf-extractor-lty1.onrender.com/extract-text';
 
-export const sendPdfData = (pdfFile: File, language: LangMode) => {
+export const GET_PDF_FILE_NAMES = 3>5? 'http://localhost:3001/pdf-files': 'https://pdf-extractor-lty1.onrender.com/extract-text';
+
+
+export const sendPdfData = (pdfFile: File | null, language: LangMode, selectedPdfName: string) => {
   return async (dispatch: StateDispatch) => {
     dispatch(vocabularyActions.addVocabulary());
 
+
+    console.log('we started')
     const formData = new FormData();
-    formData.append('pdfFile', pdfFile);
+    if(!pdfFile){
+    formData.append('pdfName', selectedPdfName);
+    }else {
+      formData.append('pdfFile', pdfFile);
+    }
 
-    // Create a cancel token source
-    const cancelTokenSource = axios.CancelToken.source();
-
-    // Attach the cancel token to each request
-    const request1 = axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token });
- 
-  
-         /**
-          * we using free server hosting so it sleeps for some time and then it wakes up, so we need to send request twice
-          * first request wakes up server and second request gets data
-          */
-    const request2 = new Promise<string>((resolve, reject) => {
-      const timeoutId = setTimeout(() => {
-      
-
-        axios.post<string>(PDF_EXTRACT_URL, formData, { cancelToken: cancelTokenSource.token })
-          .then((res) => resolve(res.data))
-          .catch((err) => {
-            if (axios.isCancel(err)) {
-              console.log('Request canceled:', err.message);
-            } else {
-              console.log(err);
-              dispatch(vocabularyActions.addVocabularyFail());
-              reject(err);
-            }
-          });
-      }, 8000); // 8-second delay
-
-
-      request1.then(() => clearTimeout(timeoutId));
-    });
-
-console.log(request2)
-    // Use Promise.race to resolve with the result of the first completed request
-    Promise.race([request1])
+    axios.post<string>(PDF_EXTRACT_URL, formData)
       .then((res: any) => {
         // Cancel the other request
-        cancelTokenSource.cancel('Request canceled because another request succeeded');
-
+        console.log(res)
         const done = (data: { updatedWords: string[], firstWord: Array<string>, title: string }) => {
           dispatch(vocabularyActions.resetVocabularyState());
           dispatch(vocabularyActions.addVocabularySuccess(data.updatedWords));
@@ -69,12 +43,27 @@ console.log(request2)
         dispatch(vocabularyActions.addVocabularyByStages(res.data));
       })
       .catch((err) => {
-        if (axios.isCancel(err)) {
-          console.log('Request canceled:', err.message);
-        } else {
+       
           console.log(err);
           dispatch(vocabularyActions.addVocabularyFail());
-        }
+        
       });
   };
 };
+
+
+export const getPdfFiles = () => {
+  return async (dispatch: StateDispatch) => {
+    axios.get(GET_PDF_FILE_NAMES)
+      .then((res) => {
+        if (res.data) {
+         
+
+          dispatch(vocabularyActions.setPdfFiles(res.data));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}

@@ -28,6 +28,7 @@ export interface LearnedWord {
 }
 
 const initialVocabularyState: {
+    pdfFileNames: string[],
      vocabulary: string[],
      words: Question,
      activeWordsIndex: number,
@@ -43,7 +44,7 @@ const initialVocabularyState: {
      error: boolean
     
     } = 
-    {vocabulary: [], words: {question: '', answer: ''}, activeWordsIndex: 0,hardWordsQuestion: {question: '', answer: ''},  hardWords:  [], learnedWords: [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
+    {vocabulary: [], pdfFileNames: [], words: {question: '', answer: ''}, activeWordsIndex: 0,hardWordsQuestion: {question: '', answer: ''},  hardWords:  [], learnedWords: [],lessonTitle: '', activeLessonsKeys: [], stages: {}, vocabularyByStages: [], uploaded: false, error: false}
 
 /**
  * we can't accidentally mutate state in redux toolkit, because redux toolkit uses Immer reducer
@@ -232,7 +233,7 @@ const vocabularySlice =createSlice({
         },
         resetVocabularyState(state){
            
-            return { ...initialVocabularyState, hardWords: state.hardWords };
+            return { ...state, hardWords: state.hardWords };
 
         },
         shuffleWords(state){
@@ -241,9 +242,13 @@ const vocabularySlice =createSlice({
             state.hardWords = DataModifier.shuffle(state.hardWords)
             state.vocabularyByStages = DataModifier.shuffle(state.vocabularyByStages)
           
-        }
+        },
        
-
+        setPdfFiles(state, action: {payload: string[]}){
+        
+            state.pdfFileNames = action.payload
+        
+        }
 
        
     }

@@ -6,7 +6,7 @@
 .form__heading {
   font-size: 25px;
   text-align: center;
-  color: rgb(82 115 230);
+  color: var(--active-color);
   margin-top: 130px;
 }
 .wrapper {
@@ -74,7 +74,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  color: rgb(82 115 230);
+  color: var(--active-color);
   
 }
 .languages{
@@ -96,7 +96,7 @@
 }
 .languages_item__selected {
 
-  border-color:  rgb(82, 115, 230);
+  border-color:   var(--active-color);
 }
 .circle{
   display: flex;
@@ -104,7 +104,7 @@
   height: 16px;
   border-radius: 100%;
   border: 1px solid;
-  border-color:  rgb(82, 115, 230);
+  border-color:   var(--active-color);;
 }
 .circle__selected{
   background-color:  #4BB543;
@@ -135,5 +135,44 @@
   top: 0;
   left: 0;
   opacity: 0.4;
+  cursor: pointer;
+}
+
+.pdf_intro{
+  color:   var(--primary-bg);
+  font-size: 20px;
+  margin-top: 40px;
+}
+.pdf_container{
+  display: flex;
+  gap: 40px;
+  margin: auto;
+  margin-top: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+.pdf_container_item{
+  display: flex;
+  width: 140px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px;
+  background-color: #f4f4f4; /* Light background color */
+  color: #333; /* Text color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+  cursor: pointer; /* Show pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+ 
+}
+.pdf_container_item__selected{
+  background-color:   var(--active-color);
+  color: #fff;
+}
+
+.pdf_container_item:hover{
+  opacity: 0.8;
   cursor: pointer;
 }

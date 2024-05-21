@@ -1,4 +1,4 @@
-// scripts/generate-hashed-urls.js
+// scripts/generate-hashed-urls.js for service worker
 const fs = require('fs');
 const path = require('path');
 

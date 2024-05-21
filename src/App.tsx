@@ -18,16 +18,19 @@ import {
   useAuth,
 } from "@clerk/clerk-react";
 import { FireStore } from "./firestore/firestore.service";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LearnedWords from "./container/learnedWords/Learned-words";
+import { getPdfFiles } from "./store/vocabulary-effects";
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 function App() {
+  const dispatch = useDispatch()
   useEffect(() => {
     // Subscribe to Redux state changes
+    dispatch(getPdfFiles())
     const unsubscribe = store.subscribe(() => {
       // Update local storage whenever the state changes
       localStorage.setItem("myAppReduxState2", JSON.stringify(store.getState()));

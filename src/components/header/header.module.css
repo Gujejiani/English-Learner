@@ -3,9 +3,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgb(82, 115, 230);
+  background-color:   var(--primary-bg);
   display: flex;
   align-items: center;
+
 }
 .header__img {
   margin-left: 20px;

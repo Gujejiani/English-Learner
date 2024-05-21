@@ -6,7 +6,7 @@
 
 .hard__words__start {
   color: #fff;
-  background-color: rgb(82, 115, 230);
+  background-color:   var(--primary-bg);;
   max-width: 400px;
   margin: 100px auto;
   padding: 30px;

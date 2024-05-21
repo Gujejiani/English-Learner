@@ -1,5 +1,5 @@
 .MuiDrawer-paperAnchorLeft {
-  background-color: rgb(82 115 230) !important;
+  background-color: var(--primary-bg) !important;
 }
 .hamburger {
   display: inline-block;
@@ -26,7 +26,7 @@
   margin-top: -2px;
   width: 30px;
   height: 4px;
-  background-color: #333;
+  background-color: #fff;
   border-radius: 4px;
   transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
@@ -39,7 +39,7 @@
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: #333;
+  background-color: #fff;
   border-radius: 4px;
   transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
@@ -75,7 +75,7 @@
 .menu-wrapper {
   display: flex;
   align-items: center;
-  background-color: rgb(82, 115, 230);
+  background-color:  hsla(214, 62%, 21%, 1);
   justify-content: space-between;
   padding-right: 30px;
 }

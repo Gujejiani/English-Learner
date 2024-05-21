@@ -34,7 +34,7 @@
 }
 .card__answer {
   flex: 1;
-  background-color: rgb(82, 115, 230);
+  background-color:  var(--primary-bg);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import englishImg from '../../assets/english.png'
 import georgianImg from '../../assets/georgian.png'
 
+
 const VocabularyForm: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,17 +19,19 @@ const VocabularyForm: React.FC = () => {
   const uploaded = useSelector((state: RootState) => state.vocabulary.uploaded);
   const language = useSelector((state: RootState) => state.settings.language);
   const [processing, setProcessing] = useState<boolean>(false);
-
+  const [selectedPdfName, setSelectedPdfName] = useState<string>('');
+  const pdfs = useSelector((state: RootState) => state.vocabulary.pdfFileNames);
+  
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     // console.log(pdfFile)
 
-    if (!pdfFile) {
+    if (!pdfFile && !selectedPdfName) {
       return;
     }
     setProcessing(true);
 
-    dispatch(sendPdfData(pdfFile, language));
+    dispatch(sendPdfData( pdfFile??null, language, selectedPdfName));
   };
 
   const toggleHandler = (lang: LangMode) => {
@@ -45,19 +48,22 @@ const VocabularyForm: React.FC = () => {
   };
 
   useEffect(() => {
-    if (uploaded && pdfFile) {
+    if (uploaded && (pdfFile || selectedPdfName)) {
       history.push("dashboard");
       setPdfFile(undefined);
       setProcessing(false);
     }
   }, [uploaded]);
-
+  const selectPdfHandler =(pdf: string)=>{
+  
+    setSelectedPdfName(pdf)
+  }
   return (
     <form onSubmit={submitHandler} className={styles.form}>
       <h5 className={styles.form__heading}>Please Upload Your Vocabulary</h5>
 
       <FileUpload fileUploaded={pdfHandler} />
-
+  
       <div className={styles.language}>
         <h3>Which Language to be hidden? </h3>
         {/* <Toggle toggle={language === LangMode.GEO} onToggled={toggleHandler} /> */}
@@ -81,7 +87,7 @@ const VocabularyForm: React.FC = () => {
       </div>
       <button
         style={{ position: "relative" }}
-        className={`${styles.form__button} ${!pdfFile ? styles.disable : ""}`}
+        className={`${styles.form__button} ${!pdfFile && !selectedPdfName ? styles.disable : ""}`}
         disabled={processing}
         type="submit"
       >
@@ -97,6 +103,19 @@ const VocabularyForm: React.FC = () => {
           ""
         )}
       </button>
+
+      <h1 className={styles.pdf_intro} >Available PDFs</h1>
+      <div className={styles.pdf_container} >
+     
+      {
+        pdfs.map((pdf, index)=>{
+          return <div  onClick={()=>selectPdfHandler(pdf)}  key={index + pdf} className={`${styles.pdf_container_item} ${pdf ===selectedPdfName? styles.pdf_container_item__selected: ''}`}>
+            
+            <div key={index} style={{}}  >{pdf}</div>
+          </div>
+        })
+      }
+      </div>
     </form>
   );
 };

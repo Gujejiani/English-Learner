@@ -53,7 +53,7 @@
 .repeat-count {
   font-weight: bold;
   font-size: 18px;
-  color: rgb(82 115 230);
+  color: var(--active-color);
 }
 
 @media only screen and (max-width: 600px) {
