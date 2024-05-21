@@ -108,7 +108,7 @@ const VocabularyForm: React.FC = () => {
       <div className={styles.pdf_container} >
      
       {
-        pdfs.map((pdf, index)=>{
+        pdfs?.map((pdf, index)=>{
           return <div  onClick={()=>selectPdfHandler(pdf)}  key={index + pdf} className={`${styles.pdf_container_item} ${pdf ===selectedPdfName? styles.pdf_container_item__selected: ''}`}>
             
             <div key={index} style={{}}  >{pdf}</div>
