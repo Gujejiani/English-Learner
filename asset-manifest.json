@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/English-Learner/static/css/main.31b8cf48.css",
-    "main.js": "/English-Learner/static/js/main.12157825.js",
+    "main.css": "/English-Learner/static/css/main.86c8c9ee.css",
+    "main.js": "/English-Learner/static/js/main.2d31d56a.js",
     "static/media/english.png": "/English-Learner/static/media/english.9655757cd21d00062409.png",
     "static/media/georgian.png": "/English-Learner/static/media/georgian.b5c4fad39dc7746f6382.png",
     "static/media/success1.mp3": "/English-Learner/static/media/success1.fd2c2fea27379cbc44da.mp3",
     "index.html": "/English-Learner/index.html",
-    "main.31b8cf48.css.map": "/English-Learner/static/css/main.31b8cf48.css.map",
-    "main.12157825.js.map": "/English-Learner/static/js/main.12157825.js.map"
+    "main.86c8c9ee.css.map": "/English-Learner/static/css/main.86c8c9ee.css.map",
+    "main.2d31d56a.js.map": "/English-Learner/static/js/main.2d31d56a.js.map"
   },
   "entrypoints": [
-    "static/css/main.31b8cf48.css",
-    "static/js/main.12157825.js"
+    "static/css/main.86c8c9ee.css",
+    "static/js/main.2d31d56a.js"
   ]
 }
