@@ -6,7 +6,7 @@ import { vocabularyActions } from "./vocabulary-slice";
 
 export const PDF_EXTRACT_URL = 3>5? 'http://localhost:3001/extract-text': 'https://pdf-extractor-lty1.onrender.com/extract-text';
 
-export const GET_PDF_FILE_NAMES = 3>5? 'http://localhost:3001/pdf-files': 'https://pdf-extractor-lty1.onrender.com/extract-text';
+export const GET_PDF_FILE_NAMES = 3>5? 'http://localhost:3001/pdf-files': 'https://pdf-extractor-lty1.onrender.com/pdf-files';
 
 
 export const sendPdfData = (pdfFile: File | null, language: LangMode, selectedPdfName: string) => {
