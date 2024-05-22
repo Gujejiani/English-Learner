@@ -5,8 +5,8 @@ const CACHE_NAME = 'your-app-cache-v2';
 const urlsToCache = [
   './',
   'index.html',
-  'static/css/main.86c8c9ee.css',
-  'static/js/main.607a60b8.js',
+  'static/css/main.e07b87a2.css',
+  'static/js/main.98f04c89.js',
   'assets/english.png',
   'assets/georgian.png',
   'logo192.png',
