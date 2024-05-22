@@ -2,15 +2,14 @@
   display: flex;
 }
 
-.stages_icon {
-}
+
 
 .stages__modal {
   overflow: hidden;
   display: flex;
   left: -3px;
   width: 100%;
-  background-color: #555d5d;
+  background-color: var(--primary-bg);
   position: absolute;
   border-radius: 0 10px 10px 0;
   flex-direction: column;
@@ -52,24 +51,20 @@
   display: flex;
 
   flex-wrap: wrap;
-  justify-content: center;
+
 }
-.button {
-  box-shadow: inset 0px 1px 0px 0px #fce2c1;
-  background: linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
-  background-color: #ffc477;
-  border-radius: 11px;
-  border: 2px solid #eeb44f;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 8px 18px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #cc9f52;
-}
+@media screen and (max-width: 768px) {
+  .lessons{
+     justify-content: center;
+    
+  }
+  
+   
+ }
+
+
+ 
+
 
 /* CSS */
 .button_21 {

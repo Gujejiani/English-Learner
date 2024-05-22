@@ -8,6 +8,13 @@
   text-align: center;
   color: var(--active-color);
   margin-top: 130px;
+
+}
+@media screen and (max-width: 768px) {
+  .form__heading{
+    margin-top: 50px;
+  }
+  
 }
 .wrapper {
   max-width: 800px;

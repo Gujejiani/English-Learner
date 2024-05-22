@@ -1,4 +1,4 @@
-.button_41 {
+.button {
   background-color: initial;
   background-image: linear-gradient(-180deg, #00d775, #00bd68);
   border-radius: 5px;
@@ -7,14 +7,7 @@
   cursor: pointer;
   display: flex;
   box-sizing: border-box;
-  font-family:
-    Inter,
-    -apple-system,
-    system-ui,
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
+ 
   height: 44px;
   line-height: 44px;
   outline: 0;
@@ -33,9 +26,21 @@
   border: 0;
   margin-bottom: 10px;
   margin-left: 10px;
+  justify-content: center
+  ;
 }
 
-.button_41:hover {
+@media screen and (max-width: 768px) {
+  .button{
+      width: 100px;
+    
+  }
+  
+   
+ }
+ 
+
+.button:hover {
   background: #00bd68;
 }
 .lesson__inactive {

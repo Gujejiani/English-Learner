@@ -9,10 +9,10 @@ const Lesson: React.FC<{
   return (
     <button
       onClick={props.lessonClicked}
-      className={`${styles.button_41}  ${
+      className={`${styles.button}  ${
         props.active ? "" : styles.lesson__inactive
       }`}
-      role="button"
+     
     >
       {props.lessonName}
     </button>

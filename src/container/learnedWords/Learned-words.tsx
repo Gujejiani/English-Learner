@@ -48,7 +48,10 @@ const LearnedWords = () => {
     </div>
       
          <div className={styles.dictionary} >
-          
+           
+           {
+            !learnedWords.length && <h1 className={styles.no_words} >No Words Learned Yet</h1>
+           }
 
           {
             learnedWords.map((word: LearnedWord, index: number) => {

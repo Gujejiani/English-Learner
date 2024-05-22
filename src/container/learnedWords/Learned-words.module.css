@@ -57,6 +57,16 @@
     color: rgb(123, 34, 34);
     cursor: pointer;
   }
+
+  .no_words{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: gray;
+    height: 100%;
+    font-size: 16px;
+  }
   
   .word_list_word {
     margin: 0;

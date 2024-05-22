@@ -91,7 +91,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {screenWidth <= 480 ? (
+      {screenWidth <= 680 ? (
         <div className="menu-wrapper">
           <button onClick={toggleDrawer} className="hamburger">
             <span className="hamburger-box">
